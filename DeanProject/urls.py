@@ -22,6 +22,8 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_view),
+    path('forms/', views.form_view)
+
 ]
 
 urlpatterns += staticfiles_urlpatterns()
