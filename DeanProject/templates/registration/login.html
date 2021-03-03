@@ -1,0 +1,18 @@
+{% extends "DeanProject/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block styles %}
+<link rel="stylesheet" href="/static/styles_login.css">
+{% endblock %}
+
+
+{% block content %}
+<div id="login-field">
+  <h2>ATU Forms Login</h2>
+  <form method="post" class="form-group">
+    {% csrf_token %}
+    {{form|crispy}}
+    <button type="submit" class="btn btn-success">Login</button>
+  </form>
+</div>
+{% endblock %}
