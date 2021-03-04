@@ -12,7 +12,7 @@ def home_view(request):
       elif request.user.groups.filter(name="Student").exists():
           template = loader.get_template('DeanProject/dash-student.html')
       else:
-          template = loader.get_template('DeanProject/dashboard.html')
+          template = loader.get_template('DeanProject/error.html')
       return HttpResponse(template.render())
   else:
       return redirect('/login')
