@@ -22,11 +22,11 @@
        <div id="header"><div class="logo"></div></div>
         <div class="content">
           <img src="/static/images/login_logo.png" alt="" style="width:100%"/>
-          <h2>Forms Login</h2>
+          <h2 class="custom-login-title">Forms Login</h2>
           <form method="post" class="form-group">
             {% csrf_token %}
             {{form|crispy}}
-            <button type="submit" class="btn btn-success mt-2">Login</button>
+            <button type="submit" class="btn btn-success custom-login-button">Login</button>
           </form>
         </div>
     </body>
