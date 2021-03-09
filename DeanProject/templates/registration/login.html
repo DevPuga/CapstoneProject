@@ -1,18 +1,35 @@
-{% extends "DeanProject/base.html" %}
 {% load crispy_forms_tags %}
-
-{% block styles %}
-<link rel="stylesheet" href="/static/styles_login.css">
-{% endblock %}
-
-
 {% block content %}
-<div id="login-field">
-  <h2>ATU Forms Login</h2>
-  <form method="post" class="form-group">
-    {% csrf_token %}
-    {{form|crispy}}
-    <button type="submit" class="btn btn-success">Login</button>
-  </form>
-</div>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <title>Forms - Arkansas Tech University</title>
+        <link type="text/css" rel="stylesheet" href="/static/login/cas.css" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="/static/login/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/static/login/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/static/login/uniform.default.css" rel="stylesheet" type="text/css"/>
+        <link href="/static/login/style-metronic.css" rel="stylesheet" type="text/css"/>
+        <link href="/static/login/style.css" rel="stylesheet" type="text/css"/>
+        <link href="/static/login/style-responsive.css" rel="stylesheet" type="text/css"/>
+        <link href="/static/login/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+        <link href="/static/login/login-soft.css" rel="stylesheet" type="text/css"/>
+        <link href="/static/login/custom.css" rel="stylesheet" type="text/css"/>
+        <link rel="icon" href="/static/images/favicon.png" type="image/x-icon" />
+    </head>
+    <body class="login" >
+       <div id="header"><div class="logo"></div></div>
+        <div class="content">
+          <img src="/static/images/login_logo.png" alt="" style="width:100%"/>
+          <h2 class="custom-login-title">Forms Login</h2>
+          <form method="post" class="form-group">
+            {% csrf_token %}
+            {{form|crispy}}
+            <button type="submit" class="btn btn-success custom-login-button">Login</button>
+          </form>
+        </div>
+    </body>
+</html>
+
 {% endblock %}
