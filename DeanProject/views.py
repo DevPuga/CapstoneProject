@@ -1,11 +1,8 @@
-from django.http import HttpResponse
-from django.template import loader
 from django.shortcuts import render, redirect
-
 from .forms import UGGraduation
 
 #The main dashboard view
-def home_view(request):
+def dashboard(request):
   if request.user.is_authenticated:
       # Checks the group the authenticated user is in
       # if request.user.groups.filter(name="Faculty").exists():
@@ -14,8 +11,8 @@ def home_view(request):
       #     template = loader.get_template('DeanProject/dash-student.html')
       # else:
       #     template = loader.get_template('DeanProject/error.html')
-      template = loader.get_template('DeanProject/base.html')
-      return HttpResponse(template.render())
+      context = {"dashboard_page": "active"}
+      return render(request, 'DeanProject/dashboard.html', context)
   else:
       return redirect('/login')
 

@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
 from . import views
 
 urlpatterns = [
@@ -24,7 +23,7 @@ urlpatterns = [
     path('pending/', views.pending, name='pending'),
     path('approved/', views.approved, name='approved'),
     path('denied/', views.denied, name='denied'),
-    path('', views.home_view),
+    path('', views.dashboard, name='dashboard'),
     path('', include("django.contrib.auth.urls")),
 ]
 
