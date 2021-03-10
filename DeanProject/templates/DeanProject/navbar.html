@@ -16,6 +16,11 @@
         <li class="nav-item">
           <a class="nav-link {{ denied_page }}" href="{% url 'denied' %}"><i class="material-icons">thumb_down_alt</i>Denied</a>
         </li>
+        {% if userGroup == 'Faculty' %}
+        <li class="nav-item">
+          <a class="nav-link {{ faculty_page }}" href="{% url 'faculty' %}"><i class="material-icons">work</i>Faculty</a>
+        </li>
+        {% endif %}
         <li class="nav-item">
           <a class="nav-link" href="/logout"><i class="material-icons">logout</i>Log Out</a>
         </li>

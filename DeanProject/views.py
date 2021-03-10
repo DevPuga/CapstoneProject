@@ -1,29 +1,38 @@
 from django.shortcuts import render, redirect
 from .forms import UGGraduation
 
-#The main dashboard view
-def dashboard(request):
+#Used in navbar to check if user is faculty
+userGroup = ''
+
+def checkIf(group, request):
+    if request.user.groups.filter(name="%s"%group).exists():
+        global userGroup
+        userGroup = group
+        return True
+    else:
+        return False
+
+def get(request):
+  checkIf("Faculty", request)
+  checkIf("Student", request)
+  requestedPage = (request.path).strip("/")
   if request.user.is_authenticated:
-      # Checks the group the authenticated user is in
-      # if request.user.groups.filter(name="Faculty").exists():
-      #     template = loader.get_template('DeanProject/dash-faculty.html')
-      # elif request.user.groups.filter(name="Student").exists():
-      #     template = loader.get_template('DeanProject/dash-student.html')
-      # else:
-      #     template = loader.get_template('DeanProject/error.html')
-      context = {"dashboard_page": "active"}
-      return render(request, 'DeanProject/dashboard.html', context)
+      if requestedPage == "":
+          requestedPage = "dashboard"
+
+      # Only allow faculty to access faculty page
+      if requestedPage == "faculty":
+          if checkIf("Faculty", request):
+              pass
+          else:
+              return redirect('/error')
+
+      # Set tab as active and render faculty tab if faculty
+      context = {"%s_page"%requestedPage: "active", "userGroup": userGroup}
+
+      return render(request, 'DeanProject/%s.html'%requestedPage, context)
   else:
       return redirect('/login')
 
-def pending(request):
-    context = {"pending_page": "active"}
-    return render(request, 'DeanProject/pending.html', context)
-
-def approved(request):
-    context = {"approved_page": "active"}
-    return render(request, 'DeanProject/approved.html', context)
-
-def denied(request):
-    context = {"denied_page": "active"}
-    return render(request, 'DeanProject/denied.html', context)
+def error(request):
+    return render(request, 'DeanProject/error.html')

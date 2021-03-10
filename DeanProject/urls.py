@@ -20,10 +20,12 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('pending/', views.pending, name='pending'),
-    path('approved/', views.approved, name='approved'),
-    path('denied/', views.denied, name='denied'),
-    path('', views.dashboard, name='dashboard'),
+    path('', views.get, name='dashboard'),
+    path('pending/', views.get, name='pending'),
+    path('approved/', views.get, name='approved'),
+    path('denied/', views.get, name='denied'),
+    path('faculty/', views.get, name='faculty'),
+    path('error/', views.error, name='error'),
     path('', include("django.contrib.auth.urls")),
 ]
 
