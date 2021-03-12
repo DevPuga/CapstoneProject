@@ -29,9 +29,10 @@ def get(request):
 
       # Get user's forms so we can populate them as cards
       forms = getForms(request)
+      numPending = max(forms["pending"]) + 1
 
       # Set tab as active, render faculty tab if faculty, give forms to html
-      context = {"%s_page"%requestedPage: "active", "userGroup": userGroup, "forms": forms}
+      context = {"%s_page"%requestedPage: "active", "userGroup": userGroup, "forms": forms, "numPending": numPending}
 
       return render(request, 'DeanProject/%s.html'%requestedPage, context)
   else:
