@@ -27,12 +27,20 @@ def get(request):
           else:
               return redirect('/error')
 
-      # Set tab as active and render faculty tab if faculty
-      context = {"%s_page"%requestedPage: "active", "userGroup": userGroup}
+      # Get user's forms so we can populate them as cards
+      forms = getForms(request)
+
+      # Set tab as active, render faculty tab if faculty, give forms to html
+      context = {"%s_page"%requestedPage: "active", "userGroup": userGroup, "forms": forms}
 
       return render(request, 'DeanProject/%s.html'%requestedPage, context)
   else:
       return redirect('/login')
+
+# Should return all forms for authenticated user as dictionary or array
+def getForms(request):
+    forms = {'all' : range(13), 'pending' : range(3), 'approved' : range(9), 'denied' : range(1)}
+    return forms
 
 def error(request):
     return render(request, 'DeanProject/error.html')
