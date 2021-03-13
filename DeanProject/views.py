@@ -26,14 +26,21 @@ def get(request):
               pass
           else:
               return redirect('/error')
-
+      
       # Get user's forms so we can populate them as cards
       forms = getForms(request)
       numPending = max(forms["pending"]) + 1
 
       # Set tab as active, render faculty tab if faculty, give forms to html
       context = {"%s_page"%requestedPage: "active", "userGroup": userGroup, "forms": forms, "numPending": numPending}
-
+      
+      #For newform.html page
+      if requestedPage == "newform":
+        if request.method == "POST":
+          selected_form = request.POST['form-selector']
+          if selected_form == '1':
+            context['form_selector'] = UGGraduation()
+          
       return render(request, 'DeanProject/%s.html'%requestedPage, context)
   else:
       return redirect('/login')

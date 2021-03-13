@@ -26,6 +26,7 @@ urlpatterns = [
     path('denied/', views.get, name='denied'),
     path('faculty/', views.get, name='faculty'),
     path('error/', views.error, name='error'),
+    path('newform/', views.get, name='newform'),
     path('', include("django.contrib.auth.urls")),
 ]
 

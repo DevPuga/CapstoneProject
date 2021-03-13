@@ -1,0 +1,34 @@
+{% extends "DeanProject/base.html" %}
+{% block styles %}
+<link rel="stylesheet" href="/static/styles_newform.css">
+{% endblock %}
+
+{% block content%}
+{% load crispy_forms_tags %}
+
+
+<div id="select-container">
+  <form method="POST">
+    {% csrf_token %}
+    <select name="form-selector" class="form-select" aria-label="Default select example">
+      <option selected>Select a form</option>
+        <optgroup label="Forms For Registration">
+        <option value="1">Permit to Register</option>
+        <option value="2">Add/Drop Course</option>
+      </optgroup>
+      <optgroup label="Forms Graduation">
+        <option value="3">Undergraduate Graduation Application</option>
+        <option value="4">Master's Graduation Application</option>
+      </optgroup>
+      <optgroup label="Other">
+        <option value="5">Degree Audit Amendment</option>
+        <option value="6">Transcript Request Form</option>
+      </optgroup>
+    </select>
+    <input class="btn btn-primary" type="submit">
+  </form>
+</div>
+<form method="POST">
+  {{ form_selector |crispy }}
+</form>
+{% endblock %}
