@@ -1,0 +1,31 @@
+{% block content %}
+<nav style="background-color: #0A553E;" class="navbar navbar-expand-sm navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">ATU Forms</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarToggler" role="tablist" data-target="#myTabContent">
+      <ul class="navbar-nav ms-auto pr-4">
+        <li class="nav-item">
+          <a class="nav-link {{ pending_page }}" aria-current="page" href="{% url 'pending' %}"><i class="material-icons">pending_actions</i>Pending <span class="badge bg-secondary">{{ numPending }}</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ approved_page }}" href="{% url 'approved' %}"><i class="material-icons">thumb_up_alt</i>Approved</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ denied_page }}" href="{% url 'denied' %}"><i class="material-icons">thumb_down_alt</i>Denied</a>
+        </li>
+        {% if userGroup == 'Faculty' %}
+        <li class="nav-item">
+          <a class="nav-link {{ faculty_page }}" href="{% url 'faculty' %}"><i class="material-icons">work</i>Faculty</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="/logout"><i class="material-icons">logout</i>Log Out</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endblock %}
