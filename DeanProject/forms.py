@@ -1,5 +1,5 @@
 from django import forms
-from .models import permitToRegister, add_dropClass, UGGraduation, masterGraduation, degreeAudit, transcriptRequest
+from .models import permitToRegister, add_dropClass, UGGraduation, masterGraduation, degreeAudit, transcriptRequest, courseInfo
 
 class permitToRegisterForm(forms.ModelForm):
   class Meta:
@@ -10,6 +10,11 @@ class permitToRegisterForm(forms.ModelForm):
       'name_enrolled_under',
       'registration_semester',
       'registration_year',
+      'comments',
+      'total_hours_enrolled',
+      'dean_signature',
+      'advisor_signature',
+      'student_signature',
     ]
     labels = {
       'student_id_number': 'T Number',
@@ -17,6 +22,27 @@ class permitToRegisterForm(forms.ModelForm):
       'name_enrolled_under': 'Name Enrolled Under (Last, First, Middle, Other)',
       'registration_semester': 'Registration Semester',
       'registration_year': 'Registration Year',
+      'comments': 'Comments',
+      'total_hours_enrolled': 'Total hours enrolled',
+      'dean_signature': 'Dean’s Signature, Overload Approval',
+      'advisor_signature': 'Advisor’s Signature',
+      'student_signature': 'Student’s Signature',
+    }
+
+class courseInfoForm(forms.ModelForm): #WIP (not WAP)
+  class Meta:
+    model = courseInfo
+    fields = [
+      'crn',
+      'course_prefix',
+      'course_number',
+      'sec_no',
+    ]
+    labels = {
+      'crn': 'CRN',
+      'course_prefix': 'Course Prefix',
+      'course_number': 'Course Number',
+      'sec_no': 'Sec No.',
     }
 
 class add_dropClassForm(forms.ModelForm):
