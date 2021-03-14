@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import UGGraduation, permitToRegister
+from .forms import permitToRegisterForm, add_dropClassForm, UGGraduationForm, masterGraduationForm, degreeAuditForm, transcriptRequestForm
 
 #Used in navbar to check if user is faculty
 userGroup = ''
@@ -37,11 +37,19 @@ def get(request):
       #For newform.html page
       if requestedPage == "newform":
         if request.method == "POST":
-          selected_form = request.POST['form-selector']
-          if selected_form == '1':
-            context['form_selector'] = permitToRegister()
-          elif selected_form == '3':
-            context['form_selector'] = UGGraduation()
+            selected_form = request.POST['form-selector']
+            if selected_form == '1':
+                context['form_selector'] = permitToRegisterForm()
+            elif selected_form == '2':
+                context['form_selector'] = add_dropClassForm()
+            elif selected_form == '3':
+                context['form_selector'] = UGGraduationForm()
+            elif selected_form == '4':
+                context['form_selector'] = masterGraduationForm()
+            elif selected_form == '5':
+                context['form_selector'] = degreeAuditForm()
+            elif selected_form == '6':
+                context['form_selector'] = transcriptRequestForm()
           
       return render(request, 'DeanProject/%s.html'%requestedPage, context)
   else:
