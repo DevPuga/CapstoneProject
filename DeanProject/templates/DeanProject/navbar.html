@@ -21,6 +21,11 @@
           <a class="nav-link {{ faculty_page }}" href="{% url 'faculty' %}"><i class="material-icons">work</i>Faculty</a>
         </li>
         {% endif %}
+        {% if userGroup == 'Student' %}
+        <li class="nav-item">
+          <a class="nav-link {{ newform_page }}" href="{% url 'newform' %}"><i class="material-icons">add</i>New</a>
+        </li>
+        {% endif %}
         <li class="nav-item">
           <a class="nav-link" href="/logout"><i class="material-icons">logout</i>Log Out</a>
         </li>
