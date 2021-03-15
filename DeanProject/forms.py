@@ -91,6 +91,11 @@ class add_dropClassForm(forms.ModelForm):
       'name_enrolled_under',
       'recieves_financial_aid', #Yes/No
       'financial_aid_representative_signature', #Signature
+      'total_hours_enrolled_after_change',
+      'comments',
+      'advisor_signature', #Signature
+      'student_signature', #Signature
+      'atu_comments',
       'another_course_fits_schedule', #Academic Issues
       'changing_major',
       'changing_minor',
@@ -129,11 +134,6 @@ class add_dropClassForm(forms.ModelForm):
       'personal_emergency',
       'unmotivated_for_this_courses_or_tired_of_school',
       'working_too_many_hours',
-      'total_hours_enrolled_after_change',
-      'comments',
-      'advisor_signature', #Signature
-      'student_signature', #Signature
-      'atu_comments',
     ]
     labels = {
       'student_id_number': 'T Number',
@@ -141,6 +141,11 @@ class add_dropClassForm(forms.ModelForm):
       'name_enrolled_under': 'Name Enrolled Under (Last, First, Middle, Other)',
       'recieves_financial_aid': 'Do you receive financial aid? (loans, grants, scholarships)', #Yes/No
       'financial_aid_representative_signature': 'Financial Aid Representative Signature', #Signature
+      'total_hours_enrolled_after_change': 'Total Hours Enrolled After Change',
+      'comments': 'Comments',
+      'advisor_signature': 'Advisor\'s Signature', #Signature
+      'student_signature': 'Student\'s Signature', #Signature
+      'atu_comments': 'Do you feel ATU could have done more to meet your needs? If so please tell us how',
       'another_course_fits_schedule': 'Another Course fits schedule', #Academic Issues
       'changing_major': 'Changing Major',
       'classes_too_large': 'Classes too large',
@@ -178,11 +183,6 @@ class add_dropClassForm(forms.ModelForm):
       'personal_emergency': 'Personal emergency ',
       'unmotivated_for_this_courses_or_tired_of_school': 'Unmotivated for this course(s) or tired of school ',
       'working_too_many_hours': 'Working too many hours',
-      'total_hours_enrolled_after_change': 'Total Hours Enrolled After Change',
-      'comments': 'Comments',
-      'advisor_signature': 'Advisor\'s Signature', #Signature
-      'student_signature': 'Student\'s Signature', #Signature
-      'atu_comments': 'Do you feel ATU could have done more to meet your needs? If so please tell us how',
     }
 
 class UGGraduationForm(forms.ModelForm):
