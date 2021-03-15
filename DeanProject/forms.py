@@ -430,6 +430,51 @@ class transcriptRequestForm(forms.ModelForm):
       'arsbn': 'ARSBN',
     }
 
+  def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
+    self.helper = FormHelper()
+    self.helper.layout = Layout(
+        Div(
+            Div(
+                Div('name_enrolled_under', css_class='col-8'),
+                Div('student_id_number', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('mailing_address', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('city', css_class='col-8'),
+                Div('state', css_class='col'),
+                Div('zip_code', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('phone_number', css_class='col'),
+                Div('birth_date', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('semester', css_class='col'),
+                Div('year', css_class='col'),
+            css_class='row'),
+            Div(
+                Div(
+                    Div('adhe', css_class='row'),
+                    Div('sacm', css_class='row'),
+                    Div('embassy_of_kuwait', css_class='row'),
+                css_class='col'),
+                Div(
+                    Div('ade_licensure', css_class='row'),
+                    Div('arsbn', css_class='row'),
+                css_class='col'),
+            css_class='row'),
+            Div(
+                Div('student_signature', css_class='col'),
+            css_class='row'),
+        css_class=''),
+        ButtonHolder(
+            Submit('submit', 'Submit', css_class='btn btn-primary mt-2')
+        )
+    )
+
 class courseInfoForm(forms.ModelForm): #WIP (not WAP)
   class Meta:
     model = courseInfo
