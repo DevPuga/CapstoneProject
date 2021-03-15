@@ -149,7 +149,7 @@ class add_dropClassForm(forms.ModelForm):
       'another_course_fits_schedule': 'Another Course fits schedule', #Academic Issues
       'changing_major': 'Changing Major',
       'classes_too_large': 'Classes too large',
-      'could_not_understand_the_instructor_course_or_materials': 'Could not understand the instructor course or material',
+      'could_not_understand_the_instructor_course_or_materials': 'Couldn\'t understand the instructor course or material',
       'course_not_required_for_major': 'Course not required for Major',
       'inadequate_academic_support_services': 'Inadequate academic support services',
       'insufficient_high_school_preparation': 'Insufficient high school preparation',
@@ -184,6 +184,90 @@ class add_dropClassForm(forms.ModelForm):
       'unmotivated_for_this_courses_or_tired_of_school': 'Unmotivated for this course(s) or tired of school ',
       'working_too_many_hours': 'Working too many hours',
     }
+
+  def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
+    self.helper = FormHelper()
+    self.helper.layout = Layout(
+        Div(
+            Div(
+                Div('name_enrolled_under', css_class='col-8'),
+                Div('student_id_number', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('recieves_financial_aid', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('total_hours_enrolled_after_change', css_class='col'),
+                Div('financial_aid_representative_signature', css_class='col-8'),
+            css_class='row'),
+            Div(
+                Div('student_signature', css_class='col-8'),
+                Div('date', css_class='col-4'),
+            css_class='row'),
+            Div(
+                Div('advisor_signature', css_class='col'),
+            css_class='row'),
+            HTML("<p class='my-2'>Please tell us why you wish to drop. Please select all that apply.</p>"),
+            Div(
+                Div(
+                    HTML("<h6 class='mb-0'>Academic issues</h6>"),
+                    Div('another_course_fits_schedule'),
+                    Div('changing_major'),
+                    Div('classes_too_large'),
+                    Div('could_not_understand_the_instructor_course_or_materials'),
+                    Div('course_not_required_for_major'),
+                    Div('inadequate_academic_support_services'),
+                    Div('insufficient_high_school_preparation'),
+                    Div('lack_of_academic_challenge'),
+                    Div('lack_of_progress_in_the_courses'),
+                    Div('need_to_re_enroll_in_classes_next_semester'),
+                    Div('need_to_re_enroll_in_classes_with_different_instructor'),
+                    Div('quality_of_instruction_did_not_meet_expections'),
+                    Div('reduce_course_load'),
+                    Div('wanted_classes_face_to_face'),
+                    Div('wanted_classes_online'),
+                    HTML("<h6 class='mt-2 mb-0'>Financial issues</h6>"),
+                    Div('change_in_family_financial_circumstances'),
+                    Div('didnt_have_enough_money_to_continue'),
+                    Div('financial_aid_was_not_sufficient'),
+                    Div('increases_in_tuition_and_fees'),
+                css_class='col-6'),
+                Div(
+                    Div('incurred_too_much_debt'),
+                    Div('needed_Course_for_financial_aid_eligibility'),
+                    Div('scholarship_Grant_was_not_renewed'),
+                    HTML("<h6 class='mt-2 mb-0'>Family issues</h6>"),
+                    Div('family_illness_responsibility'),
+                    Div('homesick'),
+                    Div('wanted_to_be_closer_to_family_and_friends'),
+                    HTML("<h6 class='mt-2 mb-0'>Housing and travel issues</h6>"),
+                    Div('commute_too_long'),
+                    Div('moved_out_of_the_area'),
+                    HTML("<h6 class='mt-2 mb-0'>Personal and transition issues</h6>"),
+                    Div('distracted_Social_life'),
+                    Div('felt_class_climate_unwelcoming'),
+                    Div('felt_out_of_place_in_class'),
+                    Div('impact_of_natural_disaster'),
+                    Div('inadequate_study_skills_or_lack_of_academic_success'),
+                    Div('military_obligations'),
+                    Div('personal_health'),
+                    Div('personal_emergency'),
+                    Div('unmotivated_for_this_courses_or_tired_of_school'),
+                    Div('working_too_many_hours'),
+                css_class='col'),
+            css_class='row mb-2'),
+            Div(
+                Div('comments', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('atu_comments', css_class='col'),
+            css_class='row'),
+        css_class=''),
+        ButtonHolder(
+            Submit('submit', 'Submit', css_class='btn btn-primary mt-2')
+        )
+    )
 
 class UGGraduationForm(forms.ModelForm):
   class Meta:
