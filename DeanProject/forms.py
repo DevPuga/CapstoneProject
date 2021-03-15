@@ -1,7 +1,7 @@
 from django import forms
-from .models import permitToRegister, add_dropClass, UGGraduation, masterGraduation, degreeAudit, transcriptRequest, courseInfo
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import *
+from .models import *
 
 class permitToRegisterForm(forms.ModelForm):
   class Meta:
@@ -334,3 +334,20 @@ class courseInfoForm(forms.ModelForm): #WIP (not WAP)
       'course_number': 'Course Number',
       'sec_no': 'Sec No.',
     }
+
+class substitutionRequestForm(forms.ModelForm): #WIP (not WAP)
+  class Meta:
+    model = substitutionRequest
+    fields = [
+      'current_course',
+      'requested_course',
+    ]
+    labels = {
+      'current_course': 'Current Course Prefix/Number',
+      'requested_course': 'Requested Course Prefix/Number',
+    }
+
+class emptyForm(forms.ModelForm):
+    class Meta:
+        model = empty
+        fields = []
