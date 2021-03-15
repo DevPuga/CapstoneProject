@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from .forms import *
-# from .forms import permitToRegisterForm, add_dropClassForm, UGGraduationForm, masterGraduationForm, degreeAuditForm, transcriptRequestForm, courseInfoForm
 
 #Used in navbar to check if user is faculty
 userGroup = ''
@@ -27,14 +26,14 @@ def get(request):
               pass
           else:
               return redirect('/error')
-      
+
       # Get user's forms so we can populate them as cards
       forms = getForms(request)
       numPending = max(forms["pending"]) + 1
 
       # Set tab as active, render faculty tab if faculty, give forms to html
-      context = {"%s_page"%requestedPage: "active", "userGroup": userGroup, "forms": forms, "numPending": numPending}
-      
+      context = {"%s_page"%requestedPage: "active", "userGroup": userGroup, "forms": forms, "numPending": numPending, "form_selector": emptyForm()}
+
       #For newform.html page
       if requestedPage == "newform":
         if request.method == "POST":
@@ -51,6 +50,7 @@ def get(request):
                 context['form_selector'] = degreeAuditForm()
             elif selected_form == '6':
                 context['form_selector'] = transcriptRequestForm()
+
       return render(request, 'DeanProject/%s.html'%requestedPage, context)
   else:
       return redirect('/login')

@@ -1,6 +1,7 @@
 from django import forms
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import *
 from .models import *
-#from .models import permitToRegister, add_dropClass, UGGraduation, masterGraduation, degreeAudit, transcriptRequest, courseInfo, substitutionRequest
 
 class permitToRegisterForm(forms.ModelForm):
   class Meta:
@@ -28,6 +29,57 @@ class permitToRegisterForm(forms.ModelForm):
       'dean_signature': 'Dean’s Signature, Overload Approval',
       'advisor_signature': 'Advisor’s Signature',
       'student_signature': 'Student’s Signature',
+    }
+
+  def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
+    self.helper = FormHelper()
+    self.helper.layout = Layout(
+        Div(
+            Div(
+                Div('name_enrolled_under', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('student_id_number', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('registration_semester', css_class='col'),
+                Div('registration_year', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('total_hours_enrolled', css_class='col'),
+                Div('dean_signature', css_class='col-8'),
+            css_class='row'),
+            Div(
+                Div('student_signature', css_class='col-8'),
+                Div('date', css_class='col-4'),
+            css_class='row'),
+            Div(
+                Div('advisor_signature', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('comments', css_class='col'),
+            css_class='row'),
+        css_class=''),
+        ButtonHolder(
+            Submit('submit', 'Submit', css_class='btn btn-primary mt-2')
+        )
+    )
+
+class courseInfoForm(forms.ModelForm): #WIP (not WAP)
+  class Meta:
+    model = courseInfo
+    fields = [
+      'crn',
+      'course_prefix',
+      'course_number',
+      'sec_no',
+    ]
+    labels = {
+      'crn': 'CRN',
+      'course_prefix': 'Course Prefix',
+      'course_number': 'Course Number',
+      'sec_no': 'Sec No.',
     }
 
 class add_dropClassForm(forms.ModelForm):
@@ -62,7 +114,7 @@ class add_dropClassForm(forms.ModelForm):
       'incurred_too_much_debt',
       'needed_Course_for_financial_aid_eligibility',
       'scholarship_Grant_was_not_renewed',
-      'family_illness_responsibility', #Family Issues  
+      'family_illness_responsibility', #Family Issues
       'homesick',
       'wanted_to_be_closer_to_family_and_friends',
       'commute_too_long', #Housing and Travel Issues
@@ -111,7 +163,7 @@ class add_dropClassForm(forms.ModelForm):
       'incurred_too_much_debt': 'Incurred too much debt',
       'needed_Course_for_financial_aid_eligibility': 'Needed course for financial aid eligibility',
       'scholarship_Grant_was_not_renewed': 'Scholarship/grant was not renewed',
-      'family_illness_responsibility': 'Family illness/responsibility', #Family Issues  
+      'family_illness_responsibility': 'Family illness/responsibility', #Family Issues
       'homesick': 'Homesick',
       'wanted_to_be_closer_to_family_and_friends': ' Wanted to be closer to family and friends',
       'commute_too_long': 'Commute too long ', #Housing and Travel Issues
@@ -294,3 +346,8 @@ class substitutionRequestForm(forms.ModelForm): #WIP (not WAP)
       'current_course': 'Current Course Prefix/Number',
       'requested_course': 'Requested Course Prefix/Number',
     }
+
+class emptyForm(forms.ModelForm):
+    class Meta:
+        model = empty
+        fields = []

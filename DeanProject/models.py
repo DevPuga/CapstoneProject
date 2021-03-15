@@ -163,3 +163,6 @@ class courseInfo(models.Model): #WIP (not WAP)
 class substitutionRequest(models.Model): #WIP (not WAP)
   current_course = models.CharField(max_length=50)
   requested_course = models.CharField(max_length=50)
+
+class empty(models.Model):
+    empty = models.BooleanField()
