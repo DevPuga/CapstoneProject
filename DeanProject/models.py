@@ -28,7 +28,13 @@ class permitToRegister(models.Model):
   name_enrolled_under = models.CharField(max_length=50)
   registration_semester = models.CharField(max_length=10)
   registration_year = models.DecimalField(decimal_places = 0, max_digits=4)
-  #Still Needs Work
+  #Course Table would go here
+  comments = models.TextField(max_length=100)
+  total_hours_enrolled = models.DecimalField(decimal_places = 0, max_digits=2)
+  dean_signature = models.CharField(max_length=50) #Signature
+  advisor_signature = models.CharField(max_length=50) #Signature
+  student_signature = models.CharField(max_length=50) #Signature
+
 
 class add_dropClass(models.Model):
   student_id_number = models.CharField(max_length=10)
@@ -36,7 +42,21 @@ class add_dropClass(models.Model):
   name_enrolled_under = models.CharField(max_length=50)
   recieves_financial_aid = models.BooleanField() #Yes/No
   financial_aid_representative_signature = models.CharField(max_length=50) #Signature
-  #Still Needs Work
+  #Add Drop table would go here
+  total_hours_enrolled_after_change = models.DecimalField(decimal_places = 0, max_digits=2)
+  comments = models.TextField(max_length=100)
+  advisor_signature = models.CharField(max_length=50) #Signature
+  student_signature = models.CharField(max_length=50) #Signature
+  atu_comments = models.TextField(max_length=100)
+  #Section: Academic Issues
+  another_course_fits_schedule = models.BooleanField()
+  changing_major = models.BooleanField()
+  changing_minor = models.BooleanField()
+  classes_too_large = models.BooleanField()
+  #Section: Financial Issues
+  #Section: Family Issues
+  #Section: Housing and Travel Issues
+  #Section: Personal and Transition Issues
 
 class UGGraduation(models.Model):
   student_id_number = models.CharField(max_length=10)
@@ -50,8 +70,8 @@ class UGGraduation(models.Model):
   parents_completed_bachelor_degree = models.BooleanField() #Yes/No
   expected_graduation_term = models.CharField(max_length=6, choices=SEASON_CHOICES)
   expected_graduation_year = models.DecimalField(decimal_places = 0, max_digits=4)
-  #Still Needs Work
-
+  #Catalog table would go here
+  preferred_degree = models.CharField(max_length=100)
 
 class masterGraduation(models.Model):
   student_id_number = models.CharField(max_length=10)
@@ -98,4 +118,10 @@ class transcriptRequest(models.Model):
   embassy_of_kuwait = models.BooleanField()
   ade_licensure = models.BooleanField()
   arsbn = models.BooleanField()
-  #Still Needs Work
+  #Tables need to be added
+
+class courseInfo(models.Model): #WIP (not WAP)
+  crn = models.DecimalField(decimal_places=0, max_digits=5)
+  course_prefix = models.CharField(max_length=4)
+  course_number = models.DecimalField(decimal_places=0, max_digits=4)
+  sec_no = models.CharField(max_length=3)

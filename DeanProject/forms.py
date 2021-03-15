@@ -1,5 +1,5 @@
 from django import forms
-from .models import permitToRegister, add_dropClass, UGGraduation, masterGraduation, degreeAudit, transcriptRequest
+from .models import permitToRegister, add_dropClass, UGGraduation, masterGraduation, degreeAudit, transcriptRequest, courseInfo
 
 class permitToRegisterForm(forms.ModelForm):
   class Meta:
@@ -10,6 +10,11 @@ class permitToRegisterForm(forms.ModelForm):
       'name_enrolled_under',
       'registration_semester',
       'registration_year',
+      'comments',
+      'total_hours_enrolled',
+      'dean_signature',
+      'advisor_signature',
+      'student_signature',
     ]
     labels = {
       'student_id_number': 'T Number',
@@ -17,6 +22,11 @@ class permitToRegisterForm(forms.ModelForm):
       'name_enrolled_under': 'Name Enrolled Under (Last, First, Middle, Other)',
       'registration_semester': 'Registration Semester',
       'registration_year': 'Registration Year',
+      'comments': 'Comments',
+      'total_hours_enrolled': 'Total hours enrolled',
+      'dean_signature': 'Dean’s Signature, Overload Approval',
+      'advisor_signature': 'Advisor’s Signature',
+      'student_signature': 'Student’s Signature',
     }
 
 class add_dropClassForm(forms.ModelForm):
@@ -28,6 +38,11 @@ class add_dropClassForm(forms.ModelForm):
       'name_enrolled_under',
       'recieves_financial_aid', #Yes/No
       'financial_aid_representative_signature', #Signature
+      'total_hours_enrolled_after_change',
+      'comments',
+      'advisor_signature', #Signature
+      'student_signature', #Signature
+      'atu_comments',
     ]
     labels = {
       'student_id_number': 'T Number',
@@ -35,6 +50,11 @@ class add_dropClassForm(forms.ModelForm):
       'name_enrolled_under': 'Name Enrolled Under (Last, First, Middle, Other)',
       'recieves_financial_aid': 'Do you receive financial aid? (loans, grants, scholarships)', #Yes/No
       'financial_aid_representative_signature': 'Financial Aid Representative Signature', #Signature
+      'total_hours_enrolled_after_change': 'Total Hours Enrolled After Change',
+      'comments': 'Comments',
+      'advisor_signature': 'Advisor\'s Signature', #Signature
+      'student_signature': 'Student\'s Signature', #Signature
+      'atu_comments': 'Do you feel ATU could have done more to meet your needs? If so please tell us how',
     }
 
 class UGGraduationForm(forms.ModelForm):
@@ -52,6 +72,7 @@ class UGGraduationForm(forms.ModelForm):
       'parents_completed_bachelor_degree', #Yes/No
       'expected_graduation_term',
       'expected_graduation_year',
+      'preferred_degree',
     ]
     labels = {
       'student_id_number': 'T Number',
@@ -65,6 +86,7 @@ class UGGraduationForm(forms.ModelForm):
       'parents_completed_bachelor_degree': 'Did either of your parents complete a bachelor\'s degree?', #Yes/No
       'expected_graduation_term': 'Expected Graduation Term',
       'expected_graduation_year': 'Expected Graduation Year',
+      'preferred_degree': 'If you are seeking two Bachelor’s degrees (Double Degree), please indicate which major you’d like to walk with in the ceremony',
     }
 
 class masterGraduationForm(forms.ModelForm):
@@ -167,4 +189,20 @@ class transcriptRequestForm(forms.ModelForm):
       'embassy_of_kuwait': 'Embassy of Kuwait',
       'ade_licensure': 'ADE Licensure',
       'arsbn': 'ARSBN',
+    }
+
+class courseInfoForm(forms.ModelForm): #WIP (not WAP)
+  class Meta:
+    model = courseInfo
+    fields = [
+      'crn',
+      'course_prefix',
+      'course_number',
+      'sec_no',
+    ]
+    labels = {
+      'crn': 'CRN',
+      'course_prefix': 'Course Prefix',
+      'course_number': 'Course Number',
+      'sec_no': 'Sec No.',
     }
