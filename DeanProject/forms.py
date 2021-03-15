@@ -36,6 +36,8 @@ class permitToRegisterForm(forms.ModelForm):
     self.helper = FormHelper()
     self.helper.layout = Layout(
         Div(
+            HTML("<h2 class='mt-4\'>Permit to Register</h2>"),
+            HTML("<hr class='solid my-1\'>"),
             Div(
                 Div('name_enrolled_under', css_class='col'),
             css_class='row'),
@@ -149,7 +151,7 @@ class add_dropClassForm(forms.ModelForm):
       'another_course_fits_schedule': 'Another Course fits schedule', #Academic Issues
       'changing_major': 'Changing Major',
       'classes_too_large': 'Classes too large',
-      'could_not_understand_the_instructor_course_or_materials': 'Could not understand the instructor course or material',
+      'could_not_understand_the_instructor_course_or_materials': 'Couldn\'t understand the instructor course or material',
       'course_not_required_for_major': 'Course not required for Major',
       'inadequate_academic_support_services': 'Inadequate academic support services',
       'insufficient_high_school_preparation': 'Insufficient high school preparation',
@@ -185,6 +187,92 @@ class add_dropClassForm(forms.ModelForm):
       'working_too_many_hours': 'Working too many hours',
     }
 
+  def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
+    self.helper = FormHelper()
+    self.helper.layout = Layout(
+        Div(
+            HTML("<h2 class='mt-4\'>Add/Drop Course</h2>"),
+            HTML("<hr class='solid my-1\'>"),
+            Div(
+                Div('name_enrolled_under', css_class='col-8'),
+                Div('student_id_number', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('recieves_financial_aid', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('total_hours_enrolled_after_change', css_class='col'),
+                Div('financial_aid_representative_signature', css_class='col-8'),
+            css_class='row'),
+            Div(
+                Div('student_signature', css_class='col-8'),
+                Div('date', css_class='col-4'),
+            css_class='row'),
+            Div(
+                Div('advisor_signature', css_class='col'),
+            css_class='row'),
+            HTML("<p class='my-2'>Please tell us why you wish to drop. Please select all that apply.</p>"),
+            Div(
+                Div(
+                    HTML("<h6 class='mb-0'>Academic issues</h6>"),
+                    Div('another_course_fits_schedule'),
+                    Div('changing_major'),
+                    Div('classes_too_large'),
+                    Div('could_not_understand_the_instructor_course_or_materials'),
+                    Div('course_not_required_for_major'),
+                    Div('inadequate_academic_support_services'),
+                    Div('insufficient_high_school_preparation'),
+                    Div('lack_of_academic_challenge'),
+                    Div('lack_of_progress_in_the_courses'),
+                    Div('need_to_re_enroll_in_classes_next_semester'),
+                    Div('need_to_re_enroll_in_classes_with_different_instructor'),
+                    Div('quality_of_instruction_did_not_meet_expections'),
+                    Div('reduce_course_load'),
+                    Div('wanted_classes_face_to_face'),
+                    Div('wanted_classes_online'),
+                    HTML("<h6 class='mt-2 mb-0'>Financial issues</h6>"),
+                    Div('change_in_family_financial_circumstances'),
+                    Div('didnt_have_enough_money_to_continue'),
+                    Div('financial_aid_was_not_sufficient'),
+                    Div('increases_in_tuition_and_fees'),
+                css_class='col-6'),
+                Div(
+                    Div('incurred_too_much_debt'),
+                    Div('needed_Course_for_financial_aid_eligibility'),
+                    Div('scholarship_Grant_was_not_renewed'),
+                    HTML("<h6 class='mt-2 mb-0'>Family issues</h6>"),
+                    Div('family_illness_responsibility'),
+                    Div('homesick'),
+                    Div('wanted_to_be_closer_to_family_and_friends'),
+                    HTML("<h6 class='mt-2 mb-0'>Housing and travel issues</h6>"),
+                    Div('commute_too_long'),
+                    Div('moved_out_of_the_area'),
+                    HTML("<h6 class='mt-2 mb-0'>Personal and transition issues</h6>"),
+                    Div('distracted_Social_life'),
+                    Div('felt_class_climate_unwelcoming'),
+                    Div('felt_out_of_place_in_class'),
+                    Div('impact_of_natural_disaster'),
+                    Div('inadequate_study_skills_or_lack_of_academic_success'),
+                    Div('military_obligations'),
+                    Div('personal_health'),
+                    Div('personal_emergency'),
+                    Div('unmotivated_for_this_courses_or_tired_of_school'),
+                    Div('working_too_many_hours'),
+                css_class='col'),
+            css_class='row mb-2'),
+            Div(
+                Div('comments', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('atu_comments', css_class='col'),
+            css_class='row'),
+        css_class=''),
+        ButtonHolder(
+            Submit('submit', 'Submit', css_class='btn btn-primary mt-2')
+        )
+    )
+
 class UGGraduationForm(forms.ModelForm):
   class Meta:
     model = UGGraduation
@@ -216,6 +304,43 @@ class UGGraduationForm(forms.ModelForm):
       'expected_graduation_year': 'Expected Graduation Year',
       'preferred_degree': 'If you are seeking two Bachelor’s degrees (Double Degree), please indicate which major you’d like to walk with in the ceremony',
     }
+
+  def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
+    self.helper = FormHelper()
+    self.helper.layout = Layout(
+        Div(
+            HTML("<h2 class='mt-4\'>Undergraduate Graduation Application</h2>"),
+            HTML("<hr class='solid my-1\'>"),
+            Div(
+                Div('name_enrolled_under', css_class='col-8'),
+                Div('student_id_number', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('phone_number', css_class='col'),
+                Div('expected_graduation_term', css_class='col'),
+                Div('expected_graduation_year', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('preferred_degree', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('diploma_name', css_class='col-8'),
+                Div('name_pronunciation', css_class='col'),
+                Div('pronunciation_recorded'),
+            css_class='row'),
+            Div(
+                Div('parents_completed_bachelor_degree', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('student_signature', css_class='col-8'),
+                Div('date', css_class='col-4'),
+            css_class='row'),
+        css_class=''),
+        ButtonHolder(
+            Submit('submit', 'Submit', css_class='btn btn-primary mt-2')
+        )
+    )
 
 class masterGraduationForm(forms.ModelForm):
   class Meta:
@@ -257,6 +382,57 @@ class masterGraduationForm(forms.ModelForm):
       'degree_name': 'Degree',
     }
 
+  def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
+    self.helper = FormHelper()
+    self.helper.layout = Layout(
+        Div(
+            HTML("<h2 class='mt-4\'>Master's Graduation Application</h2>"),
+            HTML("<hr class='solid my-1\'>"),
+            Div(
+                Div('name_enrolled_under', css_class='col-8'),
+                Div('student_id_number', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('mailing_address', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('city', css_class='col'),
+                Div('state', css_class='col'),
+                Div('zip_code', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('phone_number', css_class='col'),
+                Div('email', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('student_starting_semester', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('student_starting_year', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('expected_graduation_term', css_class='col'),
+                Div('expected_graduation_year', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('diploma_name', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('name_pronunciation', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('degree_name', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('date', css_class='col'),
+            css_class='row'),
+        css_class=''),
+        ButtonHolder(
+            Submit('submit', 'Submit', css_class='btn btn-primary mt-2')
+        )
+    )
+
 class degreeAuditForm(forms.ModelForm):
   class Meta:
     model = degreeAudit
@@ -280,6 +456,35 @@ class degreeAuditForm(forms.ModelForm):
       'semester': 'All requirements will be completed at the end of',
       'year': 'Year',
     }
+
+  def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
+    self.helper = FormHelper()
+    self.helper.layout = Layout(
+        Div(
+            HTML("<h2 class='mt-4\'>Degree Audit</h2>"),
+            HTML("<hr class='solid my-1\'>"),
+            Div(
+                Div('name_enrolled_under', css_class='col-8'),
+                Div('student_id_number', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('major_or_minor_name', css_class='col-8'),
+                Div('catalog_year', css_class='col'),
+                Div(
+                    Div('major_was_chosen', css_class='row mt-3'),
+                    Div('minor_was_chosen', css_class='row'),
+                css_class='col'),
+            css_class='row'),
+            Div(
+                Div('semester', css_class='col'),
+                Div('year', css_class='col'),
+            css_class='row'),
+        css_class=''),
+        ButtonHolder(
+            Submit('submit', 'Submit', css_class='btn btn-primary mt-2')
+        )
+    )
 
 class transcriptRequestForm(forms.ModelForm):
   class Meta:
@@ -312,12 +517,60 @@ class transcriptRequestForm(forms.ModelForm):
       'zip_code': 'ZIP',
       'phone_number': 'Phone Number',
       'student_signature': 'Student Signature',  #Signature
-      'adhe': 'ADHE',
-      'sacm': 'SACM',
+      'adhe': 'ADHE (AR Lottery Scholarship)',
+      'sacm': 'SACM (Saudi Arabian Cultural Mission)',
       'embassy_of_kuwait': 'Embassy of Kuwait',
-      'ade_licensure': 'ADE Licensure',
-      'arsbn': 'ARSBN',
+      'ade_licensure': 'ADE Licensure (AR Dept. of Ed.)',
+      'arsbn': 'ARSBN (AR State Board of Nursing)',
     }
+
+  def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
+    self.helper = FormHelper()
+    self.helper.layout = Layout(
+        Div(
+            HTML("<h2 class='mt-4\'>Transcript Request</h2>"),
+            HTML("<hr class='solid my-1\'>"),
+            Div(
+                Div('name_enrolled_under', css_class='col-8'),
+                Div('student_id_number', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('mailing_address', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('city', css_class='col-8'),
+                Div('state', css_class='col'),
+                Div('zip_code', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('phone_number', css_class='col'),
+                Div('birth_date', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('semester', css_class='col'),
+                Div('year', css_class='col'),
+            css_class='row'),
+            Div(
+            HTML("<p class='my-2'>Send my transcript to:</p>"),
+                Div(
+                    Div('adhe', css_class='row'),
+                    Div('sacm', css_class='row'),
+                    Div('embassy_of_kuwait', css_class='row'),
+                css_class='col'),
+                Div(
+                    Div('ade_licensure', css_class='row'),
+                    Div('arsbn', css_class='row'),
+                css_class='col'),
+            css_class='row mb-2'),
+            Div(
+                Div('student_signature', css_class='col'),
+            css_class='row'),
+        css_class=''),
+        ButtonHolder(
+            Submit('submit', 'Submit', css_class='btn btn-primary mt-2')
+        )
+    )
 
 class courseInfoForm(forms.ModelForm): #WIP (not WAP)
   class Meta:
