@@ -216,6 +216,40 @@ class UGGraduationForm(forms.ModelForm):
       'expected_graduation_year': 'Expected Graduation Year',
       'preferred_degree': 'If you are seeking two Bachelor’s degrees (Double Degree), please indicate which major you’d like to walk with in the ceremony',
     }
+  def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
+    self.helper = FormHelper()
+    self.helper.layout = Layout(
+        Div(
+            Div(
+                Div('name_enrolled_under', css_class='col-8'),
+                Div('student_id_number', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('phone_number', css_class='col'),
+                Div('expected_graduation_term', css_class='col'),
+                Div('expected_graduation_year', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('preferred_degree', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('diploma_name', css_class='col-8'),
+                Div('name_pronunciation', css_class='col'),
+                Div('pronunciation_recorded'),
+            css_class='row'),
+            Div(
+                Div('parents_completed_bachelor_degree', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('student_signature', css_class='col-8'),
+                Div('date', css_class='col-4'),
+            css_class='row'),
+        css_class=''),
+        ButtonHolder(
+            Submit('submit', 'Submit', css_class='btn btn-primary mt-2')
+        )
+    )
 
 class masterGraduationForm(forms.ModelForm):
   class Meta:
