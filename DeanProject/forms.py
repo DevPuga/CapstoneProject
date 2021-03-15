@@ -91,6 +91,49 @@ class add_dropClassForm(forms.ModelForm):
       'name_enrolled_under',
       'recieves_financial_aid', #Yes/No
       'financial_aid_representative_signature', #Signature
+      'another_course_fits_schedule', #Academic Issues
+      'changing_major',
+      'changing_minor',
+      'classes_too_large',
+      'could_not_understand_the_instructor_course_or_materials',
+      'course_not_required_for_major',
+      'inadequate_academic_support_services',
+      'insufficient_high_school_preparation',
+      'lack_of_academic_challenge',
+      'lack_of_progress_in_the_courses',
+      'need_to_re_enroll_in_classes_next_semester',
+      'need_to_re_enroll_in_classes_with_different_instructor',
+      'quality_of_instruction_did_not_meet_expections',
+      'reduce_course_load',
+      'wanted_classes_face_to_face',
+      'wanted_classes_online',
+      'change_in_family_financial_circumstances', #Financial Issues
+      'didnt_have_enough_money_to_continue',
+      'financial_aid_was_not_sufficient',
+      'increases_in_tuition_and_fees',
+      'incurred_too_much_debt',
+      'needed_Course_for_financial_aid_eligibility',
+      'scholarship_Grant_was_not_renewed',
+      'family_illness_responsibility', #Family Issues
+      'homesick',
+      'wanted_to_be_closer_to_family_and_friends',
+      'commute_too_long', #Housing and Travel Issues
+      'moved_out_of_the_area',
+      'distracted_Social_life', #Personal and Transition Issues
+      'felt_class_climate_unwelcoming',
+      'felt_out_of_place_in_class',
+      'impact_of_natural_disaster',
+      'inadequate_study_skills_or_lack_of_academic_success',
+      'military_obligations',
+      'personal_health',
+      'personal_emergency',
+      'unmotivated_for_this_courses_or_tired_of_school',
+      'working_too_many_hours',
+      'total_hours_enrolled_after_change',
+      'comments',
+      'advisor_signature', #Signature
+      'student_signature', #Signature
+      'atu_comments',
     ]
     labels = {
       'student_id_number': 'T Number',
@@ -98,6 +141,48 @@ class add_dropClassForm(forms.ModelForm):
       'name_enrolled_under': 'Name Enrolled Under (Last, First, Middle, Other)',
       'recieves_financial_aid': 'Do you receive financial aid? (loans, grants, scholarships)', #Yes/No
       'financial_aid_representative_signature': 'Financial Aid Representative Signature', #Signature
+      'another_course_fits_schedule': 'Another Course fits schedule', #Academic Issues
+      'changing_major': 'Changing Major',
+      'classes_too_large': 'Classes too large',
+      'could_not_understand_the_instructor_course_or_materials': 'Could not understand the instructor course or material',
+      'course_not_required_for_major': 'Course not required for Major',
+      'inadequate_academic_support_services': 'Inadequate academic support services',
+      'insufficient_high_school_preparation': 'Insufficient high school preparation',
+      'lack_of_academic_challenge': 'Lack of academic challenge',
+      'lack_of_progress_in_the_courses': 'Lack of progress in the course(s)',
+      'need_to_re_enroll_in_classes_next_semester': 'Need to re-enroll in class(es) next semester',
+      'need_to_re_enroll_in_classes_with_different_instructor': 'Need to re-enroll in class(es) with different instructor',
+      'quality_of_instruction_did_not_meet_expections': 'Quality of instruction did not meet expectations',
+      'reduce_course_load': 'Reduce course load',
+      'wanted_classes_face_to_face': 'Wanted class(es) face to face',
+      'wanted_classes_online': 'Wanted class(es) online',
+      'change_in_family_financial_circumstances': 'Changing in Family Circumstances', #Financial Issues
+      'didnt_have_enough_money_to_continue': 'Didn’t have enough money to continue',
+      'financial_aid_was_not_sufficient': 'Financial aid was not sufficient',
+      'increases_in_tuition_and_fees': 'Increases in tuition and fees ',
+      'incurred_too_much_debt': 'Incurred too much debt',
+      'needed_Course_for_financial_aid_eligibility': 'Needed course for financial aid eligibility',
+      'scholarship_Grant_was_not_renewed': 'Scholarship/grant was not renewed',
+      'family_illness_responsibility': 'Family illness/responsibility', #Family Issues
+      'homesick': 'Homesick',
+      'wanted_to_be_closer_to_family_and_friends': ' Wanted to be closer to family and friends',
+      'commute_too_long': 'Commute too long ', #Housing and Travel Issues
+      'moved_out_of_the_area': 'Moved out of the area ',
+      'distracted_Social_life': 'Distracted by social life ', #Personal and Transition Issues
+      'felt_class_climate_unwelcoming': 'Felt class climate unwelcoming',
+      'felt_out_of_place_in_class': 'Felt out of place in class',
+      'impact_of_natural_disaster': 'Impact of natural disaster',
+      'inadequate_study_skills_or_lack_of_academic_success': 'Inadequate study skills or lack of academic success',
+      'military_obligations': 'Military obligations',
+      'personal_health': 'Personal health',
+      'personal_emergency': 'Personal emergency ',
+      'unmotivated_for_this_courses_or_tired_of_school': 'Unmotivated for this course(s) or tired of school ',
+      'working_too_many_hours': 'Working too many hours',
+      'total_hours_enrolled_after_change': 'Total Hours Enrolled After Change',
+      'comments': 'Comments',
+      'advisor_signature': 'Advisor\'s Signature', #Signature
+      'student_signature': 'Student\'s Signature', #Signature
+      'atu_comments': 'Do you feel ATU could have done more to meet your needs? If so please tell us how',
     }
 
 class UGGraduationForm(forms.ModelForm):
@@ -115,6 +200,7 @@ class UGGraduationForm(forms.ModelForm):
       'parents_completed_bachelor_degree', #Yes/No
       'expected_graduation_term',
       'expected_graduation_year',
+      'preferred_degree',
     ]
     labels = {
       'student_id_number': 'T Number',
@@ -128,6 +214,7 @@ class UGGraduationForm(forms.ModelForm):
       'parents_completed_bachelor_degree': 'Did either of your parents complete a bachelor\'s degree?', #Yes/No
       'expected_graduation_term': 'Expected Graduation Term',
       'expected_graduation_year': 'Expected Graduation Year',
+      'preferred_degree': 'If you are seeking two Bachelor’s degrees (Double Degree), please indicate which major you’d like to walk with in the ceremony',
     }
 
 class masterGraduationForm(forms.ModelForm):
@@ -230,4 +317,20 @@ class transcriptRequestForm(forms.ModelForm):
       'embassy_of_kuwait': 'Embassy of Kuwait',
       'ade_licensure': 'ADE Licensure',
       'arsbn': 'ARSBN',
+    }
+
+class courseInfoForm(forms.ModelForm): #WIP (not WAP)
+  class Meta:
+    model = courseInfo
+    fields = [
+      'crn',
+      'course_prefix',
+      'course_number',
+      'sec_no',
+    ]
+    labels = {
+      'crn': 'CRN',
+      'course_prefix': 'Course Prefix',
+      'course_number': 'Course Number',
+      'sec_no': 'Sec No.',
     }
