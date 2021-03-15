@@ -36,6 +36,8 @@ class permitToRegisterForm(forms.ModelForm):
     self.helper = FormHelper()
     self.helper.layout = Layout(
         Div(
+            HTML("<h2 class='mt-4\'>Permit to Register</h2>"),
+            HTML("<hr class='solid my-1\'>"),
             Div(
                 Div('name_enrolled_under', css_class='col'),
             css_class='row'),
@@ -190,6 +192,8 @@ class add_dropClassForm(forms.ModelForm):
     self.helper = FormHelper()
     self.helper.layout = Layout(
         Div(
+            HTML("<h2 class='mt-4\'>Add/Drop Course</h2>"),
+            HTML("<hr class='solid my-1\'>"),
             Div(
                 Div('name_enrolled_under', css_class='col-8'),
                 Div('student_id_number', css_class='col'),
@@ -306,6 +310,8 @@ class UGGraduationForm(forms.ModelForm):
     self.helper = FormHelper()
     self.helper.layout = Layout(
         Div(
+            HTML("<h2 class='mt-4\'>Undergraduate Graduation Application</h2>"),
+            HTML("<hr class='solid my-1\'>"),
             Div(
                 Div('name_enrolled_under', css_class='col-8'),
                 Div('student_id_number', css_class='col'),
@@ -381,6 +387,8 @@ class masterGraduationForm(forms.ModelForm):
     self.helper = FormHelper()
     self.helper.layout = Layout(
         Div(
+            HTML("<h2 class='mt-4\'>Master's Graduation Application</h2>"),
+            HTML("<hr class='solid my-1\'>"),
             Div(
                 Div('name_enrolled_under', css_class='col-8'),
                 Div('student_id_number', css_class='col'),
@@ -454,6 +462,8 @@ class degreeAuditForm(forms.ModelForm):
     self.helper = FormHelper()
     self.helper.layout = Layout(
         Div(
+            HTML("<h2 class='mt-4\'>Degree Audit</h2>"),
+            HTML("<hr class='solid my-1\'>"),
             Div(
                 Div('name_enrolled_under', css_class='col-8'),
                 Div('student_id_number', css_class='col'),
@@ -507,11 +517,11 @@ class transcriptRequestForm(forms.ModelForm):
       'zip_code': 'ZIP',
       'phone_number': 'Phone Number',
       'student_signature': 'Student Signature',  #Signature
-      'adhe': 'ADHE',
-      'sacm': 'SACM',
+      'adhe': 'ADHE (AR Lottery Scholarship)',
+      'sacm': 'SACM (Saudi Arabian Cultural Mission)',
       'embassy_of_kuwait': 'Embassy of Kuwait',
-      'ade_licensure': 'ADE Licensure',
-      'arsbn': 'ARSBN',
+      'ade_licensure': 'ADE Licensure (AR Dept. of Ed.)',
+      'arsbn': 'ARSBN (AR State Board of Nursing)',
     }
 
   def __init__(self, *args, **kwargs):
@@ -519,6 +529,8 @@ class transcriptRequestForm(forms.ModelForm):
     self.helper = FormHelper()
     self.helper.layout = Layout(
         Div(
+            HTML("<h2 class='mt-4\'>Transcript Request</h2>"),
+            HTML("<hr class='solid my-1\'>"),
             Div(
                 Div('name_enrolled_under', css_class='col-8'),
                 Div('student_id_number', css_class='col'),
@@ -540,6 +552,7 @@ class transcriptRequestForm(forms.ModelForm):
                 Div('year', css_class='col'),
             css_class='row'),
             Div(
+            HTML("<p class='my-2'>Send my transcript to:</p>"),
                 Div(
                     Div('adhe', css_class='row'),
                     Div('sacm', css_class='row'),
@@ -549,7 +562,7 @@ class transcriptRequestForm(forms.ModelForm):
                     Div('ade_licensure', css_class='row'),
                     Div('arsbn', css_class='row'),
                 css_class='col'),
-            css_class='row'),
+            css_class='row mb-2'),
             Div(
                 Div('student_signature', css_class='col'),
             css_class='row'),
