@@ -365,6 +365,33 @@ class degreeAuditForm(forms.ModelForm):
       'year': 'Year',
     }
 
+  def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
+    self.helper = FormHelper()
+    self.helper.layout = Layout(
+        Div(
+            Div(
+                Div('name_enrolled_under', css_class='col-8'),
+                Div('student_id_number', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('major_or_minor_name', css_class='col-8'),
+                Div('catalog_year', css_class='col'),
+                Div(
+                    Div('major_was_chosen', css_class='row mt-3'),
+                    Div('minor_was_chosen', css_class='row'),
+                css_class='col'),
+            css_class='row'),
+            Div(
+                Div('semester', css_class='col'),
+                Div('year', css_class='col'),
+            css_class='row'),
+        css_class=''),
+        ButtonHolder(
+            Submit('submit', 'Submit', css_class='btn btn-primary mt-2')
+        )
+    )
+
 class transcriptRequestForm(forms.ModelForm):
   class Meta:
     model = transcriptRequest
