@@ -3,16 +3,16 @@ from django.db import models
 US_STATE_CHOICES = (
     ('ar','AR'), ('aa','AA'), ('ae','AE'), ('ak','AK'), ('al','AL'),
     ('ap','AP'), ('as','AS'), ('az','AZ'), ('ca','CA'), ('co','CO'),
-    ('ct','CT'), ('de','DE'), ('dc','DC'), ('fl','FL'), ('ga','GA'),
-    ('gu','GU'), ('hi','HI'), ('id','ID'), ('il','IL'), ('in','IN'),
-    ('ia','IA'), ('ks','KS'), ('ky','KY'), ('la','LA'), ('me','ME'),
-    ('md','MD'), ('ma','MA'), ('mi','MI'), ('mn','MN'), ('ms','MS'),
-    ('mo','MO'), ('mt','MT'), ('ne','NE'), ('nv','NV'), ('nh','NH'),
-    ('nj','NJ'), ('nm','NM'), ('ny','NY'), ('nc','NC'), ('nd','ND'),
-    ('mp','MP'), ('oh','OH'), ('ok','OK'), ('or','OR'), ('pa','PA'),
+    ('ct','CT'), ('dc','DC'), ('de','DE'), ('fl','FL'), ('ga','GA'),
+    ('gu','GU'), ('hi','HI'), ('ia','IA'), ('id','ID'), ('il','IL'),
+    ('in','IN'), ('ks','KS'), ('ky','KY'), ('la','LA'), ('ma','MA'),
+    ('md','MD'), ('me','ME'), ('mi','MI'), ('mn','MN'), ('mo','MO'),
+    ('mp','MP'), ('ms','MS'), ('mt','MT'), ('nc','NC'), ('nd','ND'),
+    ('ne','NE'), ('nh','NH'), ('nj','NJ'), ('nm','NM'), ('nv','NV'),
+    ('ny','NY'), ('oh','OH'), ('ok','OK'), ('or','OR'), ('pa','PA'),
     ('pr','PR'), ('ri','RI'), ('sc','SC'), ('sd','SD'), ('tn','TN'),
-    ('tx','TX'), ('ut','UT'), ('vt','VT'), ('va','VA'), ('vi','VI'),
-    ('wa','WA'), ('wv','WV'), ('wi','WI'), ('wy','WY'),
+    ('tx','TX'), ('ut','UT'), ('va','VA'), ('vi','VI'), ('vt','VT'),
+    ('wa','WA'), ('wi','WI'), ('wv','WV'), ('wy','WY'),
 )
 
 SEASON_CHOICES = (
@@ -125,3 +125,7 @@ class courseInfo(models.Model): #WIP (not WAP)
   course_prefix = models.CharField(max_length=4)
   course_number = models.DecimalField(decimal_places=0, max_digits=4)
   sec_no = models.CharField(max_length=3)
+
+class substitutionRequest(models.Model): #WIP (not WAP)
+  current_course = models.CharField(max_length=50)
+  requested_course = models.CharField(max_length=50)

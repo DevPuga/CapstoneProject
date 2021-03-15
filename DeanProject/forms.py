@@ -1,5 +1,6 @@
 from django import forms
-from .models import permitToRegister, add_dropClass, UGGraduation, masterGraduation, degreeAudit, transcriptRequest, courseInfo
+from .models import *
+#from .models import permitToRegister, add_dropClass, UGGraduation, masterGraduation, degreeAudit, transcriptRequest, courseInfo, substitutionRequest
 
 class permitToRegisterForm(forms.ModelForm):
   class Meta:
@@ -205,4 +206,16 @@ class courseInfoForm(forms.ModelForm): #WIP (not WAP)
       'course_prefix': 'Course Prefix',
       'course_number': 'Course Number',
       'sec_no': 'Sec No.',
+    }
+
+class substitutionRequestForm(forms.ModelForm): #WIP (not WAP)
+  class Meta:
+    model = substitutionRequest
+    fields = [
+      'current_course',
+      'requested_course',
+    ]
+    labels = {
+      'current_course': 'Current Course Prefix/Number',
+      'requested_course': 'Requested Course Prefix/Number',
     }
