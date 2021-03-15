@@ -47,8 +47,6 @@ class add_dropClass(models.Model):
   comments = models.TextField(max_length=100)
   advisor_signature = models.CharField(max_length=50) #Signature
   student_signature = models.CharField(max_length=50) #Signature
-  student_id_number = models.CharField(max_length=10)
-  name_enrolled_under = models.CharField(max_length=50)
   atu_comments = models.TextField(max_length=100)
   #Section: Academic Issues
   another_course_fits_schedule = models.BooleanField()
@@ -94,8 +92,6 @@ class add_dropClass(models.Model):
   unmotivated_for_this_courses_or_tired_of_school = models.BooleanField()
   working_too_many_hours = models.BooleanField()
 
-
-
 class UGGraduation(models.Model):
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
@@ -108,7 +104,8 @@ class UGGraduation(models.Model):
   parents_completed_bachelor_degree = models.BooleanField() #Yes/No
   expected_graduation_term = models.CharField(max_length=6, choices=SEASON_CHOICES)
   expected_graduation_year = models.DecimalField(decimal_places = 0, max_digits=4)
-  #Still Needs Work
+  #Catalog table would go here
+  preferred_degree = models.CharField(max_length=100)
 
 class masterGraduation(models.Model):
   student_id_number = models.CharField(max_length=10)
@@ -155,9 +152,8 @@ class transcriptRequest(models.Model):
   embassy_of_kuwait = models.BooleanField()
   ade_licensure = models.BooleanField()
   arsbn = models.BooleanField()
-  #Still Needs Work
+  #Tables need to be added
 
-  
 class courseInfo(models.Model): #WIP (not WAP)
   crn = models.DecimalField(decimal_places=0, max_digits=5)
   course_prefix = models.CharField(max_length=4)
