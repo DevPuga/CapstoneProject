@@ -1,5 +1,7 @@
 from django import forms
 from .models import permitToRegister, add_dropClass, UGGraduation, masterGraduation, degreeAudit, transcriptRequest, courseInfo
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import *
 
 class permitToRegisterForm(forms.ModelForm):
   class Meta:
@@ -28,6 +30,41 @@ class permitToRegisterForm(forms.ModelForm):
       'advisor_signature': 'Advisor’s Signature',
       'student_signature': 'Student’s Signature',
     }
+
+  def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
+    self.helper = FormHelper()
+    self.helper.layout = Layout(
+        Div(
+            Div(
+                Div('name_enrolled_under', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('student_id_number', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('registration_semester', css_class='col'),
+                Div('registration_year', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('total_hours_enrolled', css_class='col'),
+                Div('dean_signature', css_class='col-8'),
+            css_class='row'),
+            Div(
+                Div('student_signature', css_class='col-8'),
+                Div('date', css_class='col-4'),
+            css_class='row'),
+            Div(
+                Div('advisor_signature', css_class='col'),
+            css_class='row'),
+            Div(
+                Div('comments', css_class='col'),
+            css_class='row'),
+        css_class=''),
+        ButtonHolder(
+            Submit('submit', 'Submit', css_class='btn btn-primary mt-2')
+        )
+    )
 
 class courseInfoForm(forms.ModelForm): #WIP (not WAP)
   class Meta:
