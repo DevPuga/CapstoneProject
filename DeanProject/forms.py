@@ -548,10 +548,6 @@ class transcriptRequestForm(forms.ModelForm):
                 Div('birth_date', css_class='col'),
             css_class='row'),
             Div(
-                Div('semester', css_class='col'),
-                Div('year', css_class='col'),
-            css_class='row'),
-            Div(
             HTML("<p class='my-2'>Send my transcript to:</p>"),
                 Div(
                     Div('adhe', css_class='row'),
@@ -564,7 +560,8 @@ class transcriptRequestForm(forms.ModelForm):
                 css_class='col'),
             css_class='row mb-2'),
             Div(
-                Div('student_signature', css_class='col'),
+                Div('student_signature', css_class='col-8'),
+                Div('date', css_class='col'),
             css_class='row'),
         css_class=''),
         ButtonHolder(
