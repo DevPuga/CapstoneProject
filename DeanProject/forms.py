@@ -33,7 +33,7 @@ class permitToRegisterForm(forms.ModelForm):
 
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
-    self.helper = FormHelper()
+    self.helper = FormHelper(self)
     self.helper.layout = Layout(
         Div(
             HTML("<h2 class='mt-4\'>Permit to Register</h2>"),
@@ -67,6 +67,7 @@ class permitToRegisterForm(forms.ModelForm):
             Submit('submit', 'Submit', css_class='btn btn-primary mt-2')
         )
     )
+    self.helper.form_action = '/permitToRegisterForm/'
 
 class courseInfoForm(forms.ModelForm): #WIP (not WAP)
   class Meta:
