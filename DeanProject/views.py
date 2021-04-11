@@ -59,17 +59,17 @@ def get(request):
 
       # Process form submissions
       if requestedPage == "permitToRegister":
-          return redirect('/error')
+          return redirect('/success')
       elif requestedPage == "addDropClass":
-          return redirect('/error')
+          return redirect('/success')
       elif requestedPage == "UGGraduation":
-          return redirect('/error')
+          return redirect('/success')
       elif requestedPage == "masterGraduation":
-          return redirect('/error')
+          return redirect('/success')
       elif requestedPage == "degreeAudit":
-          return redirect('/error')
+          return redirect('/success')
       elif requestedPage == "transcriptRequest":
-          return redirect('/error')
+          return redirect('/success')
 
       return render(request, 'DeanProject/%s.html'%requestedPage, context)
   else:
