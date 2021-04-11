@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import permitToRegisterForm, add_dropClassForm, UGGraduationForm, masterGraduationForm, degreeAuditForm, transcriptRequestForm, courseInfoForm
+from .forms import *
 
 #Used in navbar to check if user is faculty
 userGroup = ''
@@ -26,32 +26,51 @@ def get(request):
               pass
           else:
               return redirect('/error')
-      
+
       # Get user's forms so we can populate them as cards
       forms = getForms(request)
       numPending = max(forms["pending"]) + 1
 
       # Set tab as active, render faculty tab if faculty, give forms to html
-      context = {"%s_page"%requestedPage: "active", "userGroup": userGroup, "forms": forms, "numPending": numPending}
-      
-      #For newform.html page
+      context = {"%s_page"%requestedPage: "active", "userGroup": userGroup, "forms": forms, "numPending": numPending, "form_selector": emptyForm(), "currentForm": ""}
+
+      # For newform.html page
       if requestedPage == "newform":
         if request.method == "POST":
             selected_form = request.POST['form-selector']
             if selected_form == '1':
                 context['form_selector'] = permitToRegisterForm()
-                context['form_table'] = courseInfoForm()
+                context['currentForm'] = "/permitToRegister"
             elif selected_form == '2':
                 context['form_selector'] = add_dropClassForm()
+                context['currentForm'] = "/addDropClass"
             elif selected_form == '3':
                 context['form_selector'] = UGGraduationForm()
+                context['currentForm'] = "/UGGraduation"
             elif selected_form == '4':
                 context['form_selector'] = masterGraduationForm()
+                context['currentForm'] = "/masterGraduation"
             elif selected_form == '5':
                 context['form_selector'] = degreeAuditForm()
+                context['currentForm'] = "/degreeAudit"
             elif selected_form == '6':
                 context['form_selector'] = transcriptRequestForm()
-          
+                context['currentForm'] = "/transcriptRequest"
+
+      # Process form submissions
+      if requestedPage == "permitToRegister":
+          return redirect('/error')
+      elif requestedPage == "addDropClass":
+          return redirect('/error')
+      elif requestedPage == "UGGraduation":
+          return redirect('/error')
+      elif requestedPage == "masterGraduation":
+          return redirect('/error')
+      elif requestedPage == "degreeAudit":
+          return redirect('/error')
+      elif requestedPage == "transcriptRequest":
+          return redirect('/error')
+
       return render(request, 'DeanProject/%s.html'%requestedPage, context)
   else:
       return redirect('/login')
