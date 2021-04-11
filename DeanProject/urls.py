@@ -27,6 +27,7 @@ urlpatterns = [
     path('faculty/', views.get, name='faculty'),
     path('error/', views.error, name='error'),
     path('newform/', views.get, name='newform'),
+    path('success/', views.get, name='success'),
     path('permitToRegister', views.get),
     path('addDropClass', views.get),
     path('UGGraduation', views.get),

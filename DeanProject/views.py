@@ -114,7 +114,7 @@ def processPermitToRegister(request):
           request.POST['student_signature']))
       db.commit()
       db.close()
-      return redirect('/error')
+      return redirect('/success')
 
 def processAddDropClass(request):
       db = sqlite3.connect('db.sqlite3')
@@ -218,7 +218,7 @@ def processAddDropClass(request):
           trySetBool(request, 'working_too_many_hours')))
       db.commit()
       db.close()
-      return redirect('/error')
+      return redirect('/success')
 
 def processUGGraduation(request):
       db = sqlite3.connect('db.sqlite3')
@@ -251,7 +251,7 @@ def processUGGraduation(request):
           request.POST['preferred_degree']))
       db.commit()
       db.close()
-      return redirect('/error')
+      return redirect('/success')
 
 def processMasterGraduation(request):
       db = sqlite3.connect('db.sqlite3')
@@ -292,7 +292,7 @@ def processMasterGraduation(request):
           request.POST['degree_name']))
       db.commit()
       db.close()
-      return redirect('/error')
+      return redirect('/success')
 
 def processDegreeAudit(request):
       db = sqlite3.connect('db.sqlite3')
@@ -317,7 +317,7 @@ def processDegreeAudit(request):
           request.POST['year']))
       db.commit()
       db.close()
-      return redirect('/error')
+      return redirect('/success')
 
 def processTranscriptRequest(request):
       db = sqlite3.connect('db.sqlite3')
@@ -356,7 +356,7 @@ def processTranscriptRequest(request):
           trySetBool(request, 'arsbn')))
       db.commit()
       db.close()
-      return redirect('/error')
+      return redirect('/success')
 
 def trySetBool(request, title):
       try:
