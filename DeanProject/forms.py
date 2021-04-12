@@ -14,9 +14,6 @@ class permitToRegisterForm(forms.ModelForm):
       'registration_year',
       'comments',
       'total_hours_enrolled',
-      'dean_signature',
-      'advisor_signature',
-      'student_signature',
     ]
     labels = {
       'student_id_number': 'T Number',
@@ -26,9 +23,7 @@ class permitToRegisterForm(forms.ModelForm):
       'registration_year': 'Registration Year',
       'comments': 'Comments',
       'total_hours_enrolled': 'Total hours enrolled',
-      'dean_signature': 'Dean’s Signature, Overload Approval',
-      'advisor_signature': 'Advisor’s Signature',
-      'student_signature': 'Student’s Signature',
+      
     }
 
   def __init__(self, *args, **kwargs):
@@ -38,6 +33,7 @@ class permitToRegisterForm(forms.ModelForm):
         Div(
             HTML("<h2 class='mt-4\'>Permit to Register</h2>"),
             HTML("<hr class='solid my-1\'>"),
+            
             Div(
                 Div('name_enrolled_under', css_class='col'),
             css_class='row'),
@@ -51,13 +47,6 @@ class permitToRegisterForm(forms.ModelForm):
             Div(
                 Div('total_hours_enrolled', css_class='col'),
                 Div('dean_signature', css_class='col-8'),
-            css_class='row'),
-            Div(
-                Div('student_signature', css_class='col-8'),
-                Div('date', css_class='col-4'),
-            css_class='row'),
-            Div(
-                Div('advisor_signature', css_class='col'),
             css_class='row'),
             Div(
                 Div('comments', css_class='col'),
@@ -93,11 +82,9 @@ class add_dropClassForm(forms.ModelForm):
       'date',
       'name_enrolled_under',
       'recieves_financial_aid', #Yes/No
-      'financial_aid_representative_signature', #Signature
+      
       'total_hours_enrolled_after_change',
       'comments',
-      'advisor_signature', #Signature
-      'student_signature', #Signature
       'atu_comments',
       'another_course_fits_schedule', #Academic Issues
       'changing_major',
@@ -143,11 +130,8 @@ class add_dropClassForm(forms.ModelForm):
       'date': 'Date',
       'name_enrolled_under': 'Name Enrolled Under (Last, First, Middle, Other)',
       'recieves_financial_aid': 'Do you receive financial aid? (loans, grants, scholarships)', #Yes/No
-      'financial_aid_representative_signature': 'Financial Aid Representative Signature', #Signature
       'total_hours_enrolled_after_change': 'Total Hours Enrolled After Change',
       'comments': 'Comments',
-      'advisor_signature': 'Advisor\'s Signature', #Signature
-      'student_signature': 'Student\'s Signature', #Signature
       'atu_comments': 'Do you feel ATU could have done more to meet your needs? If so please tell us how',
       'another_course_fits_schedule': 'Another Course fits schedule', #Academic Issues
       'changing_major': 'Changing Major',
@@ -206,14 +190,6 @@ class add_dropClassForm(forms.ModelForm):
                 Div('total_hours_enrolled_after_change', css_class='col'),
                 Div('financial_aid_representative_signature', css_class='col-8'),
             css_class='row'),
-            Div(
-                Div('student_signature', css_class='col-8'),
-                Div('date', css_class='col-4'),
-            css_class='row'),
-            Div(
-                Div('advisor_signature', css_class='col'),
-            css_class='row'),
-            HTML("<p class='my-2'>Please tell us why you wish to drop. Please select all that apply.</p>"),
             Div(
                 Div(
                     HTML("<h6 class='mb-0'>Academic issues</h6>"),
@@ -282,7 +258,6 @@ class UGGraduationForm(forms.ModelForm):
       'date',
       'name_enrolled_under',
       'phone_number',
-      'student_signature', #Signature
       'diploma_name',
       'name_pronunciation',
       'pronunciation_recorded', #Weird
@@ -296,7 +271,6 @@ class UGGraduationForm(forms.ModelForm):
       'date': 'Date',
       'name_enrolled_under': 'Name Enrolled Under (Last, First, Middle, Other)',
       'phone_number': 'Phone Number',
-      'student_signature': 'Student Signature',  #Signature
       'diploma_name': 'Print Your Name Exactly As You Want It To Appear On Your Diploma',
       'name_pronunciation': 'Name Pronounciation',
       'pronunciation_recorded': 'Pronunciation Recorded', #Weird
@@ -332,10 +306,6 @@ class UGGraduationForm(forms.ModelForm):
             css_class='row'),
             Div(
                 Div('parents_completed_bachelor_degree', css_class='col'),
-            css_class='row'),
-            Div(
-                Div('student_signature', css_class='col-8'),
-                Div('date', css_class='col-4'),
             css_class='row'),
         css_class=''),
         ButtonHolder(
@@ -439,6 +409,7 @@ class degreeAuditForm(forms.ModelForm):
     model = degreeAudit
     fields = [
       'student_id_number',
+      'date',
       'catalog_year',
       'name_enrolled_under',
       'major_or_minor_name',
@@ -449,6 +420,7 @@ class degreeAuditForm(forms.ModelForm):
     ]
     labels = {
       'student_id_number': 'T Number',
+      'date': 'Submit Date',
       'catalog_year': 'Catalog Year',
       'name_enrolled_under': 'Name Enrolled Under (Last, First, Middle, Other)',
       'major_or_minor_name': 'Major or Minor',
@@ -480,7 +452,9 @@ class degreeAuditForm(forms.ModelForm):
             Div(
                 Div('semester', css_class='col'),
                 Div('year', css_class='col'),
+                Div('date', css_class='col'),
             css_class='row'),
+            
         css_class=''),
         ButtonHolder(
             Submit('submit', 'Submit', css_class='btn btn-primary mt-2')
@@ -500,7 +474,6 @@ class transcriptRequestForm(forms.ModelForm):
       'state',
       'zip_code',
       'phone_number',
-      'student_signature', #Signature
       'adhe',
       'sacm',
       'embassy_of_kuwait',
@@ -517,7 +490,6 @@ class transcriptRequestForm(forms.ModelForm):
       'state': 'State',
       'zip_code': 'ZIP',
       'phone_number': 'Phone Number',
-      'student_signature': 'Student Signature',  #Signature
       'adhe': 'ADHE (AR Lottery Scholarship)',
       'sacm': 'SACM (Saudi Arabian Cultural Mission)',
       'embassy_of_kuwait': 'Embassy of Kuwait',
@@ -560,10 +532,6 @@ class transcriptRequestForm(forms.ModelForm):
                     Div('arsbn', css_class='row'),
                 css_class='col'),
             css_class='row mb-2'),
-            Div(
-                Div('student_signature', css_class='col-8'),
-                Div('date', css_class='col'),
-            css_class='row'),
         css_class=''),
         ButtonHolder(
             Submit('submit', 'Submit', css_class='btn btn-primary mt-2')

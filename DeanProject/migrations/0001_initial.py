@@ -87,6 +87,7 @@ class Migration(migrations.Migration):
                 ('minor_was_chosen', models.BooleanField()),
                 ('semester', models.CharField(choices=[('spring', 'Spring'), ('summer', 'Summer'), ('fall', 'Fall'), ('winter', 'Winter')], max_length=6)),
                 ('year', models.DecimalField(decimal_places=0, max_digits=4)),
+                ('date',models.DateField()),
             ],
         ),
         migrations.CreateModel(
