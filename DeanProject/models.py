@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+
 US_STATE_CHOICES = (
     ('ar','AR'), ('aa','AA'), ('ae','AE'), ('ak','AK'), ('al','AL'),
     ('ap','AP'), ('as','AS'), ('az','AZ'), ('ca','CA'), ('co','CO'),
@@ -30,6 +31,7 @@ class Profile(models.Model):
   tech_id = models.CharField(max_length=9)
   name = models.CharField(max_length=20, default="Person")
 
+  
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
   if created:
@@ -40,6 +42,10 @@ def save_user_profile(sender, instance, **kwargs):
   instance.profile.save()
 
 class permitToRegister(models.Model):
+
+  class Meta:
+    verbose_name = "Permit to Register"
+
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
   name_enrolled_under = models.CharField(max_length=50)
@@ -52,8 +58,11 @@ class permitToRegister(models.Model):
   advisor_signature = models.CharField(max_length=50) #Signature
   student_signature = models.CharField(max_length=50) #Signature
 
-
 class add_dropClass(models.Model):
+
+  class Meta:
+    verbose_name = "Add/Drop Class"
+  
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
   name_enrolled_under = models.CharField(max_length=50)
@@ -110,6 +119,10 @@ class add_dropClass(models.Model):
   working_too_many_hours = models.BooleanField()
 
 class UGGraduation(models.Model):
+
+  class Meta:
+    verbose_name = "Undergraduate Graduation"
+  
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
   name_enrolled_under = models.CharField(max_length=50)
@@ -125,6 +138,10 @@ class UGGraduation(models.Model):
   preferred_degree = models.CharField(max_length=100)
 
 class masterGraduation(models.Model):
+  
+  class Meta:
+    verbose_name = "Master's Graduation"
+  
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
   name_enrolled_under = models.CharField(max_length=50)
@@ -143,6 +160,10 @@ class masterGraduation(models.Model):
   degree_name = models.CharField(max_length=100) #In reality this would be a dropdown
 
 class degreeAudit(models.Model):
+
+  class Meta:
+    verbose_name = "Degree Audit"
+
   student_id_number = models.CharField(max_length=10)
   catalog_year = models.DecimalField(decimal_places = 0, max_digits=4)
   name_enrolled_under = models.CharField(max_length=50)
@@ -154,6 +175,9 @@ class degreeAudit(models.Model):
   #Still Needs Work
 
 class transcriptRequest(models.Model):
+  class Meta:
+    verbose_name = "Transcript Request"
+  
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
   name_enrolled_under = models.CharField(max_length=50)

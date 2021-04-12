@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import *
+from .models import *
+from django.db import connection
+from itertools import chain
 
 #Used in navbar to check if user is faculty
 userGroup = ''
@@ -77,8 +80,29 @@ def get(request):
 
 # Should return all forms for authenticated user as dictionary or array
 def getForms(request):
-    forms = {'all' : range(13), 'pending' : range(3), 'approved' : range(9), 'denied' : range(1)}
-    return forms
+    #forms = {'all' : range(13), 'pending' : range(3), 'approved' : range(9), 'denied' : range(1)}
+    user_id = request.user.profile.tech_id
+    
+    #cursor = connection.cursor()
+    #print(cursor.execute('''SELECT * FROM DeanProject_permittoregister WHERE student_id_number = "%s"''' %user_id))
+
+    permitToRegisterData = permitToRegister.objects.filter(student_id_number=user_id)
+    #addDropData = add_dropClass.objects.filter(student_id_number=user_id)
+    #ugGraduationData = UGGraduation.objects.filter(student_id_number=user_id)
+    #masterGraduationData = masterGraduation.objects.filter(student_id_number=user_id)
+    #degreeAuditData = degreeAudit.objects.filter(student_id_number=user_id)
+    #transcriptRequestData = transcriptRequest.objects.filter(student_id_number=user_id)
+
+    print(permitToRegisterData)
+
+    forms = {
+        'all' : permitToRegisterData,
+        'pending' : range(1),
+        'approved' : range(1),
+        'denied' : range(1)
+    }
+    
+    return forms 
 
 def error(request):
     return render(request, 'DeanProject/error.html')
