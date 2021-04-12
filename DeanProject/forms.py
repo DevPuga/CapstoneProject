@@ -23,7 +23,6 @@ class permitToRegisterForm(forms.ModelForm):
       'registration_year': 'Registration Year',
       'comments': 'Comments',
       'total_hours_enrolled': 'Total hours enrolled',
-      
     }
 
   def __init__(self, *args, **kwargs):
@@ -33,9 +32,9 @@ class permitToRegisterForm(forms.ModelForm):
         Div(
             HTML("<h2 class='mt-4\'>Permit to Register</h2>"),
             HTML("<hr class='solid my-1\'>"),
-            
             Div(
                 Div('name_enrolled_under', css_class='col'),
+                Div('date', css_class='col-4'),
             css_class='row'),
             Div(
                 Div('student_id_number', css_class='col'),
@@ -82,7 +81,6 @@ class add_dropClassForm(forms.ModelForm):
       'date',
       'name_enrolled_under',
       'recieves_financial_aid', #Yes/No
-      
       'total_hours_enrolled_after_change',
       'comments',
       'atu_comments',
@@ -185,6 +183,7 @@ class add_dropClassForm(forms.ModelForm):
             css_class='row'),
             Div(
                 Div('recieves_financial_aid', css_class='col'),
+                Div('date', css_class='col-4'),
             css_class='row'),
             Div(
                 Div('total_hours_enrolled_after_change', css_class='col'),
@@ -290,6 +289,7 @@ class UGGraduationForm(forms.ModelForm):
             Div(
                 Div('name_enrolled_under', css_class='col-8'),
                 Div('student_id_number', css_class='col'),
+                Div('date', css_class='col-4'),
             css_class='row'),
             Div(
                 Div('phone_number', css_class='col'),
@@ -366,6 +366,7 @@ class masterGraduationForm(forms.ModelForm):
             css_class='row'),
             Div(
                 Div('mailing_address', css_class='col'),
+                Div('date', css_class='col'),
             css_class='row'),
             Div(
                 Div('city', css_class='col'),
@@ -394,9 +395,6 @@ class masterGraduationForm(forms.ModelForm):
             css_class='row'),
             Div(
                 Div('degree_name', css_class='col'),
-            css_class='row'),
-            Div(
-                Div('date', css_class='col'),
             css_class='row'),
         css_class=''),
         ButtonHolder(
@@ -510,6 +508,7 @@ class transcriptRequestForm(forms.ModelForm):
             css_class='row'),
             Div(
                 Div('mailing_address', css_class='col'),
+                Div('date', css_class='col'),
             css_class='row'),
             Div(
                 Div('city', css_class='col-8'),
