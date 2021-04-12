@@ -120,7 +120,8 @@ class permitToRegisterForm(forms.ModelForm):
                 Div('registration_semester', css_class='col'),
                 Div('registration_year', css_class='col'),
             css_class='row'),
-            HTML("<p class='my-2'>Please enter all courses you wish to take:</p>"),
+            HTML("<p class='my-1'>Please enter all courses you wish to enroll in:</p>"),
+            HTML("<hr class='solid my-1\'>"),
             Div(
                 Div('crn0', css_class='col'),
                 Div('prefix0', css_class='col'),
@@ -178,7 +179,7 @@ class permitToRegisterForm(forms.ModelForm):
             Div(
                 Div('total_hours_enrolled', css_class='col'),
                 Div('dean_signature', css_class='col-8'),
-            css_class='row'),
+            css_class='row pt-1'),
             Div(
                 Div('student_signature', css_class='col-8'),
                 Div('date', css_class='col-4'),
