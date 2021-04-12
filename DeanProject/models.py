@@ -28,7 +28,7 @@ SEASON_CHOICES = (
 
 class Profile(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
-  tech_id = models.CharField(max_length=9)
+  tech_id = models.CharField(max_length=9, default="")
   name = models.CharField(max_length=20, default="Person")
 
   
