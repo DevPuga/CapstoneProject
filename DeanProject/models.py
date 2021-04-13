@@ -28,7 +28,6 @@ class permitToRegister(models.Model):
   name_enrolled_under = models.CharField(max_length=50)
   registration_semester = models.CharField(max_length=10)
   registration_year = models.DecimalField(decimal_places = 0, max_digits=4)
-  #Course Table would go here
   comments = models.TextField(max_length=100)
   total_hours_enrolled = models.DecimalField(decimal_places = 0, max_digits=2)
   dean_signature = models.CharField(max_length=50) #Signature
