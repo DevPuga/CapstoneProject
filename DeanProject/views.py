@@ -64,8 +64,8 @@ def get(request):
                 context['form_selector'] = transcriptRequestForm()
                 context['currentForm'] = "/transcriptRequest"
             elif selected_form == '7':
-                context['form_selector'] = degreeAuditAmendmentRequest()
-                context['currentForm'] = "/degreeAuditAmendmentRequestForm"
+                context['form_selector'] = degreeAuditAmendmentRequestForm()
+                context['currentForm'] = "/degreeAuditAmendmentRequest"
 
       # Process form submissions
       if requestedPage == "permitToRegister":
@@ -312,6 +312,7 @@ def processDegreeAudit(request):
       db.commit()
       db.close()
       return redirect('/success')
+
 def processDegreeAuditAmendmentRequest(request):
       db = sqlite3.connect('db.sqlite3')
       cursor = db.cursor()
@@ -338,7 +339,7 @@ def processDegreeAuditAmendmentRequest(request):
           semester_taken2,
           atu_course_subject2,
           atu_course_num2,
-          course_equivalent2, 
+          course_equivalent2,
           course_Substitution2,
           transfer_Institution3,
           course_subject3,
@@ -477,6 +478,7 @@ def processDegreeAuditAmendmentRequest(request):
       db.commit()
       db.close()
       return redirect('/success')
+
 def processTranscriptRequest(request):
       db = sqlite3.connect('db.sqlite3')
       cursor = db.cursor()
