@@ -120,6 +120,11 @@ class permitToRegisterForm(forms.ModelForm):
                 Div('registration_semester', css_class='col'),
                 Div('registration_year', css_class='col'),
             css_class='row'),
+            HTML('''<p class='my-1'><strong>All obligations to Arkansas Tech
+                University must be satisfied and holds lifted before Registration
+                is permitted.
+                Check OneTech for any existing Registration Holds, and contact
+                the appropriate office to resolve.</strong></p>'''),
             HTML("<p class='my-1'>Please enter all courses you wish to enroll in:</p>"),
             HTML("<hr class='solid my-1\'>"),
             Div(
@@ -324,7 +329,7 @@ class add_dropClassForm(forms.ModelForm):
       'student_id_number': 'T Number',
       'date': 'Date',
       'name_enrolled_under': 'Name Enrolled Under (Last, First, Middle, Other)',
-      'recieves_financial_aid': 'Do you receive financial aid? (loans, grants, scholarships)', #Yes/No
+      'recieves_financial_aid': 'I receive financial aid (loans, grants, scholarships)', #Yes/No
       'financial_aid_representative_signature': 'Financial Aid Representative Signature', #Signature
       'total_hours_enrolled_after_change': 'Total Hours Enrolled After Change',
       'comments': 'Comments',
@@ -416,12 +421,12 @@ class add_dropClassForm(forms.ModelForm):
       'addSecNo3': '',
       'addSecNo4': '',
       'addSecNo5': '',
-      'dropDidAttend0': 'Did you attend?',
-      'dropDidAttend1': '',
-      'dropDidAttend2': '',
-      'dropDidAttend3': '',
-      'dropDidAttend4': '',
-      'dropDidAttend5': '',
+      'dropDidAttend0': 'I attended this class',
+      'dropDidAttend1': 'I attended this class',
+      'dropDidAttend2': 'I attended this class',
+      'dropDidAttend3': 'I attended this class',
+      'dropDidAttend4': 'I attended this class',
+      'dropDidAttend5': 'I attended this class',
     }
 
   def __init__(self, *args, **kwargs):
@@ -431,73 +436,75 @@ class add_dropClassForm(forms.ModelForm):
         Div(
             HTML("<h2 class='mt-4\'>Add/Drop Course</h2>"),
             HTML("<hr class='solid my-1\'>"),
+            HTML('''<p class='my-2'><strong>Dropping ALL of your courses? Do not complete this form;
+                contact the Office of the Registrar to begin the total withdrawal
+                 process.</strong></p>'''),
             Div(
                 Div('name_enrolled_under', css_class='col-8'),
                 Div('student_id_number', css_class='col'),
             css_class='row'),
             Div(
                 Div('recieves_financial_aid', css_class='col'),
-            css_class='row'),
-            HTML('''<p>Dropping ALL of your courses? Do not complete this form;
-                contact the Office of the Registrar to begin the total withdrawal
-                 process. </p>'''),
-            HTML('''<p>Dates below are for full-term classes: January 11 - May 4, 2021</p>'''),
-            HTML('''<p>Last day 100% refund - tuition/fees: January 15</p>'''),
-            HTML('''<p>Last day to add/change sections : January 15</p>'''),
-            HTML('''<p>Last day to drop with course(s) not reflected on transcript: January 26</p>'''),
-            HTML('''<p>Last day 80% reduction/tuition: January 26</p>'''),
-            HTML('''<p>Last day to drop with a "W" or change to audit: April 16</p>'''),
-            HTML('''<p>For condensed class dates visit Condensed Courses on the Registration tab in OneTech.</p>'''),
-            HTML('''<p>*WARNING: DROPPING A COURSE MAY RESULT IN LOSS OF YOUR FINANCIAL AID or VETERAN BENEFITS</p>'''),
-            HTML('''<p>SCHOLARSHIPS - Academic scholarships require completion of at least 15 hours. Requirements for private scholarships vary in required number of hours.</p>'''),
-            HTML('''<p>LOANS - Requirements vary based on policy.</p>'''),
-            HTML('''<p>GRANTS - Requirements vary in conjunction with the amount of grant you receive.</p>'''),
-            HTML('''<p>For questions concerning scholarships, loans and grants, please contact the Financial Aid Office: Brown Hall, Suite 206 or call 479-968-0399.</p>'''),
-            HTML('''<p>VETERANS BENEFITS - Dropping below full-time may affect benefits; please contact Veteran Services: Doc Bryan, Suite 104 or call 479-968-0445.</p>'''),
-            HTML('''<p>Dropping:</p>'''),
+            css_class='row my-1'),
+            HTML('''<h5 class='mt-4'><strong>Dates below are for full-term classes: January 11 - May 4, 2021</strong></h5>'''),
+            HTML('''<p class='my-1'>Last day 100% refund - tuition/fees: <strong>January 15</strong></p>'''),
+            HTML('''<p class='my-1'>Last day to add/change sections : <strong>January 15</strong></p>'''),
+            HTML('''<p class='my-1'>Last day to drop with course(s) not reflected on transcript: <strong>January 26</strong></p>'''),
+            HTML('''<p class='my-1'>Last day 80% reduction/tuition: <strong>January 26</strong></p>'''),
+            HTML('''<p class='my-1'>Last day to drop with a "W" or change to audit: <strong>April 16</strong></p>'''),
+            HTML('''<p><strong>For condensed class dates visit Condensed Courses on the Registration tab in OneTech or click <a href="https://ssbprod.atu.edu/pls/PROD/hws9date.p_displayForm" target="_blank">here</a></strong></p>'''),
+            HTML('''<h4 style="text-decoration:underline;"><strong>*WARNING: DROPPING A COURSE MAY RESULT IN LOSS OF YOUR FINANCIAL AID or VETERAN BENEFITS</strong></h4>'''),
+            HTML('''<p class='my-1'><strong>SCHOLARSHIPS</strong> - Academic scholarships require completion of at least 15 hours. Requirements for private scholarships vary in required number of hours.</p>'''),
+            HTML('''<p class='my-1'><strong>LOANS</strong> - Requirements vary based on policy.</p>'''),
+            HTML('''<p class='my-1'><strong>GRANTS</strong> - Requirements vary in conjunction with the amount of grant you receive.</p>'''),
+            HTML('''<p class='my-1'>For questions concerning scholarships, loans and grants, please contact the Financial Aid Office: Brown Hall, Suite 206 or call 479-968-0399.</p>'''),
+            HTML('''<p class='my-1'><strong>VETERANS BENEFITS</strong> - Dropping below full-time may affect benefits; please contact Veteran Services: Doc Bryan, Suite 104 or call 479-968-0445.</p>'''),
+            HTML('''<h4 class='mt-4'>Dropping:</h4>'''),
+            HTML("<hr class='solid my-1\'>"),
             Div(
                 Div('dropCRN0', css_class='col'),
                 Div('dropPrefix0', css_class='col'),
                 Div('dropCourseNum0', css_class='col'),
                 Div('dropSecNo0', css_class='col'),
-                Div('dropDidAttend0', css_class='col'),
+                Div('dropDidAttend0', css_class='col', style='margin-top: 32px;'),
             css_class='row pt-1'),
             Div(
                 Div('dropCRN1', css_class='col'),
                 Div('dropPrefix1', css_class='col'),
                 Div('dropCourseNum1', css_class='col'),
                 Div('dropSecNo1', css_class='col'),
-                Div('dropDidAttend1', css_class='col'),
+                Div('dropDidAttend1', css_class='col my-auto'),
             css_class='row pt-1'),
             Div(
                 Div('dropCRN2', css_class='col'),
                 Div('dropPrefix2', css_class='col'),
                 Div('dropCourseNum2', css_class='col'),
                 Div('dropSecNo2', css_class='col'),
-                Div('dropDidAttend2', css_class='col'),
+                Div('dropDidAttend2', css_class='col my-auto'),
             css_class='row pt-1'),
             Div(
                 Div('dropCRN3', css_class='col'),
                 Div('dropPrefix3', css_class='col'),
                 Div('dropCourseNum3', css_class='col'),
                 Div('dropSecNo3', css_class='col'),
-                Div('dropDidAttend3', css_class='col'),
+                Div('dropDidAttend3', css_class='col my-auto'),
             css_class='row pt-1'),
             Div(
                 Div('dropCRN4', css_class='col'),
                 Div('dropPrefix4', css_class='col'),
                 Div('dropCourseNum4', css_class='col'),
                 Div('dropSecNo4', css_class='col'),
-                Div('dropDidAttend4', css_class='col'),
+                Div('dropDidAttend4', css_class='col my-auto'),
             css_class='row pt-1'),
             Div(
                 Div('dropCRN5', css_class='col'),
                 Div('dropPrefix5', css_class='col'),
                 Div('dropCourseNum5', css_class='col'),
                 Div('dropSecNo5', css_class='col'),
-                Div('dropDidAttend5', css_class='col'),
+                Div('dropDidAttend5', css_class='col my-auto'),
             css_class='row pt-1'),
-            HTML('''<p>Adding:</p>'''),
+            HTML('''<h4 class='mt-4'>Adding:</h4>'''),
+            HTML("<hr class='solid my-1\'>"),
             Div(
                 Div('addCRN0', css_class='col'),
                 Div('addPrefix0', css_class='col'),
@@ -533,7 +540,7 @@ class add_dropClassForm(forms.ModelForm):
                 Div('addPrefix5', css_class='col'),
                 Div('addCourseNum5', css_class='col'),
                 Div('addSecNo5', css_class='col'),
-            css_class='row pt-1'),
+            css_class='row pt-1 mb-2'),
             Div(
                 Div('total_hours_enrolled_after_change', css_class='col'),
                 Div('financial_aid_representative_signature', css_class='col-8'),
@@ -599,10 +606,10 @@ class add_dropClassForm(forms.ModelForm):
             css_class='row'),
             Div(
                 Div('atu_comments', css_class='col'),
-            css_class='row'),
+            css_class='row my-2'),
         css_class=''),
         ButtonHolder(
-            Submit('submit', 'Submit', css_class='btn btn-primary mt-2')
+            Submit('submit', 'Submit', css_class='btn btn-primary')
         )
     )
 
