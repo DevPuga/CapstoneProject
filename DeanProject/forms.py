@@ -855,8 +855,8 @@ class degreeAuditForm(forms.ModelForm):
       'subCourse6B': '',
       'subCourse7A': '',
       'subCourse7B': '',
-      'reqWaiver0': '',
-      'reqWaiver1': '',
+      'reqWaiver0': 'Course Prefix/Number',
+      'reqWaiver1': 'Course Prefix/Number',
       'reqCourse0A': 'Course Prefix/Number',
       'reqCourse0B': 'Course Prefix/Number',
       'reqCourse1A': '',
@@ -875,8 +875,8 @@ class degreeAuditForm(forms.ModelForm):
       'reqCourse7B': '',
       'collegeDistinction0': '',
       'collegeDistinction1': '',
-      'lowDivHours': 'ELECTIVES (Lower Division, number of hours required)',
-      'upDivHours': 'ELECTIVES (Upper Division, number of hours required)',
+      'lowDivHours': '<strong>ELECTIVES</strong> (Lower Division, number of hours required)',
+      'upDivHours': '<strong>ELECTIVES</strong> (Upper Division, number of hours required)',
       'currentEHRS': 'Current EHRS',
       'lessDupCredit': 'Less duplicate credit, repeats, excess PE',
       'hoursTowardGraduation': 'Hours toward graduation',
@@ -908,7 +908,10 @@ class degreeAuditForm(forms.ModelForm):
                 Div('semester', css_class='col'),
                 Div('year', css_class='col'),
             css_class='row'),
-            HTML("<p class='my-1'>Requested Substitutions:</p>"),
+            HTML('''<p class='my-2'>All substitutions for required courses and all waivers of
+            degree requirements must receive the recommendation from the advisor,
+            Department Head, and the Dean of your College.</p>'''),
+            HTML("<h4 class='my-1'><strong>Requested Substitutions:</strong></h4>"),
             HTML("<hr class='solid my-1\'>"),
             Div(
                 Div('subCourse0A', css_class='col'),
@@ -942,23 +945,23 @@ class degreeAuditForm(forms.ModelForm):
                 Div('subCourse7A', css_class='col'),
                 Div('subCourse7B', css_class='col'),
             css_class='row pt-1'),
-            HTML("<p class='my-1'>Requested Waivers (Course Prefix/Number):</p>"),
+            HTML("<p class='mt-1 mb-0'><strong>Requested Waivers:</strong></p>"),
             Div(
                 Div('reqWaiver0', css_class='col'),
                 Div('reqWaiver1', css_class='col'),
-            css_class='row pt-1'),
-            HTML("<p class='my-1'>College Distinction:</p>"),
+            css_class='row'),
+            HTML("<p class='my-1'><strong>College Distinction:</strong></p>"),
             Div(
                 Div('collegeDistinction0', css_class='col'),
                 Div('collegeDistinction1', css_class='col'),
             css_class='row pt-1'),
-            HTML('''<p class='my-1'>Listed below are all courses not completed and
+            HTML('''<p class='my-2'><strong>Listed below are all courses not completed and
                 required to complete my degree, including
-                correspondence and other off-campus classes.</p>'''),
-            HTML('''<p class='my-1'>Please list course numbers for required classes only.
+                correspondence and other off-campus classes.</strong></p>'''),
+            HTML('''<p class='my-2'>Please list course numbers for <strong>required</strong> classes only.
                 If electives are required, list the total hours of electives
                 and whether lower or upper-level.</p>'''),
-            HTML("<p class='my-1'>Required Substitutions:</p>"),
+            HTML("<h4 class='my-1'><strong>Required Substitutions:</strong></h4>"),
             HTML("<hr class='solid my-1\'>"),
             Div(
                 Div('reqCourse0A', css_class='col'),
