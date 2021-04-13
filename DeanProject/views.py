@@ -32,10 +32,12 @@ def get(request):
 
       # Get user's forms so we can populate them as cards
       forms = getForms(request)
-      numPending = max(forms["pending"]) + 1
+      #numPending = max(forms["pending"]) + 1
 
       # Set tab as active, render faculty tab if faculty, give forms to html
-      context = {"%s_page"%requestedPage: "active", "userGroup": userGroup, "forms": forms, "numPending": numPending, "form_selector": emptyForm(), "currentForm": ""}
+      context = {"%s_page"%requestedPage: "active", "userGroup": userGroup, "forms": forms, 
+      #"numPending": numPending, 
+      "form_selector": emptyForm(), "currentForm": ""}
 
       # For newform.html page
       if requestedPage == "newform":
@@ -92,15 +94,27 @@ def getForms(request):
 
     results = list(chain(permitToRegisterData, addDropClassData, ugGraduationData, masterGraduationData, degreeAuditData, transcriptRequestData))
 
+    pending = []
+    approved = []
+    denied = []
+
+    for form in results:
+        if form.isPending:
+            pending.append(form)
+        elif form.isApproved:
+            approved.append(form)
+        elif form.isDenied:
+            denied.append(form)
+
     print(results)
     forms = {
         'all' : results,
-        'pending' : range(1),
-        'approved' : range(1),
-        'denied' : range(1)
+        'pending' : pending,
+        'approved' : approved,
+        'denied' : denied
     }
     
-    return forms 
+    return forms
 
 def error(request):
     return render(request, 'DeanProject/error.html')

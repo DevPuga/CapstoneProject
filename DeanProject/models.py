@@ -31,7 +31,7 @@ class Profile(models.Model):
   tech_id = models.CharField(max_length=9, default="")
   name = models.CharField(max_length=20, default="Person")
 
-  
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
   if created:
@@ -57,6 +57,9 @@ class permitToRegister(models.Model):
   dean_signature = models.CharField(max_length=50) #Signature
   advisor_signature = models.CharField(max_length=50) #Signature
   student_signature = models.CharField(max_length=50) #Signature
+  isPending = models.BooleanField(default=True)
+  isApproved = models.BooleanField(default=False)
+  isDenied = models.BooleanField(default=False)
 
 class add_dropClass(models.Model):
 
@@ -117,6 +120,9 @@ class add_dropClass(models.Model):
   personal_emergency = models.BooleanField()
   unmotivated_for_this_courses_or_tired_of_school = models.BooleanField()
   working_too_many_hours = models.BooleanField()
+  isPending = models.BooleanField(default=True)
+  isApproved = models.BooleanField(default=False)
+  isDenied = models.BooleanField(default=False)
 
 class UGGraduation(models.Model):
 
@@ -136,6 +142,9 @@ class UGGraduation(models.Model):
   expected_graduation_year = models.DecimalField(decimal_places = 0, max_digits=4)
   #Catalog table would go here
   preferred_degree = models.CharField(max_length=100)
+  isPending = models.BooleanField(default=True)
+  isApproved = models.BooleanField(default=False)
+  isDenied = models.BooleanField(default=False)
 
 class masterGraduation(models.Model):
   
@@ -158,6 +167,9 @@ class masterGraduation(models.Model):
   expected_graduation_term = models.CharField(max_length=6, choices=SEASON_CHOICES)
   expected_graduation_year = models.DecimalField(decimal_places = 0, max_digits=4)
   degree_name = models.CharField(max_length=100) #In reality this would be a dropdown
+  isPending = models.BooleanField(default=True)
+  isApproved = models.BooleanField(default=False)
+  isDenied = models.BooleanField(default=False)
 
 class degreeAudit(models.Model):
 
@@ -173,6 +185,9 @@ class degreeAudit(models.Model):
   semester = models.CharField(max_length=6, choices=SEASON_CHOICES)
   year = models.DecimalField(decimal_places = 0, max_digits=4)
   #Still Needs Work
+  isPending = models.BooleanField(default=True)
+  isApproved = models.BooleanField(default=False)
+  isDenied = models.BooleanField(default=False)
 
 class transcriptRequest(models.Model):
   class Meta:
@@ -194,12 +209,16 @@ class transcriptRequest(models.Model):
   ade_licensure = models.BooleanField()
   arsbn = models.BooleanField()
   #Tables need to be added
+  isPending = models.BooleanField(default=True)
+  isApproved = models.BooleanField(default=False)
+  isDenied = models.BooleanField(default=False)
 
 class courseInfo(models.Model): #WIP (not WAP)
   crn = models.DecimalField(decimal_places=0, max_digits=5)
   course_prefix = models.CharField(max_length=4)
   course_number = models.DecimalField(decimal_places=0, max_digits=4)
   sec_no = models.CharField(max_length=3)
+  
 
 class substitutionRequest(models.Model): #WIP (not WAP)
   current_course = models.CharField(max_length=50)
