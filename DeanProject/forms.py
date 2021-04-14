@@ -452,12 +452,13 @@ class degreeAuditForm(forms.ModelForm):
                 Div('year', css_class='col'),
                 Div('date', css_class='col'),
             css_class='row'),
-            
+
         css_class=''),
         ButtonHolder(
             Submit('submit', 'Submit', css_class='btn btn-primary mt-2')
         )
     )
+
 class degreeAuditAmendmentRequestForm(forms.ModelForm):
   class Meta:
     model = degreeAuditAmendmentRequest
@@ -484,7 +485,7 @@ class degreeAuditAmendmentRequestForm(forms.ModelForm):
       'semester_taken2',
       'atu_course_subject2',
       'atu_course_num2',
-      'course_equivalent2', 
+      'course_equivalent2',
       'course_Substitution2',
       'transfer_Institution3',
       'course_subject3',
