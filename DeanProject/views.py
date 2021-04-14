@@ -64,8 +64,8 @@ def get(request):
                 context['form_selector'] = transcriptRequestForm()
                 context['currentForm'] = "/transcriptRequest"
             elif selected_form == '7':
-                context['form_selector'] = degreeAuditAmendmentRequest()
-                context['currentForm'] = "/degreeAuditAmendmentRequestForm"
+                context['form_selector'] = degreeAuditAmendmentRequestForm()
+                context['currentForm'] = "/degreeAuditAmendmentRequest"
 
       # Process form submissions
       if requestedPage == "permitToRegister":
