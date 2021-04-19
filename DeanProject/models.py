@@ -65,7 +65,7 @@ class add_dropClass(models.Model):
 
   class Meta:
     verbose_name = "Add/Drop Class"
-  
+
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
   name_enrolled_under = models.CharField(max_length=50)
@@ -128,7 +128,7 @@ class UGGraduation(models.Model):
 
   class Meta:
     verbose_name = "Undergraduate Graduation"
-  
+
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
   name_enrolled_under = models.CharField(max_length=50)
@@ -147,10 +147,10 @@ class UGGraduation(models.Model):
   isDenied = models.BooleanField(default=False)
 
 class masterGraduation(models.Model):
-  
+
   class Meta:
     verbose_name = "Master's Graduation"
-  
+
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
   name_enrolled_under = models.CharField(max_length=50)
@@ -158,7 +158,7 @@ class masterGraduation(models.Model):
   city = models.CharField(max_length=50)
   state = models.CharField(max_length=2, choices=US_STATE_CHOICES)
   zip_code = models.DecimalField(decimal_places = 0, max_digits=5)
-  phone_number = models.DecimalField(decimal_places = 0, max_digits=9)
+  phone_number = models.CharField(max_length=20)
   email = models.CharField(max_length=50)
   student_starting_semester = models.CharField(max_length=6, choices=SEASON_CHOICES)
   student_starting_year = models.DecimalField(decimal_places = 0, max_digits=4)
@@ -192,7 +192,7 @@ class degreeAudit(models.Model):
 class transcriptRequest(models.Model):
   class Meta:
     verbose_name = "Transcript Request"
-  
+
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
   name_enrolled_under = models.CharField(max_length=50)
@@ -201,7 +201,7 @@ class transcriptRequest(models.Model):
   city = models.CharField(max_length=50)
   state = models.CharField(max_length=2, choices=US_STATE_CHOICES)
   zip_code = models.DecimalField(decimal_places = 0, max_digits=5)
-  phone_number = models.DecimalField(decimal_places = 0, max_digits=9)
+  phone_number = models.CharField(max_length=20)
   student_signature = models.CharField(max_length=50) #Signature
   adhe = models.BooleanField()
   sacm = models.BooleanField()
@@ -218,7 +218,7 @@ class courseInfo(models.Model): #WIP (not WAP)
   course_prefix = models.CharField(max_length=4)
   course_number = models.DecimalField(decimal_places=0, max_digits=4)
   sec_no = models.CharField(max_length=3)
-  
+
 
 class substitutionRequest(models.Model): #WIP (not WAP)
   current_course = models.CharField(max_length=50)

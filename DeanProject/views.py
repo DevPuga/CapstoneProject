@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from .forms import *
-
 from .models import *
 from django.db import connection
 from itertools import chain
+import sqlite3
 
 
 #Used in navbar to check if user is faculty
@@ -37,8 +37,8 @@ def get(request):
       #numPending = max(forms["pending"]) + 1
 
       # Set tab as active, render faculty tab if faculty, give forms to html
-      context = {"%s_page"%requestedPage: "active", "userGroup": userGroup, "forms": forms, 
-      #"numPending": numPending, 
+      context = {"%s_page"%requestedPage: "active", "userGroup": userGroup, "forms": forms,
+      #"numPending": numPending,
       "form_selector": emptyForm(), "currentForm": ""}
 
       # For newform.html page
@@ -108,14 +108,13 @@ def getForms(request):
         elif form.isDenied:
             denied.append(form)
 
-    print(results)
     forms = {
         'all' : results,
         'pending' : pending,
         'approved' : approved,
         'denied' : denied
     }
-    
+
     return forms
 
 def processPermitToRegister(request):
@@ -131,8 +130,11 @@ def processPermitToRegister(request):
           total_hours_enrolled,
           dean_signature,
           advisor_signature,
-          student_signature)
-          VALUES(?,?,?,?,?,?,?,?,?,?)''',
+          student_signature,
+          isPending,
+          isApproved,
+          isDenied)
+          VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)''',
           (request.POST['student_id_number'],
           request.POST['date'],
           request.POST['name_enrolled_under'],
@@ -142,7 +144,10 @@ def processPermitToRegister(request):
           request.POST['total_hours_enrolled'],
           request.POST['dean_signature'],
           request.POST['advisor_signature'],
-          request.POST['student_signature']))
+          request.POST['student_signature'],
+          True,
+          False,
+          False))
       db.commit()
       db.close()
       return redirect('/success')
@@ -196,9 +201,12 @@ def processAddDropClass(request):
           personal_health,
           personal_emergency,
           unmotivated_for_this_courses_or_tired_of_school,
-          working_too_many_hours)
+          working_too_many_hours,
+          isPending,
+          isApproved,
+          isDenied)
           VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,
-          ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
+          ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
           (request.POST['student_id_number'],
           request.POST['date'],
           request.POST['name_enrolled_under'],
@@ -246,7 +254,10 @@ def processAddDropClass(request):
           trySetBool(request, 'personal_health'),
           trySetBool(request, 'personal_emergency'),
           trySetBool(request, 'unmotivated_for_this_courses_or_tired_of_school'),
-          trySetBool(request, 'working_too_many_hours')))
+          trySetBool(request, 'working_too_many_hours'),
+          True,
+          False,
+          False))
       db.commit()
       db.close()
       return redirect('/success')
@@ -266,8 +277,11 @@ def processUGGraduation(request):
           parents_completed_bachelor_degree,
           expected_graduation_term,
           expected_graduation_year,
-          preferred_degree)
-          VALUES(?,?,?,?,?,?,?,?,?,?,?,?)''',
+          preferred_degree,
+          isPending,
+          isApproved,
+          isDenied)
+          VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
           (request.POST['student_id_number'],
           request.POST['date'],
           request.POST['name_enrolled_under'],
@@ -279,7 +293,10 @@ def processUGGraduation(request):
           trySetBool(request, 'parents_completed_bachelor_degree'),
           request.POST['expected_graduation_term'],
           request.POST['expected_graduation_year'],
-          request.POST['preferred_degree']))
+          request.POST['preferred_degree'],
+          True,
+          False,
+          False))
       db.commit()
       db.close()
       return redirect('/success')
@@ -303,8 +320,11 @@ def processMasterGraduation(request):
           name_pronunciation,
           expected_graduation_term,
           expected_graduation_year,
-          degree_name)
-          VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
+          degree_name,
+          isPending,
+          isApproved,
+          isDenied)
+          VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
           (request.POST['student_id_number'],
           request.POST['date'],
           request.POST['name_enrolled_under'],
@@ -320,7 +340,10 @@ def processMasterGraduation(request):
           request.POST['name_pronunciation'],
           request.POST['expected_graduation_term'],
           request.POST['expected_graduation_year'],
-          request.POST['degree_name']))
+          request.POST['degree_name'],
+          True,
+          False,
+          False))
       db.commit()
       db.close()
       return redirect('/success')
@@ -336,8 +359,11 @@ def processDegreeAudit(request):
           major_was_chosen,
           minor_was_chosen,
           semester,
-          year)
-          VALUES(?,?,?,?,?,?,?,?)''',
+          year,
+          isPending,
+          isApproved,
+          isDenied)
+          VALUES(?,?,?,?,?,?,?,?,?,?,?)''',
           (request.POST['student_id_number'],
           request.POST['catalog_year'],
           request.POST['name_enrolled_under'],
@@ -345,7 +371,10 @@ def processDegreeAudit(request):
           trySetBool(request, 'major_was_chosen'),
           trySetBool(request, 'minor_was_chosen'),
           request.POST['semester'],
-          request.POST['year']))
+          request.POST['year'],
+          True,
+          False,
+          False))
       db.commit()
       db.close()
       return redirect('/success')
@@ -368,8 +397,11 @@ def processTranscriptRequest(request):
           sacm,
           embassy_of_kuwait,
           ade_licensure,
-          arsbn)
-          VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
+          arsbn,
+          isPending,
+          isApproved,
+          isDenied)
+          VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
           (request.POST['student_id_number'],
           request.POST['date'],
           request.POST['name_enrolled_under'],
@@ -384,7 +416,10 @@ def processTranscriptRequest(request):
           trySetBool(request, 'sacm'),
           trySetBool(request, 'embassy_of_kuwait'),
           trySetBool(request, 'ade_licensure'),
-          trySetBool(request, 'arsbn')))
+          trySetBool(request, 'arsbn'),
+          True,
+          False,
+          False))
       db.commit()
       db.close()
       return redirect('/success')
