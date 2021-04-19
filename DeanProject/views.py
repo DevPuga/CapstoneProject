@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from .forms import *
+from .models import *
+from django.db import connection
+from itertools import chain
 import sqlite3
+
 
 #Used in navbar to check if user is faculty
 userGroup = ''
@@ -30,16 +34,12 @@ def get(request):
 
       # Get user's forms so we can populate them as cards
       forms = getForms(request)
-      numPending = max(forms["pending"]) + 1
+      #numPending = max(forms["pending"]) + 1
 
       # Set tab as active, render faculty tab if faculty, give forms to html
-      context = {"%s_page"%requestedPage: "active",
-                 "userGroup": userGroup,
-                 "forms": forms,
-                 "numPending": numPending,
-                 "form_selector": emptyForm(),
-                 "currentForm": ""
-                 }
+      context = {"%s_page"%requestedPage: "active", "userGroup": userGroup, "forms": forms,
+      #"numPending": numPending,
+      "form_selector": emptyForm(), "currentForm": ""}
 
       # For newform.html page
       if requestedPage == "newform":
@@ -84,7 +84,37 @@ def get(request):
 
 # Should return all forms for authenticated user as dictionary or array
 def getForms(request):
-    forms = {'all' : range(13), 'pending' : range(3), 'approved' : range(9), 'denied' : range(1)}
+    #forms = {'all' : range(13), 'pending' : range(3), 'approved' : range(9), 'denied' : range(1)}
+    user_id = request.user.profile.tech_id
+
+    permitToRegisterData = permitToRegister.objects.filter(student_id_number=user_id)
+    addDropClassData = add_dropClass.objects.filter(student_id_number=user_id)
+    ugGraduationData = UGGraduation.objects.filter(student_id_number=user_id)
+    masterGraduationData = masterGraduation.objects.filter(student_id_number=user_id)
+    degreeAuditData = degreeAudit.objects.filter(student_id_number=user_id)
+    transcriptRequestData = transcriptRequest.objects.filter(student_id_number=user_id)
+
+    results = list(chain(permitToRegisterData, addDropClassData, ugGraduationData, masterGraduationData, degreeAuditData, transcriptRequestData))
+
+    pending = []
+    approved = []
+    denied = []
+
+    for form in results:
+        if form.isPending:
+            pending.append(form)
+        elif form.isApproved:
+            approved.append(form)
+        elif form.isDenied:
+            denied.append(form)
+
+    forms = {
+        'all' : results,
+        'pending' : pending,
+        'approved' : approved,
+        'denied' : denied
+    }
+
     return forms
 
 def processPermitToRegister(request):
@@ -136,8 +166,11 @@ def processPermitToRegister(request):
           secNo5,
           secNo6,
           secNo7,
-          secNo8)
-          VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
+          secNo8,
+          isPending,
+          isApproved,
+          isDenied)
+          VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
           (request.POST['student_id_number'],
           request.POST['date'],
           request.POST['name_enrolled_under'],
@@ -184,6 +217,9 @@ def processPermitToRegister(request):
           request.POST['secNo6'],
           request.POST['secNo7'],
           request.POST['secNo8']))
+          True,
+          False,
+          False))
       db.commit()
       db.close()
       return redirect('/success')
@@ -291,11 +327,14 @@ def processAddDropClass(request):
           dropDidAttend2,
           dropDidAttend3,
           dropDidAttend4,
-          dropDidAttend5)
+          dropDidAttend5,
+          isPending,
+          isApproved,
+          isDenied)
           VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,
           ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,
           ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,
-          ?)''',
+          ?,?,?,?)''',
           (request.POST['student_id_number'],
           request.POST['date'],
           request.POST['name_enrolled_under'],
@@ -397,7 +436,10 @@ def processAddDropClass(request):
           trySetBool(request, 'dropDidAttend2'),
           trySetBool(request, 'dropDidAttend3'),
           trySetBool(request, 'dropDidAttend4'),
-          trySetBool(request, 'dropDidAttend5')))
+          trySetBool(request, 'dropDidAttend5'),
+          True,
+          False,
+          False))
       db.commit()
       db.close()
       return redirect('/success')
@@ -417,8 +459,11 @@ def processUGGraduation(request):
           parents_completed_bachelor_degree,
           expected_graduation_term,
           expected_graduation_year,
-          preferred_degree)
-          VALUES(?,?,?,?,?,?,?,?,?,?,?,?)''',
+          preferred_degree,
+          isPending,
+          isApproved,
+          isDenied)
+          VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
           (request.POST['student_id_number'],
           request.POST['date'],
           request.POST['name_enrolled_under'],
@@ -430,7 +475,10 @@ def processUGGraduation(request):
           trySetBool(request, 'parents_completed_bachelor_degree'),
           request.POST['expected_graduation_term'],
           request.POST['expected_graduation_year'],
-          request.POST['preferred_degree']))
+          request.POST['preferred_degree'],
+          True,
+          False,
+          False))
       db.commit()
       db.close()
       return redirect('/success')
@@ -454,8 +502,11 @@ def processMasterGraduation(request):
           name_pronunciation,
           expected_graduation_term,
           expected_graduation_year,
-          degree_name)
-          VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
+          degree_name,
+          isPending,
+          isApproved,
+          isDenied)
+          VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
           (request.POST['student_id_number'],
           request.POST['date'],
           request.POST['name_enrolled_under'],
@@ -471,7 +522,10 @@ def processMasterGraduation(request):
           request.POST['name_pronunciation'],
           request.POST['expected_graduation_term'],
           request.POST['expected_graduation_year'],
-          request.POST['degree_name']))
+          request.POST['degree_name'],
+          True,
+          False,
+          False))
       db.commit()
       db.close()
       return redirect('/success')
@@ -531,9 +585,12 @@ def processDegreeAudit(request):
           minReqHours,
           UDReqSatisfied,
           reqWaiver0,
-          reqWaiver1)
+          reqWaiver1,
+          isPending,
+          isApproved,
+          isDenied)
           VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,
-          ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
+          ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
           (request.POST['student_id_number'],
           request.POST['catalog_year'],
           request.POST['name_enrolled_under'],
@@ -585,7 +642,10 @@ def processDegreeAudit(request):
           request.POST['minReqHours'],
           request.POST['UDReqSatisfied'],
           request.POST['reqWaiver0'],
-          request.POST['reqWaiver1']))
+          request.POST['reqWaiver1'],
+          True,
+          False,
+          False))
       db.commit()
       db.close()
       return redirect('/success')
@@ -608,8 +668,11 @@ def processTranscriptRequest(request):
           sacm,
           embassy_of_kuwait,
           ade_licensure,
-          arsbn)
-          VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
+          arsbn,
+          isPending,
+          isApproved,
+          isDenied)
+          VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
           (request.POST['student_id_number'],
           request.POST['date'],
           request.POST['name_enrolled_under'],
@@ -624,7 +687,10 @@ def processTranscriptRequest(request):
           trySetBool(request, 'sacm'),
           trySetBool(request, 'embassy_of_kuwait'),
           trySetBool(request, 'ade_licensure'),
-          trySetBool(request, 'arsbn')))
+          trySetBool(request, 'arsbn'),
+          True,
+          False,
+          False))
       db.commit()
       db.close()
       return redirect('/success')
