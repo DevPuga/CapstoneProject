@@ -3,6 +3,7 @@
 {% block content%}
 {% load crispy_forms_tags %}
 
+<title>Submit new form - ATU Forms</title>
 <div class="container mb-4" id="select-container">
   <form method="POST">
     {% csrf_token %}
@@ -18,7 +19,7 @@
         <option value="4">Master's Graduation Application</option>
       </optgroup>
       <optgroup label="Other">
-        <option value="5">Degree Audit Amendment</option>
+        <option value="5">Degree Audit</option>
         <option value="6">Transcript Request Form</option>
       </optgroup>
     </select>
