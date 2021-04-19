@@ -1,6 +1,10 @@
 {% extends "DeanProject/base.html" %}
 
 {% block content %}
+<head>
+<script type="text/javascript" src="/static/viewPopup.js"></script>
+</head>
+
 <title>Pending Forms - ATU Forms</title>
 <div class="container">
   <div class="row card-group">
@@ -11,7 +15,28 @@
           <h5>Card title <span class="badge bg-warning">Pending</span></h5>
           <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="card-link">View</a>
+          {% comment %} <a href="#" class="card-link">View</a> {% endcomment %}
+
+          {% comment %} <div class = "popup" onclick="func()"> Pop up View
+          <span class="popuptext" id = "myPopup">Popup</span>
+          </div> {% endcomment %}
+
+          <a href="#" class="card-link" onclick="displayPopup()" id="popupButton">View</a>
+          {% comment %} <button onclick="displayPopup()" id="popupButton">View Popup</button> {% endcomment %}
+
+          <div id="popup" class="modal">
+            <div class="modal-content">
+              <span onclick="closePopup()" id="closePopup" class="close">&times;</span>
+
+              <div id="popupContent">Some text in the popup..</div>
+              <script>getViewContent("permitToRegister")</script>
+              <button>Approve</button>
+              <button>Deny</button>
+
+              
+            </div>
+          </div>
+
           {% if userGroup == 'Student' %}
           <a href="#" class="card-link">Revoke</a>
           {% endif %}
