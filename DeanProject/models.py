@@ -1,4 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 US_STATE_CHOICES = (
     ('ar','AR'), ('aa','AA'), ('ae','AE'), ('ak','AK'), ('al','AL'),
@@ -22,19 +26,78 @@ SEASON_CHOICES = (
     ('winter', 'Winter'),
 )
 
+class Profile(models.Model):
+  user = models.OneToOneField(User, on_delete=models.CASCADE)
+  tech_id = models.CharField(max_length=9, default="")
+  name = models.CharField(max_length=20, default="Person")
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+  if created:
+    Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+  instance.profile.save()
+
 class permitToRegister(models.Model):
+
+  class Meta:
+    verbose_name = "Permit to Register"
+
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
   name_enrolled_under = models.CharField(max_length=50)
   registration_semester = models.CharField(max_length=10)
   registration_year = models.DecimalField(decimal_places = 0, max_digits=4)
-  #Course Table would go here
   comments = models.TextField(max_length=100)
   total_hours_enrolled = models.DecimalField(decimal_places = 0, max_digits=2)
-
-
+  crn0 = models.CharField(max_length=10, blank=True)
+  crn1 = models.CharField(max_length=10, blank=True)
+  crn2 = models.CharField(max_length=10, blank=True)
+  crn3 = models.CharField(max_length=10, blank=True)
+  crn4 = models.CharField(max_length=10, blank=True)
+  crn5 = models.CharField(max_length=10, blank=True)
+  crn6 = models.CharField(max_length=10, blank=True)
+  crn7 = models.CharField(max_length=10, blank=True)
+  crn8 = models.CharField(max_length=10, blank=True)
+  prefix0 = models.CharField(max_length=10, blank=True)
+  prefix1 = models.CharField(max_length=10, blank=True)
+  prefix2 = models.CharField(max_length=10, blank=True)
+  prefix3 = models.CharField(max_length=10, blank=True)
+  prefix4 = models.CharField(max_length=10, blank=True)
+  prefix5 = models.CharField(max_length=10, blank=True)
+  prefix6 = models.CharField(max_length=10, blank=True)
+  prefix7 = models.CharField(max_length=10, blank=True)
+  prefix8 = models.CharField(max_length=10, blank=True)
+  courseNum0 = models.CharField(max_length=10, blank=True)
+  courseNum1 = models.CharField(max_length=10, blank=True)
+  courseNum2 = models.CharField(max_length=10, blank=True)
+  courseNum3 = models.CharField(max_length=10, blank=True)
+  courseNum4 = models.CharField(max_length=10, blank=True)
+  courseNum5 = models.CharField(max_length=10, blank=True)
+  courseNum6 = models.CharField(max_length=10, blank=True)
+  courseNum7 = models.CharField(max_length=10, blank=True)
+  courseNum8 = models.CharField(max_length=10, blank=True)
+  secNo0 = models.CharField(max_length=10, blank=True)
+  secNo1 = models.CharField(max_length=10, blank=True)
+  secNo2 = models.CharField(max_length=10, blank=True)
+  secNo3 = models.CharField(max_length=10, blank=True)
+  secNo4 = models.CharField(max_length=10, blank=True)
+  secNo5 = models.CharField(max_length=10, blank=True)
+  secNo6 = models.CharField(max_length=10, blank=True)
+  secNo7 = models.CharField(max_length=10, blank=True)
+  secNo8 = models.CharField(max_length=10, blank=True)
+  isPending = models.BooleanField(default=True)
+  isApproved = models.BooleanField(default=False)
+  isDenied = models.BooleanField(default=False)
 
 class add_dropClass(models.Model):
+
+  class Meta:
+    verbose_name = "Add/Drop Class"
+
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
   name_enrolled_under = models.CharField(max_length=50)
@@ -86,8 +149,69 @@ class add_dropClass(models.Model):
   personal_emergency = models.BooleanField()
   unmotivated_for_this_courses_or_tired_of_school = models.BooleanField()
   working_too_many_hours = models.BooleanField()
+  dropCRN0 = models.CharField(max_length=10, blank=True)
+  dropCRN1 = models.CharField(max_length=10, blank=True)
+  dropCRN2 = models.CharField(max_length=10, blank=True)
+  dropCRN3 = models.CharField(max_length=10, blank=True)
+  dropCRN4 = models.CharField(max_length=10, blank=True)
+  dropCRN5 = models.CharField(max_length=10, blank=True)
+  addCRN0 = models.CharField(max_length=10, blank=True)
+  addCRN1 = models.CharField(max_length=10, blank=True)
+  addCRN2 = models.CharField(max_length=10, blank=True)
+  addCRN3 = models.CharField(max_length=10, blank=True)
+  addCRN4 = models.CharField(max_length=10, blank=True)
+  addCRN5 = models.CharField(max_length=10, blank=True)
+  dropPrefix0 = models.CharField(max_length=10, blank=True)
+  dropPrefix1 = models.CharField(max_length=10, blank=True)
+  dropPrefix2 = models.CharField(max_length=10, blank=True)
+  dropPrefix3 = models.CharField(max_length=10, blank=True)
+  dropPrefix4 = models.CharField(max_length=10, blank=True)
+  dropPrefix5 = models.CharField(max_length=10, blank=True)
+  addPrefix0 = models.CharField(max_length=10, blank=True)
+  addPrefix1 = models.CharField(max_length=10, blank=True)
+  addPrefix2 = models.CharField(max_length=10, blank=True)
+  addPrefix3 = models.CharField(max_length=10, blank=True)
+  addPrefix4 = models.CharField(max_length=10, blank=True)
+  addPrefix5 = models.CharField(max_length=10, blank=True)
+  dropCourseNum0 = models.CharField(max_length=10, blank=True)
+  dropCourseNum1 = models.CharField(max_length=10, blank=True)
+  dropCourseNum2 = models.CharField(max_length=10, blank=True)
+  dropCourseNum3 = models.CharField(max_length=10, blank=True)
+  dropCourseNum4 = models.CharField(max_length=10, blank=True)
+  dropCourseNum5 = models.CharField(max_length=10, blank=True)
+  addCourseNum0 = models.CharField(max_length=10, blank=True)
+  addCourseNum1 = models.CharField(max_length=10, blank=True)
+  addCourseNum2 = models.CharField(max_length=10, blank=True)
+  addCourseNum3 = models.CharField(max_length=10, blank=True)
+  addCourseNum4 = models.CharField(max_length=10, blank=True)
+  addCourseNum5 = models.CharField(max_length=10, blank=True)
+  dropSecNo0 = models.CharField(max_length=10, blank=True)
+  dropSecNo1 = models.CharField(max_length=10, blank=True)
+  dropSecNo2 = models.CharField(max_length=10, blank=True)
+  dropSecNo3 = models.CharField(max_length=10, blank=True)
+  dropSecNo4 = models.CharField(max_length=10, blank=True)
+  dropSecNo5 = models.CharField(max_length=10, blank=True)
+  addSecNo0 = models.CharField(max_length=10, blank=True)
+  addSecNo1 = models.CharField(max_length=10, blank=True)
+  addSecNo2 = models.CharField(max_length=10, blank=True)
+  addSecNo3 = models.CharField(max_length=10, blank=True)
+  addSecNo4 = models.CharField(max_length=10, blank=True)
+  addSecNo5 = models.CharField(max_length=10, blank=True)
+  dropDidAttend0 = models.BooleanField()
+  dropDidAttend1 = models.BooleanField()
+  dropDidAttend2 = models.BooleanField()
+  dropDidAttend3 = models.BooleanField()
+  dropDidAttend4 = models.BooleanField()
+  dropDidAttend5 = models.BooleanField()
+  isPending = models.BooleanField(default=True)
+  isApproved = models.BooleanField(default=False)
+  isDenied = models.BooleanField(default=False)
 
 class UGGraduation(models.Model):
+
+  class Meta:
+    verbose_name = "Undergraduate Graduation"
+
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
   name_enrolled_under = models.CharField(max_length=50)
@@ -100,8 +224,15 @@ class UGGraduation(models.Model):
   expected_graduation_year = models.DecimalField(decimal_places = 0, max_digits=4)
   #Catalog table would go here
   preferred_degree = models.CharField(max_length=100)
+  isPending = models.BooleanField(default=True)
+  isApproved = models.BooleanField(default=False)
+  isDenied = models.BooleanField(default=False)
 
 class masterGraduation(models.Model):
+
+  class Meta:
+    verbose_name = "Master's Graduation"
+
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
   name_enrolled_under = models.CharField(max_length=50)
@@ -109,7 +240,7 @@ class masterGraduation(models.Model):
   city = models.CharField(max_length=50)
   state = models.CharField(max_length=2, choices=US_STATE_CHOICES)
   zip_code = models.DecimalField(decimal_places = 0, max_digits=5)
-  phone_number = models.DecimalField(decimal_places = 0, max_digits=9)
+  phone_number = models.CharField(max_length=20)
   email = models.CharField(max_length=50)
   student_starting_semester = models.CharField(max_length=6, choices=SEASON_CHOICES)
   student_starting_year = models.DecimalField(decimal_places = 0, max_digits=4)
@@ -118,8 +249,15 @@ class masterGraduation(models.Model):
   expected_graduation_term = models.CharField(max_length=6, choices=SEASON_CHOICES)
   expected_graduation_year = models.DecimalField(decimal_places = 0, max_digits=4)
   degree_name = models.CharField(max_length=100) #In reality this would be a dropdown
+  isPending = models.BooleanField(default=True)
+  isApproved = models.BooleanField(default=False)
+  isDenied = models.BooleanField(default=False)
 
 class degreeAudit(models.Model):
+
+  class Meta:
+    verbose_name = "Degree Audit"
+
   student_id_number = models.CharField(max_length=10)
   date = models.DateField(default = '')
   catalog_year = models.DecimalField(decimal_places = 0, max_digits=4)
@@ -129,9 +267,59 @@ class degreeAudit(models.Model):
   minor_was_chosen = models.BooleanField()
   semester = models.CharField(max_length=6, choices=SEASON_CHOICES)
   year = models.DecimalField(decimal_places = 0, max_digits=4)
-  #Still Needs Work
+  subCourse0A = models.CharField(max_length=15, blank=True)
+  subCourse0B = models.CharField(max_length=15, blank=True)
+  subCourse1A = models.CharField(max_length=15, blank=True)
+  subCourse1B = models.CharField(max_length=15, blank=True)
+  subCourse2A = models.CharField(max_length=15, blank=True)
+  subCourse2B = models.CharField(max_length=15, blank=True)
+  subCourse3A = models.CharField(max_length=15, blank=True)
+  subCourse3B = models.CharField(max_length=15, blank=True)
+  subCourse4A = models.CharField(max_length=15, blank=True)
+  subCourse4B = models.CharField(max_length=15, blank=True)
+  subCourse5A = models.CharField(max_length=15, blank=True)
+  subCourse5B = models.CharField(max_length=15, blank=True)
+  subCourse6A = models.CharField(max_length=15, blank=True)
+  subCourse6B = models.CharField(max_length=15, blank=True)
+  subCourse7A = models.CharField(max_length=15, blank=True)
+  subCourse7B = models.CharField(max_length=15, blank=True)
+  reqWaiver0 = models.CharField(max_length=10, blank=True)
+  reqWaiver1 = models.CharField(max_length=10, blank=True)
+  collegeDistinction0 = models.CharField(max_length=15, blank=True)
+  collegeDistinction1 = models.CharField(max_length=15, blank=True)
+  reqCourse0A = models.CharField(max_length=15, blank=True)
+  reqCourse0B = models.CharField(max_length=15, blank=True)
+  reqCourse1A = models.CharField(max_length=15, blank=True)
+  reqCourse1B = models.CharField(max_length=15, blank=True)
+  reqCourse2A = models.CharField(max_length=15, blank=True)
+  reqCourse2B = models.CharField(max_length=15, blank=True)
+  reqCourse3A = models.CharField(max_length=15, blank=True)
+  reqCourse3B = models.CharField(max_length=15, blank=True)
+  reqCourse4A = models.CharField(max_length=15, blank=True)
+  reqCourse4B = models.CharField(max_length=15, blank=True)
+  reqCourse5A = models.CharField(max_length=15, blank=True)
+  reqCourse5B = models.CharField(max_length=15, blank=True)
+  reqCourse6A = models.CharField(max_length=15, blank=True)
+  reqCourse6B = models.CharField(max_length=15, blank=True)
+  reqCourse7A = models.CharField(max_length=15, blank=True)
+  reqCourse7B = models.CharField(max_length=15, blank=True)
+  lowDivHours = models.DecimalField(decimal_places = 0, max_digits=2, blank=True)
+  upDivHours = models.DecimalField(decimal_places = 0, max_digits=2, blank=True)
+  currentEHRS = models.CharField(max_length=5, blank=True)
+  lessDupCredit = models.CharField(max_length=5, blank=True)
+  hoursTowardGraduation = models.CharField(max_length=5, blank=True)
+  plusHoursOnAudit = models.CharField(max_length=5, blank=True)
+  minReqHours = models.CharField(max_length=5, blank=True)
+  UDReqSatisfied = models.CharField(max_length=5, blank=True)
+  isPending = models.BooleanField(default=True)
+  isApproved = models.BooleanField(default=False)
+  isDenied = models.BooleanField(default=False)
 
 class degreeAuditAmendmentRequest(models.Model):
+    
+  class Meta:
+    verbose_name = "Degree Audit Amendment Request"
+
   student_id_number = models.CharField(max_length=10)
   catalog_year = models.DecimalField(decimal_places = 0, max_digits=4)
   date = models.DateField(default = '')
@@ -212,7 +400,7 @@ class degreeAuditAmendmentRequest(models.Model):
   atu_course_prefix5 = models.CharField(max_length = 50, blank = True)
   atu_course_number5 = models.CharField(max_length=10, blank=True)
   comments5 = models.CharField(max_length=100, blank = True)
-  
+
   atu_course_prefix6 = models.CharField(max_length = 50, blank = True)
   atu_course_number6 = models.CharField(max_length=10, blank=True)
   comments6 = models.CharField(max_length=100, blank = True)
@@ -220,7 +408,14 @@ class degreeAuditAmendmentRequest(models.Model):
   college_distinction2 = models.CharField(max_length = 50, blank = True)
   comments = models.TextField(max_length=100, blank = True)
 
+  isPending = models.BooleanField(default=True)
+  isApproved = models.BooleanField(default=False)
+  isDenied = models.BooleanField(default=False)
+
 class transcriptRequest(models.Model):
+  class Meta:
+    verbose_name = "Transcript Request"
+
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
   name_enrolled_under = models.CharField(max_length=50)
@@ -229,19 +424,23 @@ class transcriptRequest(models.Model):
   city = models.CharField(max_length=50)
   state = models.CharField(max_length=2, choices=US_STATE_CHOICES)
   zip_code = models.DecimalField(decimal_places = 0, max_digits=5)
-  phone_number = models.DecimalField(decimal_places = 0, max_digits=9)
+  phone_number = models.CharField(max_length=20)
   adhe = models.BooleanField()
   sacm = models.BooleanField()
   embassy_of_kuwait = models.BooleanField()
   ade_licensure = models.BooleanField()
   arsbn = models.BooleanField()
   #Tables need to be added
+  isPending = models.BooleanField(default=True)
+  isApproved = models.BooleanField(default=False)
+  isDenied = models.BooleanField(default=False)
 
 class courseInfo(models.Model): #WIP (not WAP)
   crn = models.DecimalField(decimal_places=0, max_digits=5)
   course_prefix = models.CharField(max_length=4)
   course_number = models.DecimalField(decimal_places=0, max_digits=4)
   sec_no = models.CharField(max_length=3)
+
 
 class substitutionRequest(models.Model): #WIP (not WAP)
   current_course = models.CharField(max_length=50)
