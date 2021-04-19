@@ -63,6 +63,9 @@ def get(request):
             elif selected_form == '6':
                 context['form_selector'] = transcriptRequestForm()
                 context['currentForm'] = "/transcriptRequest"
+            elif selected_form == '7':
+                context['form_selector'] = degreeAuditAmendmentRequestForm()
+                context['currentForm'] = "/degreeAuditAmendmentRequest"
 
       # Process form submissions
       if requestedPage == "permitToRegister":
@@ -77,6 +80,8 @@ def get(request):
           return processDegreeAudit(request)
       elif requestedPage == "transcriptRequest":
           return processTranscriptRequest(request)
+      elif requestedPage == "degreeAuditAmendmentRequest":
+          return processDegreeAuditAmendmentRequest(request)
 
       return render(request, 'DeanProject/%s.html'%requestedPage, context)
   else:
@@ -93,8 +98,9 @@ def getForms(request):
     masterGraduationData = masterGraduation.objects.filter(student_id_number=user_id)
     degreeAuditData = degreeAudit.objects.filter(student_id_number=user_id)
     transcriptRequestData = transcriptRequest.objects.filter(student_id_number=user_id)
+    degreeAuditAmendmentRequestData = degreeAuditAmendmentRequest.objects.filter(student_id_number=user_id)
 
-    results = list(chain(permitToRegisterData, addDropClassData, ugGraduationData, masterGraduationData, degreeAuditData, transcriptRequestData))
+    results = list(chain(permitToRegisterData, addDropClassData, ugGraduationData, masterGraduationData, degreeAuditData, transcriptRequestData, degreeAuditAmendmentRequestData))
 
     pending = []
     approved = []
@@ -232,11 +238,8 @@ def processAddDropClass(request):
           date,
           name_enrolled_under,
           recieves_financial_aid,
-          financial_aid_representative_signature,
           total_hours_enrolled_after_change,
           comments,
-          advisor_signature,
-          student_signature,
           atu_comments,
           another_course_fits_schedule,
           changing_major,
@@ -339,11 +342,8 @@ def processAddDropClass(request):
           request.POST['date'],
           request.POST['name_enrolled_under'],
           trySetBool(request, 'recieves_financial_aid'),
-          request.POST['financial_aid_representative_signature'],
           request.POST['total_hours_enrolled_after_change'],
           request.POST['comments'],
-          request.POST['advisor_signature'],
-          request.POST['student_signature'],
           request.POST['atu_comments'],
           trySetBool(request, 'another_course_fits_schedule'),
           trySetBool(request, 'changing_major'),
@@ -452,7 +452,6 @@ def processUGGraduation(request):
           date,
           name_enrolled_under,
           phone_number,
-          student_signature,
           diploma_name,
           name_pronunciation,
           pronunciation_recorded,
@@ -468,7 +467,6 @@ def processUGGraduation(request):
           request.POST['date'],
           request.POST['name_enrolled_under'],
           request.POST['phone_number'],
-          request.POST['student_signature'],
           request.POST['diploma_name'],
           request.POST['name_pronunciation'],
           trySetBool(request,'pronunciation_recorded'),
@@ -535,6 +533,7 @@ def processDegreeAudit(request):
       cursor = db.cursor()
       cursor.execute('''INSERT INTO DeanProject_degreeaudit(
           student_id_number,
+          date,
           catalog_year,
           name_enrolled_under,
           major_or_minor_name,
@@ -592,6 +591,7 @@ def processDegreeAudit(request):
           VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,
           ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
           (request.POST['student_id_number'],
+          request.POST['date'],
           request.POST['catalog_year'],
           request.POST['name_enrolled_under'],
           request.POST['major_or_minor_name'],
@@ -650,6 +650,179 @@ def processDegreeAudit(request):
       db.close()
       return redirect('/success')
 
+def processDegreeAuditAmendmentRequest(request):
+      db = sqlite3.connect('db.sqlite3')
+      cursor = db.cursor()
+      cursor.execute('''INSERT INTO DeanProject_degreeauditamendmentrequest(
+          student_id_number,
+          catalog_year,
+          date,
+          name_enrolled_under,
+          major_was_chosen,
+          change_grad_Term_to,
+          transfer_Institution,
+          course_subject,
+          course_num,
+          grade,
+          semester_taken,
+          atu_course_subject,
+          atu_course_num,
+          course_equivalent,
+          course_Substitution,
+          transfer_Institution2,
+          course_subject2,
+          course_num2,
+          grade2,
+          semester_taken2,
+          atu_course_subject2,
+          atu_course_num2,
+          course_equivalent2,
+          course_Substitution2,
+          transfer_Institution3,
+          course_subject3,
+          course_num3,
+          grade3,
+          semester_taken3,
+          atu_course_subject3,
+          atu_course_num3,
+          course_equivalent3,
+          course_Substitution3,
+          transfer_Institution4,
+          course_subject4,
+          course_num4,
+          grade4,
+          semester_taken4,
+          atu_course_subject4,
+          atu_course_num4,
+          course_equivalent4,
+          course_Substitution4,
+          transfer_Institution5,
+          course_subject5,
+          course_num5,
+          grade5,
+          semester_taken5,
+          atu_course_subject5,
+          atu_course_num5,
+          course_equivalent5,
+          course_Substitution5,
+          atu_course_prefix1,
+          atu_course_number1,
+          semester_taken1,
+          atu_course_prefix1B,
+          atu_course_num1B,
+          atu_course_prefix2,
+          atu_course_number2,
+          semester_taken2B,
+          atu_course_prefix2B,
+          atu_course_num2B,
+          atu_course_prefix3,
+          atu_course_number3,
+          semester_taken3B,
+          atu_course_prefix3B,
+          atu_course_num3B,
+          atu_course_prefix4,
+          atu_course_number4,
+          comments4,
+          atu_course_prefix5,
+          atu_course_number5,
+          comments5,
+          atu_course_prefix6,
+          atu_course_number6,
+          comments6,
+          college_distinction,
+          college_distinction2,
+          comments,
+          isPending,
+          isApproved,
+          isDenied)
+          VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,
+          ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,
+          ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
+          (request.POST['student_id_number'],
+          request.POST['catalog_year'],
+          request.POST['date'],
+          request.POST['name_enrolled_under'],
+          request.POST['major_was_chosen'],
+          request.POST['change_grad_Term_to'],
+          request.POST['transfer_Institution'],
+          request.POST['course_subject'],
+          request.POST['course_num'],
+          request.POST['grade'],
+          request.POST['semester_taken'],
+          request.POST['atu_course_subject'],
+          request.POST['atu_course_num'],
+          trySetBool(request,'course_equivalent'),
+          trySetBool(request,'course_Substitution'),
+          request.POST['transfer_Institution2'],
+          request.POST['course_subject2'],
+          request.POST['course_num2'],
+          request.POST['grade2'],
+          request.POST['semester_taken2'],
+          request.POST['atu_course_subject2'],
+          request.POST['atu_course_num2'],
+          trySetBool(request,'course_equivalent2'),
+          trySetBool(request,'course_Substitution2'),
+          request.POST['transfer_Institution3'],
+          request.POST['course_subject3'],
+          request.POST['course_num3'],
+          request.POST['grade3'],
+          request.POST['semester_taken3'],
+          request.POST['atu_course_subject3'],
+          request.POST['atu_course_num3'],
+          trySetBool(request,'course_equivalent3'),
+          trySetBool(request,'course_Substitution3'),
+          request.POST['transfer_Institution4'],
+          request.POST['course_subject4'],
+          request.POST['course_num4'],
+          request.POST['grade4'],
+          request.POST['semester_taken4'],
+          request.POST['atu_course_subject4'],
+          request.POST['atu_course_num4'],
+          trySetBool(request,'course_equivalent4'),
+          trySetBool(request,'course_Substitution4'),
+          request.POST['transfer_Institution5'],
+          request.POST['course_subject5'],
+          request.POST['course_num5'],
+          request.POST['grade5'],
+          request.POST['semester_taken5'],
+          request.POST['atu_course_subject5'],
+          request.POST['atu_course_num5'],
+          trySetBool(request,'course_equivalent5'),
+          trySetBool(request,'course_Substitution5'),
+          request.POST['atu_course_prefix1'],
+          request.POST['atu_course_number1'],
+          request.POST['semester_taken1'],
+          request.POST['atu_course_prefix1B'],
+          request.POST['atu_course_num1B'],
+          request.POST['atu_course_prefix2'],
+          request.POST['atu_course_number2'],
+          request.POST['semester_taken2B'],
+          request.POST['atu_course_prefix2B'],
+          request.POST['atu_course_num2B'],
+          request.POST['atu_course_prefix3'],
+          request.POST['atu_course_number3'],
+          request.POST['semester_taken3B'],
+          request.POST['atu_course_prefix3B'],
+          request.POST['atu_course_num3B'],
+          request.POST['atu_course_prefix4'],
+          request.POST['atu_course_number4'],
+          request.POST['comments4'],
+          request.POST['atu_course_prefix5'],
+          request.POST['atu_course_number5'],
+          request.POST['comments5'],
+          request.POST['atu_course_prefix6'],
+          request.POST['atu_course_number6'],
+          request.POST['comments6'],
+          request.POST['college_distinction'],
+          request.POST['college_distinction2'],
+          request.POST['comments'],
+          True,
+          False,
+          False))
+      db.commit()
+      db.close()
+      return redirect('/success')
+
 def processTranscriptRequest(request):
       db = sqlite3.connect('db.sqlite3')
       cursor = db.cursor()
@@ -663,7 +836,6 @@ def processTranscriptRequest(request):
           state,
           zip_code,
           phone_number,
-          student_signature,
           adhe,
           sacm,
           embassy_of_kuwait,
@@ -682,7 +854,6 @@ def processTranscriptRequest(request):
           request.POST['state'],
           request.POST['zip_code'],
           request.POST['phone_number'],
-          request.POST['student_signature'],
           trySetBool(request, 'adhe'),
           trySetBool(request, 'sacm'),
           trySetBool(request, 'embassy_of_kuwait'),

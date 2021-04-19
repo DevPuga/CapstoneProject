@@ -34,6 +34,7 @@ urlpatterns = [
     path('masterGraduation', views.get),
     path('degreeAudit', views.get),
     path('transcriptRequest', views.get),
+    path('degreeAuditAmendmentRequest', views.get),
     path('', include("django.contrib.auth.urls")),
 ]
 

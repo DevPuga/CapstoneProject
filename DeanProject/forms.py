@@ -14,9 +14,6 @@ class permitToRegisterForm(forms.ModelForm):
       'registration_year',
       'comments',
       'total_hours_enrolled',
-      'dean_signature',
-      'advisor_signature',
-      'student_signature',
       'crn0',
       'prefix0',
       'courseNum0',
@@ -62,9 +59,6 @@ class permitToRegisterForm(forms.ModelForm):
       'registration_year': 'Registration Year',
       'comments': 'Comments',
       'total_hours_enrolled': 'Total hours enrolled',
-      'dean_signature': 'Dean’s Signature, Overload Approval',
-      'advisor_signature': 'Advisor’s Signature',
-      'student_signature': 'Student’s Signature',
       'crn0': 'CRN',
       'crn1': '',
       'crn2': '',
@@ -112,6 +106,7 @@ class permitToRegisterForm(forms.ModelForm):
             HTML("<hr class='solid my-1\'>"),
             Div(
                 Div('name_enrolled_under', css_class='col'),
+                Div('date', css_class='col-4'),
             css_class='row'),
             Div(
                 Div('student_id_number', css_class='col'),
@@ -183,15 +178,7 @@ class permitToRegisterForm(forms.ModelForm):
             css_class='row pt-1'),
             Div(
                 Div('total_hours_enrolled', css_class='col'),
-                Div('dean_signature', css_class='col-8'),
             css_class='row pt-1'),
-            Div(
-                Div('student_signature', css_class='col-8'),
-                Div('date', css_class='col-4'),
-            css_class='row'),
-            Div(
-                Div('advisor_signature', css_class='col'),
-            css_class='row'),
             Div(
                 Div('comments', css_class='col'),
             css_class='row'),
@@ -226,11 +213,8 @@ class add_dropClassForm(forms.ModelForm):
       'date',
       'name_enrolled_under',
       'recieves_financial_aid', #Yes/No
-      'financial_aid_representative_signature', #Signature
       'total_hours_enrolled_after_change',
       'comments',
-      'advisor_signature', #Signature
-      'student_signature', #Signature
       'atu_comments',
       'another_course_fits_schedule', #Academic Issues
       'changing_major',
@@ -329,12 +313,9 @@ class add_dropClassForm(forms.ModelForm):
       'student_id_number': 'T Number',
       'date': 'Date',
       'name_enrolled_under': 'Name Enrolled Under (Last, First, Middle, Other)',
-      'recieves_financial_aid': 'I receive financial aid (loans, grants, scholarships)', #Yes/No
-      'financial_aid_representative_signature': 'Financial Aid Representative Signature', #Signature
+      'recieves_financial_aid': 'Do you receive financial aid? (loans, grants, scholarships)', #Yes/No
       'total_hours_enrolled_after_change': 'Total Hours Enrolled After Change',
       'comments': 'Comments',
-      'advisor_signature': 'Advisor\'s Signature', #Signature
-      'student_signature': 'Student\'s Signature', #Signature
       'atu_comments': 'Do you feel ATU could have done more to meet your needs? If so please tell us how',
       'another_course_fits_schedule': 'Another Course fits schedule', #Academic Issues
       'changing_major': 'Changing Major',
@@ -445,6 +426,7 @@ class add_dropClassForm(forms.ModelForm):
             css_class='row'),
             Div(
                 Div('recieves_financial_aid', css_class='col'),
+                Div('date', css_class='col-4'),
             css_class='row my-1'),
             HTML('''<h5 class='mt-4'><strong>Dates below are for full-term classes: January 11 - May 4, 2021</strong></h5>'''),
             HTML('''<p class='my-1'>Last day 100% refund - tuition/fees: <strong>January 15</strong></p>'''),
@@ -543,16 +525,7 @@ class add_dropClassForm(forms.ModelForm):
             css_class='row pt-1 mb-2'),
             Div(
                 Div('total_hours_enrolled_after_change', css_class='col'),
-                Div('financial_aid_representative_signature', css_class='col-8'),
             css_class='row'),
-            Div(
-                Div('student_signature', css_class='col-8'),
-                Div('date', css_class='col-4'),
-            css_class='row'),
-            Div(
-                Div('advisor_signature', css_class='col'),
-            css_class='row'),
-            HTML("<p class='my-2'>Please tell us why you wish to drop. Please select all that apply.</p>"),
             Div(
                 Div(
                     HTML("<h6 class='mb-0'>Academic issues</h6>"),
@@ -621,7 +594,6 @@ class UGGraduationForm(forms.ModelForm):
       'date',
       'name_enrolled_under',
       'phone_number',
-      'student_signature', #Signature
       'diploma_name',
       'name_pronunciation',
       'pronunciation_recorded', #Weird
@@ -635,7 +607,6 @@ class UGGraduationForm(forms.ModelForm):
       'date': 'Date',
       'name_enrolled_under': 'Name Enrolled Under (Last, First, Middle, Other)',
       'phone_number': 'Phone Number',
-      'student_signature': 'Student Signature',  #Signature
       'diploma_name': 'Print Your Name Exactly As You Want It To Appear On Your Diploma',
       'name_pronunciation': 'Name Pronounciation',
       'pronunciation_recorded': 'Pronunciation Recorded', #Weird
@@ -655,6 +626,7 @@ class UGGraduationForm(forms.ModelForm):
             Div(
                 Div('name_enrolled_under', css_class='col-8'),
                 Div('student_id_number', css_class='col'),
+                Div('date', css_class='col-4'),
             css_class='row'),
             Div(
                 Div('phone_number', css_class='col'),
@@ -671,10 +643,6 @@ class UGGraduationForm(forms.ModelForm):
             css_class='row'),
             Div(
                 Div('parents_completed_bachelor_degree', css_class='col'),
-            css_class='row'),
-            Div(
-                Div('student_signature', css_class='col-8'),
-                Div('date', css_class='col-4'),
             css_class='row'),
         css_class=''),
         ButtonHolder(
@@ -735,6 +703,7 @@ class masterGraduationForm(forms.ModelForm):
             css_class='row'),
             Div(
                 Div('mailing_address', css_class='col'),
+                Div('date', css_class='col'),
             css_class='row'),
             Div(
                 Div('city', css_class='col'),
@@ -764,9 +733,6 @@ class masterGraduationForm(forms.ModelForm):
             Div(
                 Div('degree_name', css_class='col'),
             css_class='row'),
-            Div(
-                Div('date', css_class='col'),
-            css_class='row'),
         css_class=''),
         ButtonHolder(
             Submit('submit', 'Submit', css_class='btn btn-primary mt-2')
@@ -778,6 +744,7 @@ class degreeAuditForm(forms.ModelForm):
     model = degreeAudit
     fields = [
       'student_id_number',
+      'date',
       'catalog_year',
       'name_enrolled_under',
       'major_or_minor_name',
@@ -832,6 +799,7 @@ class degreeAuditForm(forms.ModelForm):
     ]
     labels = {
       'student_id_number': 'T Number',
+      'date': 'Submit Date',
       'catalog_year': 'Catalog Year',
       'name_enrolled_under': 'Name Enrolled Under (Last, First, Middle, Other)',
       'major_or_minor_name': 'Major or Minor',
@@ -907,6 +875,7 @@ class degreeAuditForm(forms.ModelForm):
             Div(
                 Div('semester', css_class='col'),
                 Div('year', css_class='col'),
+                Div('date', css_class='col'),
             css_class='row'),
             HTML('''<p class='my-2'>All substitutions for required courses and all waivers of
             degree requirements must receive the recommendation from the advisor,
@@ -1017,6 +986,305 @@ class degreeAuditForm(forms.ModelForm):
         )
     )
 
+class degreeAuditAmendmentRequestForm(forms.ModelForm):
+  class Meta:
+    model = degreeAuditAmendmentRequest
+    fields = [
+      'student_id_number',
+      'catalog_year',
+      'date',
+      'name_enrolled_under',
+      'major_was_chosen',
+      'change_grad_Term_to',
+      'transfer_Institution',
+      'course_subject',
+      'course_num',
+      'grade',
+      'semester_taken',
+      'atu_course_subject',
+      'atu_course_num',
+      'course_equivalent',
+      'course_Substitution',
+      'transfer_Institution2',
+      'course_subject2',
+      'course_num2',
+      'grade2',
+      'semester_taken2',
+      'atu_course_subject2',
+      'atu_course_num2',
+      'course_equivalent2',
+      'course_Substitution2',
+      'transfer_Institution3',
+      'course_subject3',
+      'course_num3',
+      'grade3',
+      'semester_taken3',
+      'atu_course_subject3',
+      'atu_course_num3',
+      'course_equivalent3',
+      'course_Substitution3',
+      'transfer_Institution4',
+      'course_subject4',
+      'course_num4',
+      'grade4',
+      'semester_taken4',
+      'atu_course_subject4',
+      'atu_course_num4',
+      'course_equivalent4',
+      'course_Substitution4',
+      'transfer_Institution5',
+      'course_subject5',
+      'course_num5',
+      'grade5',
+      'semester_taken5',
+      'atu_course_subject5',
+      'atu_course_num5',
+      'course_equivalent5',
+      'course_Substitution5',
+      'atu_course_prefix1',
+      'atu_course_number1',
+      'semester_taken1',
+      'atu_course_prefix1B',
+      'atu_course_num1B',
+      'atu_course_prefix2',
+      'atu_course_number2',
+      'semester_taken2B',
+      'atu_course_prefix2B',
+      'atu_course_num2B',
+      'atu_course_prefix3',
+      'atu_course_number3',
+      'semester_taken3B',
+      'atu_course_prefix3B',
+      'atu_course_num3B',
+      'atu_course_prefix4',
+      'atu_course_number4',
+      'comments4',
+      'atu_course_prefix5',
+      'atu_course_number5',
+      'comments5',
+      'atu_course_prefix6',
+      'atu_course_number6',
+      'comments6',
+      'college_distinction',
+      'college_distinction2',
+      'comments',
+    ]
+    labels = {
+      'student_id_number': 'T Number',
+      'catalog_year': 'Catalog Year',
+      'date': 'Submit Date',
+      'name_enrolled_under': 'Name Enrolled Under (Last, First, Middle, Other)',
+      'major_was_chosen': 'Major',
+      'change_grad_Term_to': 'Change Graduation Term to',
+      'transfer_Institution': '',
+      'course_subject': '',
+      'course_num': '',
+      'grade': '',
+      'semester_taken': '',
+      'atu_course_subject': '',
+      'atu_course_num': '',
+      'course_equivalent': '',
+      'course_Substitution': '',
+      'transfer_Institution2':'',
+      'course_subject2': '',
+      'course_num2': '',
+      'grade2': '',
+      'semester_taken2': '',
+      'atu_course_subject2':'',
+      'atu_course_num2':'',
+      'course_equivalent2':'',
+      'course_Substitution2':'',
+      'transfer_Institution3':'',
+      'course_subject3':'',
+      'course_num3':'',
+      'grade3':'',
+      'semester_taken3':'',
+      'atu_course_subject3':'',
+      'atu_course_num3':'',
+      'course_equivalent3':'',
+      'course_Substitution3':'',
+      'transfer_Institution4':'',
+      'course_subject4':'',
+      'course_num4':'',
+      'grade4':'',
+      'semester_taken4':'',
+      'atu_course_subject4':'',
+      'atu_course_num4':'',
+      'course_equivalent4':'',
+      'course_Substitution4':'',
+      'transfer_Institution5':'',
+      'course_subject5':'',
+      'course_num5':'',
+      'grade5':'',
+      'semester_taken5':'',
+      'atu_course_subject5':'',
+      'atu_course_num5':'',
+      'course_equivalent5':'',
+      'course_Substitution5':'',
+      'atu_course_prefix1':'Course Prefix',
+      'atu_course_number1':'Course Number',
+      'semester_taken1':'Semester Taken',
+      'atu_course_prefix1B':'Course Prefix',
+      'atu_course_num1B':'Course Number',
+      'atu_course_prefix2':'',
+      'atu_course_number2':'',
+      'semester_taken2B':'',
+      'atu_course_prefix2B':'',
+      'atu_course_num2B':'',
+      'atu_course_prefix3':'',
+      'atu_course_number3':'',
+      'semester_taken3B':'',
+      'atu_course_prefix3B':'',
+      'atu_course_num3B':'',
+      'atu_course_prefix4':'Course Prefix',
+      'atu_course_number4':'Course Number',
+      'comments4':'Comments',
+      'atu_course_prefix5':'',
+      'atu_course_number5':'',
+      'comments5':'',
+      'atu_course_prefix6':'',
+      'atu_course_number6': '',
+      'comments6': '',
+      'college_distinction': 'College Distinction 1.',
+      'college_distinction2': '2.',
+      'comments': 'Comments',
+    }
+
+  def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
+    self.helper = FormHelper()
+    self.helper.layout = Layout(
+        Div(
+            HTML("<h2 class='mt-4\'>Degree Audit Amendment Request</h2>"),
+            HTML("<hr class='solid my-1\'>"),
+            Div(
+                Div('student_id_number', css_class='col'),
+                Div('catalog_year', css_class='col-2'),
+            css_class='row'),
+            Div(
+                Div('name_enrolled_under', css_class='col-8'),
+                Div('major_was_chosen', css_class='col-2'),
+                Div('change_grad_Term_to', css_class='col-2'),
+            css_class='row'),
+
+         Div(
+            HTML("<h6 class ='col-2'>Transfer Institution</h6>"),
+            HTML("<h6 class ='col-1'>Course Subject</h6>"),
+            HTML("<h6 class ='col-1'>Course Number</h6>"),
+            HTML("<h6 class ='col-1'>Grade</h6>"),
+            HTML("<h6 class ='col-1'>Semester Taken</h6>"),
+            HTML("<h6 class ='col-1'>ATU Course Subject</h6>"),
+            HTML("<h6 class ='col-1'>ATU Course Number</h6>"),
+            HTML("<h6 class ='col-2'>Course Equivalent</h6>"),
+            HTML("<h6 class ='col-2'>Course Substitution</h6>"),
+            css_class = 'row'),
+
+            Div(
+                Div('transfer_Institution',css_class='col-2'),
+                Div('course_subject',css_class='col-1'),
+                Div('course_num',css_class='col-1'),
+                Div('grade',css_class='col-1'),
+                Div('semester_taken',css_class = 'col-1'),
+                Div('atu_course_subject',css_class = 'col-1'),
+                Div('atu_course_num',css_class = 'col-1'),
+                Div('course_equivalent',css_class = 'col-2'),
+                Div('course_Substitution',css_class = 'col-2'),
+            css_class='row'),
+            Div(
+                Div('transfer_Institution2',css_class='col-2'),
+                Div('course_subject2',css_class='col-1'),
+                Div('course_num2',css_class='col-1'),
+                Div('grade2',css_class='col-1'),
+                Div('semester_taken2',css_class = 'col-1'),
+                Div('atu_course_subject2',css_class = 'col-1'),
+                Div('atu_course_num2',css_class = 'col-1'),
+                Div('course_equivalent2',css_class = 'col-2'),
+                Div('course_Substitution2',css_class = 'col-2'),
+            css_class='row'),
+            Div(
+                Div('transfer_Institution3',css_class='col-2'),
+                Div('course_subject3',css_class='col-1'),
+                Div('course_num3',css_class='col-1'),
+                Div('grade3',css_class='col-1'),
+                Div('semester_taken3',css_class = 'col-1'),
+                Div('atu_course_subject3',css_class = 'col-1'),
+                Div('atu_course_num3',css_class = 'col-1'),
+                Div('course_equivalent3',css_class = 'col-2'),
+                Div('course_Substitution3',css_class = 'col-2'),
+            css_class='row'),
+            Div(
+                Div('transfer_Institution4',css_class='col-2'),
+                Div('course_subject4',css_class='col-1'),
+                Div('course_num4',css_class='col-1'),
+                Div('grade4',css_class='col-1'),
+                Div('semester_taken4',css_class = 'col-1'),
+                Div('atu_course_subject4',css_class = 'col-1'),
+                Div('atu_course_num4',css_class = 'col-1'),
+                Div('course_equivalent4',css_class = 'col-2'),
+                Div('course_Substitution4',css_class = 'col-2'),
+            css_class='row'),
+            Div(
+                Div('transfer_Institution5',css_class='col-2'),
+                Div('course_subject5',css_class='col-1'),
+                Div('course_num5',css_class='col-1'),
+                Div('grade5',css_class='col-1'),
+                Div('semester_taken5',css_class = 'col-1'),
+                Div('atu_course_subject5',css_class = 'col-1'),
+                Div('atu_course_num5',css_class = 'col-1'),
+                Div('course_equivalent5',css_class = 'col-2'),
+                Div('course_Substitution5',css_class = 'col-2'),
+            css_class='row'),
+            Div(
+                Div('atu_course_prefix1',css_class='col-2'),
+                Div('atu_course_number1',css_class='col-2'),
+                Div('semester_taken1',css_class='col-2'),
+                Div('atu_course_prefix1B',css_class='col-2'),
+                Div('atu_course_num1B',css_class = 'col-2'),
+            css_class='row'),
+            Div(
+                Div('atu_course_prefix2',css_class = 'col-2'),
+                Div('atu_course_number2',css_class = 'col-2'),
+                Div('semester_taken2B',css_class = 'col-2'),
+                Div('atu_course_prefix2B',css_class = 'col-2'),
+                Div('atu_course_num2B',css_class = 'col-2'),
+            css_class='row'),
+            Div(
+                Div('atu_course_prefix3',css_class = 'col-2'),
+                Div('atu_course_number3',css_class = 'col-2'),
+                Div('semester_taken3B',css_class = 'col-2'),
+                Div('atu_course_prefix3B',css_class = 'col-2'),
+                Div('atu_course_num3B',css_class = 'col-2'),
+            css_class='row'),
+            Div(
+                Div('atu_course_prefix4',css_class='col-3'),
+                Div('atu_course_number4',css_class='col-3'),
+                Div('comments4',css_class='col-5'),
+            css_class='row'),
+            Div(
+                Div('atu_course_prefix5',css_class = 'col-3'),
+                Div('atu_course_number5',css_class = 'col-3'),
+                Div('comments5',css_class = 'col-5'),
+            css_class='row'),
+            Div(
+                Div('atu_course_prefix6',css_class = 'col-3'),
+                Div('atu_course_number6',css_class = 'col-3'),
+                Div('comments6',css_class = 'col-5'),
+            css_class='row'),
+            Div(
+                Div('college_distinction',css_class = 'col-2'),
+                Div('college_distinction2',css_class = 'col-2'),
+                css_class='row'),
+            Div(
+                Div('comments',css_class = 'col-8'),
+                Div('date',css_class='col-2'),
+                css_class='row'
+            ),
+        css_class=''),
+        ButtonHolder(
+            Submit('submit', 'Submit', css_class='btn btn-primary mt-2')
+        )
+    )
+
 class transcriptRequestForm(forms.ModelForm):
   class Meta:
     model = transcriptRequest
@@ -1030,7 +1298,6 @@ class transcriptRequestForm(forms.ModelForm):
       'state',
       'zip_code',
       'phone_number',
-      'student_signature', #Signature
       'adhe',
       'sacm',
       'embassy_of_kuwait',
@@ -1047,7 +1314,6 @@ class transcriptRequestForm(forms.ModelForm):
       'state': 'State',
       'zip_code': 'ZIP',
       'phone_number': 'Phone Number',
-      'student_signature': 'Student Signature',  #Signature
       'adhe': 'ADHE (AR Lottery Scholarship)',
       'sacm': 'SACM (Saudi Arabian Cultural Mission)',
       'embassy_of_kuwait': 'Embassy of Kuwait',
@@ -1068,6 +1334,7 @@ class transcriptRequestForm(forms.ModelForm):
             css_class='row'),
             Div(
                 Div('mailing_address', css_class='col'),
+                Div('date', css_class='col'),
             css_class='row'),
             Div(
                 Div('city', css_class='col-8'),
@@ -1090,10 +1357,6 @@ class transcriptRequestForm(forms.ModelForm):
                     Div('arsbn', css_class='row'),
                 css_class='col'),
             css_class='row mb-2'),
-            Div(
-                Div('student_signature', css_class='col-8'),
-                Div('date', css_class='col'),
-            css_class='row'),
         css_class=''),
         ButtonHolder(
             Submit('submit', 'Submit', css_class='btn btn-primary mt-2')

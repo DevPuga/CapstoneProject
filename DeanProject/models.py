@@ -53,9 +53,6 @@ class permitToRegister(models.Model):
   registration_year = models.DecimalField(decimal_places = 0, max_digits=4)
   comments = models.TextField(max_length=100)
   total_hours_enrolled = models.DecimalField(decimal_places = 0, max_digits=2)
-  dean_signature = models.CharField(max_length=50) #Signature
-  advisor_signature = models.CharField(max_length=50) #Signature
-  student_signature = models.CharField(max_length=50) #Signature
   crn0 = models.CharField(max_length=10, blank=True)
   crn1 = models.CharField(max_length=10, blank=True)
   crn2 = models.CharField(max_length=10, blank=True)
@@ -105,12 +102,9 @@ class add_dropClass(models.Model):
   date = models.DateField()
   name_enrolled_under = models.CharField(max_length=50)
   recieves_financial_aid = models.BooleanField() #Yes/No
-  financial_aid_representative_signature = models.CharField(max_length=50) #Signature
   #Add Drop table would go here
   total_hours_enrolled_after_change = models.DecimalField(decimal_places = 0, max_digits=2)
   comments = models.TextField(max_length=100)
-  advisor_signature = models.CharField(max_length=50) #Signature
-  student_signature = models.CharField(max_length=50) #Signature
   atu_comments = models.TextField(max_length=100)
   #Section: Academic Issues
   another_course_fits_schedule = models.BooleanField()
@@ -222,7 +216,6 @@ class UGGraduation(models.Model):
   date = models.DateField()
   name_enrolled_under = models.CharField(max_length=50)
   phone_number = models.CharField(max_length=20)
-  student_signature = models.CharField(max_length=50) #Signature
   diploma_name = models.CharField(max_length=50)
   name_pronunciation = models.CharField(max_length=50)
   pronunciation_recorded = models.BooleanField() #Weird
@@ -266,6 +259,7 @@ class degreeAudit(models.Model):
     verbose_name = "Degree Audit"
 
   student_id_number = models.CharField(max_length=10)
+  date = models.DateField(default = '')
   catalog_year = models.DecimalField(decimal_places = 0, max_digits=4)
   name_enrolled_under = models.CharField(max_length=50)
   major_or_minor_name = models.CharField(max_length=100)
@@ -321,6 +315,103 @@ class degreeAudit(models.Model):
   isApproved = models.BooleanField(default=False)
   isDenied = models.BooleanField(default=False)
 
+class degreeAuditAmendmentRequest(models.Model):
+    
+  class Meta:
+    verbose_name = "Degree Audit Amendment Request"
+
+  student_id_number = models.CharField(max_length=10)
+  catalog_year = models.DecimalField(decimal_places = 0, max_digits=4)
+  date = models.DateField(default = '')
+  name_enrolled_under = models.CharField(max_length=50)
+  major_was_chosen = models.CharField(max_length=50)
+  change_grad_Term_to = models.CharField(max_length = 50, blank = True)
+  transfer_Institution = models.CharField(max_length = 100, blank = True)
+  course_subject = models.CharField(max_length = 50, blank = True)
+  course_num = models.CharField(max_length=10, blank=True)
+  grade = models.CharField(max_length = 5, blank = True)
+  semester_taken = models.CharField(max_length = 50, blank = True)
+  atu_course_subject = models.CharField(max_length = 50, blank = True)
+  atu_course_num = models.CharField(max_length=10, blank=True)
+  course_equivalent = models.BooleanField(blank = True)
+  course_Substitution = models.BooleanField(blank = True)
+
+  transfer_Institution2 = models.CharField(max_length = 100, blank = True)
+  course_subject2 = models.CharField(max_length = 50, blank = True)
+  course_num2 = models.CharField(max_length=10, blank=True)
+  grade2 = models.CharField(max_length = 5, blank = True)
+  semester_taken2 = models.CharField(max_length = 50, blank = True)
+  atu_course_subject2 = models.CharField(max_length = 50, blank = True)
+  atu_course_num2 = models.CharField(max_length=10, blank=True)
+  course_equivalent2 = models.BooleanField(blank = True)
+  course_Substitution2 = models.BooleanField(blank = True)
+
+  transfer_Institution3 = models.CharField(max_length = 100, blank = True)
+  course_subject3 = models.CharField(max_length = 50, blank = True)
+  course_num3 = models.CharField(max_length=10, blank=True)
+  grade3 = models.CharField(max_length = 5, blank = True)
+  semester_taken3 = models.CharField(max_length = 50, blank = True)
+  atu_course_subject3 = models.CharField(max_length = 50, blank = True)
+  atu_course_num3 = models.CharField(max_length=10, blank=True)
+  course_equivalent3 = models.BooleanField(blank = True)
+  course_Substitution3 = models.BooleanField(blank = True)
+
+  transfer_Institution4 = models.CharField(max_length = 100, blank = True)
+  course_subject4 = models.CharField(max_length = 50, blank = True)
+  course_num4 = models.CharField(max_length=10, blank=True)
+  grade4 = models.CharField(max_length = 5, blank = True)
+  semester_taken4 = models.CharField(max_length = 50, blank = True)
+  atu_course_subject4 = models.CharField(max_length = 50, blank = True)
+  atu_course_num4 = models.CharField(max_length=10, blank=True)
+  course_equivalent4 = models.BooleanField(blank = True)
+  course_Substitution4 = models.BooleanField(blank = True)
+
+  transfer_Institution5 = models.CharField(max_length = 100, blank = True)
+  course_subject5 = models.CharField(max_length = 50, blank = True)
+  course_num5 = models.CharField(max_length=10, blank=True)
+  grade5 = models.CharField(max_length = 5, blank = True)
+  semester_taken5 = models.CharField(max_length = 50, blank = True)
+  atu_course_subject5 = models.CharField(max_length = 50, blank = True)
+  atu_course_num5 = models.CharField(max_length=10, blank=True)
+  course_equivalent5 = models.BooleanField(blank = True)
+  course_Substitution5 = models.BooleanField(blank = True)
+
+  atu_course_prefix1 = models.CharField(max_length = 50, blank = True)
+  atu_course_number1 = models.CharField(max_length=10, blank=True)
+  semester_taken1 = models.CharField(max_length = 50, blank = True)
+  atu_course_prefix1B = models.CharField(max_length = 50, blank = True)
+  atu_course_num1B = models.CharField(max_length=10, blank=True)
+
+  atu_course_prefix2 = models.CharField(max_length = 50, blank = True)
+  atu_course_number2 = models.CharField(max_length=10, blank=True)
+  semester_taken2B = models.CharField(max_length = 50, blank = True, null = True)
+  atu_course_prefix2B = models.CharField(max_length = 50, blank = True)
+  atu_course_num2B = models.CharField(max_length=10, blank=True)
+
+  atu_course_prefix3 = models.CharField(max_length = 50, blank = True)
+  atu_course_number3 = models.CharField(max_length=10, blank=True)
+  semester_taken3B = models.CharField(max_length = 50, blank = True, null = True)
+  atu_course_prefix3B = models.CharField(max_length = 50, blank = True)
+  atu_course_num3B = models.CharField(max_length=10, blank=True)
+
+  atu_course_prefix4 = models.CharField(max_length = 50, blank = True)
+  atu_course_number4 = models.CharField(max_length=10, blank=True)
+  comments4 = models.CharField(max_length=100, blank = True)
+  atu_course_prefix5 = models.CharField(max_length = 50, blank = True)
+  atu_course_number5 = models.CharField(max_length=10, blank=True)
+  comments5 = models.CharField(max_length=100, blank = True)
+
+  atu_course_prefix6 = models.CharField(max_length = 50, blank = True)
+  atu_course_number6 = models.CharField(max_length=10, blank=True)
+  comments6 = models.CharField(max_length=100, blank = True)
+  college_distinction = models.CharField(max_length = 50, blank = True)
+  college_distinction2 = models.CharField(max_length = 50, blank = True)
+  comments = models.TextField(max_length=100, blank = True)
+
+  isPending = models.BooleanField(default=True)
+  isApproved = models.BooleanField(default=False)
+  isDenied = models.BooleanField(default=False)
+
 class transcriptRequest(models.Model):
   class Meta:
     verbose_name = "Transcript Request"
@@ -334,7 +425,6 @@ class transcriptRequest(models.Model):
   state = models.CharField(max_length=2, choices=US_STATE_CHOICES)
   zip_code = models.DecimalField(decimal_places = 0, max_digits=5)
   phone_number = models.CharField(max_length=20)
-  student_signature = models.CharField(max_length=50) #Signature
   adhe = models.BooleanField()
   sacm = models.BooleanField()
   embassy_of_kuwait = models.BooleanField()
