@@ -216,7 +216,7 @@ def processPermitToRegister(request):
           request.POST['secNo5'],
           request.POST['secNo6'],
           request.POST['secNo7'],
-          request.POST['secNo8']))
+          request.POST['secNo8'],
           True,
           False,
           False))
