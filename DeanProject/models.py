@@ -46,6 +46,7 @@ class permitToRegister(models.Model):
 
   class Meta:
     verbose_name = "Permit to Register"
+    db_table = "DeanProject_permittoregister"
 
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
@@ -98,6 +99,7 @@ class add_dropClass(models.Model):
 
   class Meta:
     verbose_name = "Add/Drop Class"
+    db_table = "DeanProject_add_dropclass"
 
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
@@ -212,6 +214,7 @@ class UGGraduation(models.Model):
 
   class Meta:
     verbose_name = "Undergraduate Graduation"
+    db_table = "DeanProject_uggraduation"
 
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
@@ -233,6 +236,7 @@ class masterGraduation(models.Model):
 
   class Meta:
     verbose_name = "Master's Graduation"
+    db_table = "DeanProject_mastergraduation"
 
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
@@ -258,6 +262,7 @@ class degreeAudit(models.Model):
 
   class Meta:
     verbose_name = "Degree Audit"
+    db_table = "DeanProject_degreeaudit"
 
   student_id_number = models.CharField(max_length=10)
   date = models.DateField(default = '')
@@ -320,6 +325,7 @@ class degreeAuditAmendmentRequest(models.Model):
     
   class Meta:
     verbose_name = "Degree Audit Amendment Request"
+    db_table = "DeanProject_degreeauditamendmentrequest"
 
   student_id_number = models.CharField(max_length=10)
   catalog_year = models.DecimalField(decimal_places = 0, max_digits=4)
@@ -416,6 +422,7 @@ class degreeAuditAmendmentRequest(models.Model):
 class transcriptRequest(models.Model):
   class Meta:
     verbose_name = "Transcript Request"
+    db_table = "DeanProject_transcriptrequest"
 
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
