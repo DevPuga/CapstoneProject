@@ -3,73 +3,79 @@ function func(){
     popup.classList.toggle("show");
 }
 
-function displayPopup(){
-    var popup = document.getElementById("popup");
+function displayPopup(popup){
+    var popup = document.getElementById(popup.id);
     popup.style.display = "block";
 }
 
-function closePopup(){
-    var popup = document.getElementById("popup");
+function closePopup(popup){
+    var popup = document.getElementById(popup.id);
     popup.style.display = "none";
 }
 
-function getViewContent(formName){
-    switch(formName){
-        case "permitToRegister":
-            permitToRegisterView();
+
+function newLine(divID, content){
+    var div = document.createElement('div');
+      div.innerHTML = content;
+      document.getElementById(divID).appendChild(div);
+}
+
+function newLinePTRV(formid, content){
+    newLine("DeanProject_permittoregister"+formid+"Content", content);
+}
+
+function newLineADCV(formid, content){
+    newLine("DeanProject_add_dropclass"+formid+"Content", content);
+}
+
+function newLineUGGV(formid, content){
+    newLine("DeanProject_uggraduation"+formid+"Content", content);
+}
+
+function newLineMGV(formid, content){
+    newLine("DeanProject_mastergraduation"+formid+"Content", content);
+}
+
+function newLineDAARV(formid, content){
+    newLine("DeanProject_degreeauditamendmentrequest"+formid+"Content", content);
+}
+
+function newLineDAV(formid, content){
+    newLine("DeanProject_degreeaudit"+formid+"Content", content);
+}
+
+function newLineTRV(formid, content){
+    newLine("DeanProject_transcriptrequest"+formid+"Content", content);
+}
+
+function print(thing){
+    console.log(thing);
+}
+
+function getViewContent(formName, formid){
+    switch(String(formName)){
+        case "DeanProject_permittoregister":
+            permitToRegisterView(formid);
             break;
-        case "add_dropClass":
-            add_dropClassView();
+        case "DeanProject_add_dropclass":
+            add_dropClassView(formid);
             break;
-        case "UGGraduation":
-            UGGraduationView()
+        case "DeanProject_uggraduation":
+            UGGraduationView(formid)
             break;
-        case "MasterGraduation":
-            MasterGraduationView()
+        case "DeanProject_mastergraduation":
+            MasterGraduationView(formid)
             break;
-        case "DegreeAuditAmendment":
-            DegreeAuditAmendmentView()
+        case "DeanProject_degreeauditamendmentrequest":
+            DegreeAuditAmendmentRequestView(formid)
             break;
-        case "TranscriptRequest":
-            TranscriptRequestView()
+        case "DeanProject_degreeaudit":
+            DegreeAuditView(formid)
+            break;
+        case "DeanProject_transcriptrequest":
+            TranscriptRequestView(formid)
             break;
         default:
         console.log("GetViewContent: " + formName + " was not recognized");
     }
-}
-
-function permitToRegisterView(){
-    document.getElementById("popupContent").innerHTML = "Your mom";
-
-    var div = document.createElement('div');
-    div.innerHTML = 'is';
-    document.getElementById("popupContent").appendChild(div);
-    var div2 = document.createElement('div');
-    div2.innerHTML = 'beautiful';
-    document.getElementById("popupContent").appendChild(div2);
-}
-
-function add_dropClassView(){
-
-    document.getElementById("popupContent").innerHTML = "This one is add_dropClassForm";
-}
-
-function UGGraduationView(){
-
-    document.getElementById("popupContent").innerHTML = "This one is UGGraduationForm";
-}
-
-function MasterGraduationView(){
-
-    document.getElementById("popupContent").innerHTML = "This one is MasterGraduationForm";
-}
-
-function DegreeAuditAmendmentView(){
-
-    document.getElementById("popupContent").innerHTML = "This one is DegreeAuditAmendmentForm";
-}
-
-function TranscriptRequestView(){
-
-    document.getElementById("popupContent").innerHTML = "This one is TranscriptRequestForm";
 }

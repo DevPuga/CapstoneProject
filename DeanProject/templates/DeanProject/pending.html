@@ -9,6 +9,69 @@
 <div class="container">
   <div class="row card-group">
     {% for form in forms.pending %}
+
+    {% comment %} View Content Code START {% endcomment %}
+    <script>
+      function permitToRegisterView(formid){
+          document.getElementById("DeanProject_permittoregister"+formid+"Content").innerHTML = "Permit to Register";
+
+          newLinePTRV(formid, "Student ID Number: " + "{{form.student_id_number}}");
+          newLinePTRV(formid, "Date: " + "{{form.date}}");
+          newLinePTRV(formid, "Comments: " + "{{form.comments}}");
+          newLinePTRV(formid, "Name Enrolled Under: " + "{{form.name_enrolled_under}}");
+      }
+
+      function add_dropClassView(formid){
+
+          document.getElementById("DeanProject_add_dropclass"+formid+"Content").innerHTML = "Add/Drop Course";
+          
+          newLineADCV(formid, "Student ID Number: " + "{{form.student_id_number}}")
+          newLineADCV(formid, "Date: " + "{{form.date}}")
+          newLineADCV(formid, "Comments: " + "{{form.comments}}")
+          newLineADCV(formid, "Increases in tuition and fees: " + "{{form.increases_in_tuition_and_fees}}")
+          newLineADCV(formid, "Receives Financial Aid: " + "{{form.recieves_financial_aid}}")
+      }
+
+      function UGGraduationView(formid){
+
+          document.getElementById("DeanProject_uggraduation"+formid+"Content").innerHTML = "Undergraduate Graduation Application";
+
+          newLineUGGV(formid, "Student ID Number: " + "{{form.student_id_number}}")
+      }
+
+      function MasterGraduationView(formid){
+
+          document.getElementById("DeanProject_mastergraduation"+formid+"Content").innerHTML = "Master's Graduation Application";
+
+          newLineMGV(formid, "Student ID Number: " + "{{form.student_id_number}}")
+      }
+
+      function DegreeAuditAmendmentRequestView(formid){
+
+          document.getElementById("DeanProject_degreeauditamendmentrequest"+formid+"Content").innerHTML = "Degree Audit Ammendment Request";
+
+          newLineDAARV(formid, "Student ID Number: " + "{{form.student_id_number}}")
+      }
+
+      function DegreeAuditView(formid){
+
+          document.getElementById("DeanProject_degreeaudit"+formid+"Content").innerHTML = "Degree Audit";
+
+          newLineDAV(formid, "Student ID Number: " + "{{form.student_id_number}}")
+      }
+
+      function TranscriptRequestView(formid){
+
+          document.getElementById("DeanProject_transcriptrequest"+formid+"Content").innerHTML = "Transcript Request Form";
+
+          newLineTRV(formid, "Student ID Number: " + "{{form.student_id_number}}")
+      }
+    </script>
+
+    {% comment %}  View Content Code END {% endcomment %}
+
+
+
     <div class="col-sm-4">
       <div class="card">
         <div class="card-body">
@@ -16,21 +79,15 @@
           <h6 class="card-subtitle mb-2 text-muted">{{form | verbose_name}}</h6>
           <h6 class="card-subtitle mb-2 text-muted">{{form.date}}</h6>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          {% comment %} <a href="#" class="card-link">View</a> {% endcomment %}
 
-          {% comment %} <div class = "popup" onclick="func()"> Pop up View
-          <span class="popuptext" id = "myPopup">Popup</span>
-          </div> {% endcomment %}
+          <a href="#" class="card-link" onclick="displayPopup(popup{{form | db_table}}{{form.id}})" id="{{form | db_table}}{{form.id}}">View</a>
 
-          <a href="#" class="card-link" onclick="displayPopup()" id="popupButton">View</a>
-          {% comment %} <button onclick="displayPopup()" id="popupButton">View Popup</button> {% endcomment %}
-
-          <div id="popup" class="modal">
+          <div id="popup{{form | db_table}}{{form.id}}" class="modal">
             <div class="modal-content">
-              <span onclick="closePopup()" id="closePopup" class="close">&times;</span>
+              <span onclick="closePopup(popup{{form | db_table}}{{form.id}})" id="closePopup" class="close">&times;</span>
 
-              <div id="popupContent">Some text in the popup..</div>
-              <script>getViewContent("permitToRegister")</script>
+              <div id="{{form | db_table}}{{form.id}}Content">Some text in the popup..</div>
+              <script>getViewContent("{{form | db_table}}", "{{form.id}}")</script>
               <button>Approve</button>
               <button>Deny</button>
 

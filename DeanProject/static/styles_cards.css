@@ -1,12 +1,12 @@
-/* Popup container */
-.popup {
+ /* Popup container */
+.popup* {
     position: relative;
     display: inline-block;
     cursor: pointer;
   }
   
   /* The actual popup (appears on top) */
-  .popup .popuptext {
+  .popup* .popuptext {
     visibility: hidden;
     width: 160px;
     background-color: #555;
@@ -22,7 +22,7 @@
   }
   
   /* Popup arrow */
-  .popup .popuptext::after {
+  .popup* .popuptext::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -34,7 +34,7 @@
   }
   
   /* Toggle this class when clicking on the popup container (hide and show the popup) */
-  .popup .show {
+  .popup* .show {
     visibility: visible;
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s
