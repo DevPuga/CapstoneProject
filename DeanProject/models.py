@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+from jsonfield import JSONField
 
 US_STATE_CHOICES = (
     ('ar','AR'), ('aa','AA'), ('ae','AE'), ('ak','AK'), ('al','AL'),
@@ -30,6 +30,7 @@ class Profile(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
   tech_id = models.CharField(max_length=9, default="")
   name = models.CharField(max_length=20, default="Person")
+  advisees = JSONField()
 
 
 @receiver(post_save, sender=User)
