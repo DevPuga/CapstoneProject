@@ -297,24 +297,22 @@
 
     {% comment %}  View Content Code END {% endcomment %}
 
-
-
     <div class="col-sm-4">
       <div class="card">
         <div class="card-body">
           <h5>{{form.name_enrolled_under}} <span class="badge bg-warning">Pending</span></h5>
           <h6 class="card-subtitle mb-2 text-muted">{{form | verbose_name}}</h6>
           <h6 class="card-subtitle mb-2 text-muted">{{form.date}}</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-
+          {% if form.comments == null %}
+          <p class="card-text">No comments were included</p>
+          {% else %}
+          <p class="card-text">{{form.comments}}</p>
+          {% endif %}
           <a href="#" class="card-link" onclick="displayPopup(popup{{form | db_table}}{{form.id}})" id="{{form | db_table}}{{form.id}}">View</a>
-
           <div id="popup{{form | db_table}}{{form.id}}" class="modal">
             <div class="modal-content">
               <span onclick="closePopup(popup{{form | db_table}}{{form.id}})" id="closePopup" class="close">&times;</span>
-
               <div id="{{form | db_table}}{{form.id}}Title" class="row"></div>
-
               <div class="row">
                 <div id="{{form | db_table}}{{form.id}}Label"></div>
                 <div id="{{form | db_table}}{{form.id}}Content"></div>
