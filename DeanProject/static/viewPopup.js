@@ -36,8 +36,10 @@ function newWideTitle(divID, title){
 
 function createTable(divID, tableNum){
     var table = document.createElement('table');
-    table.setAttribute("id", divID + tableNum);
+    tableID = divID + tableNum;
+    table.setAttribute("id", tableID);
     document.getElementById(divID).appendChild(table);
+    document.getElementById(tableID).className = "my-3";
 }
 
 function newCell(rowid, content) {
