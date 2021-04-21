@@ -47,8 +47,7 @@ function newCell(rowid, content) {
     document.getElementById(rowid).appendChild(cell);
 }
 
-function createHeaderPTR(formid, tableNum, content){
-    var tableid = "DeanProject_permittoregister" + formid + "Table";
+function createHeader(tableid, tableNum, content){
     var cell = document.createElement("th");
     var text = document.createTextNode(content);
     cell.appendChild(text);
@@ -66,6 +65,23 @@ function newRowPTR(formid, tableNum, rowNum, crn, prefix, courseNum, secNo){
       newCell(rowid, prefix);
       newCell(rowid, courseNum);
       newCell(rowid, secNo);
+    }
+}
+
+function newRowADC(formid, tableNum, rowNum, crn, prefix, courseNum, secNo, attend){
+    if (crn != "" && prefix != "" && courseNum != "" && secNo != ""){
+      var tableid = "DeanProject_add_dropclass" + formid + "Table";
+      var rowid = tableid + tableNum + rowNum;
+      var row = document.createElement("tr");
+      row.setAttribute("id", rowid);
+      document.getElementById(tableid + tableNum).appendChild(row);
+      newCell(rowid, crn);
+      newCell(rowid, prefix);
+      newCell(rowid, courseNum);
+      newCell(rowid, secNo);
+      if (attend) {
+        newCell(rowid, attend)
+      }
     }
 }
 

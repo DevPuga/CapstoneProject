@@ -19,11 +19,24 @@
       }
 
       function createTablePTR(formid) {
-        createTable("DeanProject_permittoregister" + formid + "Table", 0);
-        createHeaderPTR(formid, 0, "CRN")
-        createHeaderPTR(formid, 0, "Course Prefix")
-        createHeaderPTR(formid, 0, "Course No.")
-        createHeaderPTR(formid, 0, "Section No.")
+        tableid = "DeanProject_permittoregister" + formid + "Table"
+        createTable(tableid, 0);
+        createHeader(tableid, 0, "CRN")
+        createHeader(tableid, 0, "Course Prefix")
+        createHeader(tableid, 0, "Course No.")
+        createHeader(tableid, 0, "Section No.")
+      }
+
+      function createTableADC(formid, tableNum, isDrop) {
+        tableid = "DeanProject_add_dropclass" + formid + "Table";
+        createTable(tableid, tableNum);
+        createHeader(tableid, tableNum, "CRN")
+        createHeader(tableid, tableNum, "Course Prefix")
+        createHeader(tableid, tableNum, "Course No.")
+        createHeader(tableid, tableNum, "Section No.")
+        if (isDrop) {
+          createHeader(tableid, tableNum, "Did attend")
+        }
       }
 
       function permitToRegisterView(formid){
@@ -94,6 +107,20 @@
           adcDisplayIfChecked(formid, "Personal emergency: ", "{{form.personal_emergency}}");
           adcDisplayIfChecked(formid, "Unmotivated for these courses or tired of school: ", "{{form.unmotivated_for_this_courses_or_tired_of_school}}");
           adcDisplayIfChecked(formid, "Working too many hours: ", "{{form.working_too_many_hours}}");
+          createTableADC(formid, 0, false)
+          newRowADC(formid, 0, 0, "{{form.addCRN0}}", "{{form.addPrefix0}}", "{{form.addCourseNum0}}", "{{form.addSecNo0}}");
+          newRowADC(formid, 0, 1, "{{form.addCRN1}}", "{{form.addPrefix1}}", "{{form.addCourseNum1}}", "{{form.addSecNo1}}");
+          newRowADC(formid, 0, 2, "{{form.addCRN2}}", "{{form.addPrefix2}}", "{{form.addCourseNum2}}", "{{form.addSecNo2}}");
+          newRowADC(formid, 0, 3, "{{form.addCRN3}}", "{{form.addPrefix3}}", "{{form.addCourseNum3}}", "{{form.addSecNo3}}");
+          newRowADC(formid, 0, 4, "{{form.addCRN4}}", "{{form.addPrefix4}}", "{{form.addCourseNum4}}", "{{form.addSecNo4}}");
+          newRowADC(formid, 0, 5, "{{form.addCRN5}}", "{{form.addPrefix5}}", "{{form.addCourseNum5}}", "{{form.addSecNo5}}");
+          createTableADC(formid, 1, true)
+          newRowADC(formid, 1, 0, "{{form.dropCRN0}}", "{{form.dropPrefix0}}", "{{form.dropCourseNum0}}", "{{form.dropSecNo0}}", "{{form.dropDidAttend0}}");
+          newRowADC(formid, 1, 1, "{{form.dropCRN1}}", "{{form.dropPrefix1}}", "{{form.dropCourseNum1}}", "{{form.dropSecNo1}}", "{{form.dropDidAttend1}}");
+          newRowADC(formid, 1, 2, "{{form.dropCRN2}}", "{{form.dropPrefix2}}", "{{form.dropCourseNum2}}", "{{form.dropSecNo2}}", "{{form.dropDidAttend2}}");
+          newRowADC(formid, 1, 3, "{{form.dropCRN3}}", "{{form.dropPrefix3}}", "{{form.dropCourseNum3}}", "{{form.dropSecNo3}}", "{{form.dropDidAttend3}}");
+          newRowADC(formid, 1, 4, "{{form.dropCRN4}}", "{{form.dropPrefix4}}", "{{form.dropCourseNum4}}", "{{form.dropSecNo4}}", "{{form.dropDidAttend4}}");
+          newRowADC(formid, 1, 5, "{{form.dropCRN5}}", "{{form.dropPrefix5}}", "{{form.dropCourseNum5}}", "{{form.dropSecNo5}}", "{{form.dropDidAttend5}}");
       }
 
       function UGGraduationView(formid){
