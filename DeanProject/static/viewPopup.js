@@ -16,8 +16,8 @@ function closePopup(popup){
 
 function newLine(divID, content){
     var div = document.createElement('div');
-      div.innerHTML = content;
-      document.getElementById(divID).appendChild(div);
+    div.innerHTML = content;
+    document.getElementById(divID).appendChild(div);
 }
 
 function newLinePTRV(formid, content){
