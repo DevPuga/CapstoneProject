@@ -46,6 +46,38 @@
         createHeader(tableid, tableNum, "Course Prefix/Number");
       }
 
+      function createTableDAAR(formid, tableNum, tableType) {
+        tableid = "DeanProject_degreeauditamendmentrequest" + formid + "Table";
+        createTable(tableid, tableNum);
+        switch(tableType) {
+          case "transfer":
+              createHeader(tableid, tableNum, "Transfer Institution")
+              createHeader(tableid, tableNum, "Course Subject")
+              createHeader(tableid, tableNum, "Course Number")
+              createHeader(tableid, tableNum, "Grade")
+              createHeader(tableid, tableNum, "Semester Taken")
+              createHeader(tableid, tableNum, "ATU Course Subject")
+              createHeader(tableid, tableNum, "ATU Course Number")
+              createHeader(tableid, tableNum, "Course Equivalent")
+              createHeader(tableid, tableNum, "Course Substitution")
+              break;
+          case "subA":
+              createHeader(tableid, tableNum, "Course Prefix")
+              createHeader(tableid, tableNum, "Course Number")
+              createHeader(tableid, tableNum, "Semester Taken")
+              break;
+          case "subB":
+              createHeader(tableid, tableNum, "Course Prefix")
+              createHeader(tableid, tableNum, "Course Number")
+              break;
+          case "waive":
+              createHeader(tableid, tableNum, "Course Prefix")
+              createHeader(tableid, tableNum, "Course Number")
+              createHeader(tableid, tableNum, "Comments")
+              break;
+        }
+      }
+
       function permitToRegisterView(formid){
           document.getElementById("DeanProject_permittoregister"+formid+"Title").innerHTML = "<h3> Permit to Register </h3>";
 
@@ -210,6 +242,24 @@
           newLineDAARV(formid, "College distinction 1: ", "{{form.college_distinction}}");
           newLineDAARV(formid, "College distinction 2: ", "{{form.college_distinction2}}");
           newLineDAARV(formid, "Comments: ", "{{form.comments}}");
+          createTableDAAR(formid, 0, "transfer")
+          newRowDAARTransfer(formid, 0, 0, "{{form.transfer_Institution}}", "{{form.course_subject}}", "{{form.course_num}}", "{{form.grade}}", "{{form.semester_taken}}", "{{form.atu_course_subject}}", "{{form.atu_course_num}}", "{{form.course_equivalent}}", "{{form.course_Substitution}}")
+          newRowDAARTransfer(formid, 0, 1, "{{form.transfer_Institution2}}", "{{form.course_subject2}}", "{{form.course_num2}}", "{{form.grade2}}", "{{form.semester_taken2}}", "{{form.atu_course_subject2}}", "{{form.atu_course_num2}}", "{{form.course_equivalent2}}", "{{form.course_Substitution2}}")
+          newRowDAARTransfer(formid, 0, 2, "{{form.transfer_Institution3}}", "{{form.course_subject3}}", "{{form.course_num3}}", "{{form.grade3}}", "{{form.semester_taken3}}", "{{form.atu_course_subject3}}", "{{form.atu_course_num3}}", "{{form.course_equivalent3}}", "{{form.course_Substitution3}}")
+          newRowDAARTransfer(formid, 0, 3, "{{form.transfer_Institution4}}", "{{form.course_subject4}}", "{{form.course_num4}}", "{{form.grade4}}", "{{form.semester_taken4}}", "{{form.atu_course_subject4}}", "{{form.atu_course_num4}}", "{{form.course_equivalent4}}", "{{form.course_Substitution4}}")
+          newRowDAARTransfer(formid, 0, 4, "{{form.transfer_Institution5}}", "{{form.course_subject5}}", "{{form.course_num5}}", "{{form.grade5}}", "{{form.semester_taken5}}", "{{form.atu_course_subject5}}", "{{form.atu_course_num5}}", "{{form.course_equivalent5}}", "{{form.course_Substitution5}}")
+          createTableDAAR(formid, 1, "subA")
+          newRowDAARSubA(formid, 1, 0, "{{form.atu_course_prefix1}}", "{{form.atu_course_number1}}", "{{form.semester_taken1}}")
+          newRowDAARSubA(formid, 1, 1, "{{form.atu_course_prefix2}}", "{{form.atu_course_number2}}", "{{form.semester_taken2}}")
+          newRowDAARSubA(formid, 1, 2, "{{form.atu_course_prefix3}}", "{{form.atu_course_number3}}", "{{form.semester_taken3}}")
+          createTableDAAR(formid, 2, "subB")
+          newRowDAARSubB(formid, 2, 0, "{{form.atu_course_prefix1B}}", "{{form.atu_course_num1B}}")
+          newRowDAARSubB(formid, 2, 1, "{{form.atu_course_prefix2B}}", "{{form.atu_course_num2B}}")
+          newRowDAARSubB(formid, 2, 2, "{{form.atu_course_prefix3B}}", "{{form.atu_course_num3B}}")
+          createTableDAAR(formid, 3, "waive")
+          newRowDAARWaive(formid, 3, 0, "{{form.atu_course_prefix4}}", "{{form.atu_course_number4}}", "{{form.comments4}}")
+          newRowDAARWaive(formid, 3, 1, "{{form.atu_course_prefix5}}", "{{form.atu_course_number5}}", "{{form.comments5}}")
+          newRowDAARWaive(formid, 3, 2, "{{form.atu_course_prefix6}}", "{{form.atu_course_number6}}", "{{form.comments6}}")
       }
 
       function TranscriptRequestView(formid){

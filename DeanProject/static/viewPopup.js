@@ -97,6 +97,63 @@ function newRowDA(formid, tableNum, rowNum, courseA, courseB) {
   }
 }
 
+function newRowDAARTransfer(formid, tableNum, rowNum, institution, courseSubjectA, courseNumA, grade, semTaken, courseSubjectB, courseNumB, courseEQ, courseSub) {
+  if (institution != "" && courseSubjectA != "" && courseNumA != "" && grade != "" && semTaken != "" && courseSubjectB != "" && courseNumB != "") {
+    var tableid = "DeanProject_degreeauditamendmentrequest" + formid + "Table";
+    var rowid = tableid + tableNum + rowNum;
+    var row = document.createElement("tr");
+    row.setAttribute("id", rowid);
+    document.getElementById(tableid + tableNum).appendChild(row);
+    newCell(rowid, institution);
+    newCell(rowid, courseSubjectA);
+    newCell(rowid, courseNumA);
+    newCell(rowid, grade);
+    newCell(rowid, semTaken);
+    newCell(rowid, courseSubjectB);
+    newCell(rowid, courseNumB);
+    newCell(rowid, courseEQ);
+    newCell(rowid, courseSub);
+  }
+}
+
+function newRowDAARSubA(formid, tableNum, rowNum, coursePrefix, courseNum, semesterTaken) {
+  if (coursePrefix != "" && courseNum != "" && semesterTaken != ""){
+    var tableid = "DeanProject_degreeauditamendmentrequest" + formid + "Table";
+    var rowid = tableid + tableNum + rowNum;
+    var row = document.createElement("tr");
+    row.setAttribute("id", rowid);
+    document.getElementById(tableid + tableNum).appendChild(row);
+    newCell(rowid, coursePrefix);
+    newCell(rowid, courseNum);
+    newCell(rowid, semesterTaken);
+  }
+}
+
+function newRowDAARSubB(formid, tableNum, rowNum, coursePrefix, courseNum) {
+  if (coursePrefix != "" && courseNum != ""){
+    var tableid = "DeanProject_degreeauditamendmentrequest" + formid + "Table";
+    var rowid = tableid + tableNum + rowNum;
+    var row = document.createElement("tr");
+    row.setAttribute("id", rowid);
+    document.getElementById(tableid + tableNum).appendChild(row);
+    newCell(rowid, coursePrefix);
+    newCell(rowid, courseNum);
+  }
+}
+
+function newRowDAARWaive(formid, tableNum, rowNum, coursePrefix, courseNum, comments) {
+  if (coursePrefix != "" && courseNum != "" && comments != ""){
+    var tableid = "DeanProject_degreeauditamendmentrequest" + formid + "Table";
+    var rowid = tableid + tableNum + rowNum;
+    var row = document.createElement("tr");
+    row.setAttribute("id", rowid);
+    document.getElementById(tableid + tableNum).appendChild(row);
+    newCell(rowid, coursePrefix);
+    newCell(rowid, courseNum);
+    newCell(rowid, comments);
+  }
+}
+
 function newLinePTRV(formid, title, content){
     newTitle("DeanProject_permittoregister"+formid+"Label", "<strong>" + title + "</strong>");
     newContent("DeanProject_permittoregister"+formid+"Content", content);
