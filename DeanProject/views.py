@@ -36,12 +36,19 @@ def get(request):
       # Get user's forms so we can populate them as cards
       forms = getForms(request)
       #numPending = max(forms["pending"]) + 1
-
+    
       # Set tab as active, render faculty tab if faculty, give forms to html
       context = {"%s_page"%requestedPage: "active", "userGroup": userGroup, "forms": forms,
       #"numPending": numPending,
       "form_selector": emptyForm(), "currentForm": ""}
-
+      
+      if 'deny' in request.POST:
+        print(request.POST.get("form_id"))
+        print(request.POST.get("table_name"))
+      elif 'approve' in request.POST:
+        print("Approve")
+    
+      
       # For newform.html page
       if requestedPage == "newform":
         if request.method == "POST":
