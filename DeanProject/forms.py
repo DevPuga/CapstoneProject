@@ -1145,7 +1145,7 @@ class degreeAuditAmendmentRequestForm(forms.ModelForm):
       'atu_course_prefix6':'',
       'atu_course_number6': '',
       'comments6': '',
-      'college_distinction': 'College Distinction 1.',
+      'college_distinction': '1.',
       'college_distinction2': '2.',
       'comments': 'Comments',
     }
@@ -1166,7 +1166,11 @@ class degreeAuditAmendmentRequestForm(forms.ModelForm):
                 Div('major_was_chosen', css_class='col-2'),
                 Div('change_grad_Term_to', css_class='col-2'),
             css_class='row'),
-
+            HTML("<h6 class='my-1'>An <strong>EQUIVALENCY</strong> is a course you are requesting to be used as the same course required.</h6>"),
+            HTML("<h6 class='my-1'>A <strong>SUBSTITUTION</strong> is a course you are requesting to be used <u>in place</u> of the course that is required.</h6>"),
+            HTML("<h6 class='my-1'>A <strong>WAIVER</strong> is a course you are requesting the student not to complete.</h6>"),
+            Div(css_class='row pt-2'),
+            
          Div(
             HTML("<h6 class ='col-2'>Transfer Institution</h6>"),
             HTML("<h6 class ='col-1'>Course Subject</h6>"),
@@ -1178,7 +1182,6 @@ class degreeAuditAmendmentRequestForm(forms.ModelForm):
             HTML("<h6 class ='col-2'>Course Equivalent</h6>"),
             HTML("<h6 class ='col-2'>Course Substitution</h6>"),
             css_class = 'row'),
-
             Div(
                 Div('transfer_Institution',css_class='col-2'),
                 Div('course_subject',css_class='col-1'),
@@ -1189,7 +1192,7 @@ class degreeAuditAmendmentRequestForm(forms.ModelForm):
                 Div('atu_course_num',css_class = 'col-1'),
                 Div('course_equivalent',css_class = 'col-2'),
                 Div('course_Substitution',css_class = 'col-2'),
-            css_class='row'),
+            css_class='row pt-1'),
             Div(
                 Div('transfer_Institution2',css_class='col-2'),
                 Div('course_subject2',css_class='col-1'),
@@ -1200,7 +1203,7 @@ class degreeAuditAmendmentRequestForm(forms.ModelForm):
                 Div('atu_course_num2',css_class = 'col-1'),
                 Div('course_equivalent2',css_class = 'col-2'),
                 Div('course_Substitution2',css_class = 'col-2'),
-            css_class='row'),
+            css_class='row pt-1'),
             Div(
                 Div('transfer_Institution3',css_class='col-2'),
                 Div('course_subject3',css_class='col-1'),
@@ -1211,7 +1214,7 @@ class degreeAuditAmendmentRequestForm(forms.ModelForm):
                 Div('atu_course_num3',css_class = 'col-1'),
                 Div('course_equivalent3',css_class = 'col-2'),
                 Div('course_Substitution3',css_class = 'col-2'),
-            css_class='row'),
+            css_class='row pt-1'),
             Div(
                 Div('transfer_Institution4',css_class='col-2'),
                 Div('course_subject4',css_class='col-1'),
@@ -1222,7 +1225,7 @@ class degreeAuditAmendmentRequestForm(forms.ModelForm):
                 Div('atu_course_num4',css_class = 'col-1'),
                 Div('course_equivalent4',css_class = 'col-2'),
                 Div('course_Substitution4',css_class = 'col-2'),
-            css_class='row'),
+            css_class='row pt-1'),
             Div(
                 Div('transfer_Institution5',css_class='col-2'),
                 Div('course_subject5',css_class='col-1'),
@@ -1233,52 +1236,76 @@ class degreeAuditAmendmentRequestForm(forms.ModelForm):
                 Div('atu_course_num5',css_class = 'col-1'),
                 Div('course_equivalent5',css_class = 'col-2'),
                 Div('course_Substitution5',css_class = 'col-2'),
-            css_class='row'),
+            css_class='row pt-1'),
+            HTML("<h6>I understand that if taken at another college/university, official transcripts for the above course(s) must be on file in the Registrar's Office by.</h6>"),
+            HTML("<h6>the date Arkansas Tech University final grades are due. It is my responsibility to see that this requirement is met by the deadline, or my.</h6>"),
+            HTML("<h6>graduation will be postponed to the next term. I am also aware of the Grading Policy and Graduation Requirements as put forth in the Catalog.</h6>"),
+            
+            Div(css_class='row pt-3'),
+            
+            Div(
+                HTML(" <class = 'row'>Please substitute following <strong><u>ARKANSAS TECH UNIVERSITY</u></strong> course(s):</h6>"),
+                css_class='row' 
+            ),
+            
+            Div( 
+                HTML("<h6 class ='col-7'>SUBSTITUTE THESE ATU COURSES:</h6>"),
+                HTML("<h6 class ='col-4'>FOR THESE ATU COURSES:</h6>"),
+                css_class = 'row pt-3'),
+        
             Div(
                 Div('atu_course_prefix1',css_class='col-2'),
                 Div('atu_course_number1',css_class='col-2'),
                 Div('semester_taken1',css_class='col-2'),
+                Div(css_class = 'col-1'),
                 Div('atu_course_prefix1B',css_class='col-2'),
-                Div('atu_course_num1B',css_class = 'col-2'),
-            css_class='row'),
+                Div('atu_course_num1B',css_class='col-2'),
+            css_class='row pt-2'),
             Div(
                 Div('atu_course_prefix2',css_class = 'col-2'),
                 Div('atu_course_number2',css_class = 'col-2'),
                 Div('semester_taken2B',css_class = 'col-2'),
+                Div(css_class = 'col-1'),
                 Div('atu_course_prefix2B',css_class = 'col-2'),
                 Div('atu_course_num2B',css_class = 'col-2'),
-            css_class='row'),
+            css_class='row pt-1'),
+            
             Div(
                 Div('atu_course_prefix3',css_class = 'col-2'),
                 Div('atu_course_number3',css_class = 'col-2'),
                 Div('semester_taken3B',css_class = 'col-2'),
+                Div(css_class = 'col-1'),
                 Div('atu_course_prefix3B',css_class = 'col-2'),
                 Div('atu_course_num3B',css_class = 'col-2'),
-            css_class='row'),
+            css_class='row pt-1'),
+            Div( 
+                HTML("<h6 class ='col-7'>Please waive the following course requirement(s):</h6>"),
+                css_class = 'row pt-3'),
             Div(
                 Div('atu_course_prefix4',css_class='col-3'),
                 Div('atu_course_number4',css_class='col-3'),
                 Div('comments4',css_class='col-5'),
-            css_class='row'),
+            css_class='row pt-2'),
             Div(
                 Div('atu_course_prefix5',css_class = 'col-3'),
                 Div('atu_course_number5',css_class = 'col-3'),
                 Div('comments5',css_class = 'col-5'),
-            css_class='row'),
+            css_class='row pt-1'),
             Div(
                 Div('atu_course_prefix6',css_class = 'col-3'),
                 Div('atu_course_number6',css_class = 'col-3'),
                 Div('comments6',css_class = 'col-5'),
-            css_class='row'),
+            css_class='row pt-1'),
+            
             Div(
+                HTML("<h6> College Distinction </h6>"),
                 Div('college_distinction',css_class = 'col-2'),
                 Div('college_distinction2',css_class = 'col-2'),
-                css_class='row'),
+                css_class='row pt-5'),
             Div(
                 Div('comments',css_class = 'col-8'),
                 Div('date',css_class='col-2'),
-                css_class='row'
-            ),
+                css_class='row pt-5'),
         css_class=''),
         ButtonHolder(
             Submit('submit', 'Submit', css_class='btn btn-primary mt-2')
