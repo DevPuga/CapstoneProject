@@ -22,14 +22,14 @@ function newContent(divID, content){
 
 function newTitle(divID, title){
     var div = document.createElement('div');
-    document.getElementById(divID).className = "col-4";
+    document.getElementById(divID).style.width = "200px"
     div.innerHTML = title;
     document.getElementById(divID).appendChild(div);
 }
 
 function newWideTitle(divID, title){
     var div = document.createElement('div');
-    document.getElementById(divID).className = "col-6";
+    document.getElementById(divID).style.width = "500px"
     div.innerHTML = title;
     document.getElementById(divID).appendChild(div);
 }
@@ -191,7 +191,7 @@ function newLineDAV(formid, title, content){
 }
 
 function newLineTRV(formid, title, content){
-    newTitle("DeanProject_transcriptrequest"+formid+"Label", "<strong>" + title + "</strong>");
+    newWideTitle("DeanProject_transcriptrequest"+formid+"Label", "<strong>" + title + "</strong>");
     newContent("DeanProject_transcriptrequest"+formid+"Content", content);
 }
 
