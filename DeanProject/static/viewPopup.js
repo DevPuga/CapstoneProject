@@ -34,12 +34,16 @@ function newWideTitle(divID, title){
     document.getElementById(divID).appendChild(div);
 }
 
-function createTable(divID, tableNum){
+function createTable(divID, tableNum, tableTitle){
     var table = document.createElement('table');
     tableID = divID + tableNum;
     table.setAttribute("id", tableID);
+    var title = document.createElement('h5');
+    var text = document.createTextNode(tableTitle);
+    title.appendChild(text)
+    document.getElementById(divID).appendChild(title);
     document.getElementById(divID).appendChild(table);
-    document.getElementById(tableID).className = "my-3";
+    document.getElementById(tableID).className = "mb-3";
 }
 
 function newCell(rowid, content) {
