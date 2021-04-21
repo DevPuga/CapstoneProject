@@ -47,14 +47,14 @@ function newCell(rowid, content) {
     document.getElementById(rowid).appendChild(cell);
 }
 
-function createHeader(tableid, tableNum, content){
+function createHeader(tableid, tableNum, content) {
     var cell = document.createElement("th");
     var text = document.createTextNode(content);
     cell.appendChild(text);
     document.getElementById(tableid + tableNum).appendChild(cell);
 }
 
-function newRowPTR(formid, tableNum, rowNum, crn, prefix, courseNum, secNo){
+function newRowPTR(formid, tableNum, rowNum, crn, prefix, courseNum, secNo) {
     if (crn != "" && prefix != "" && courseNum != "" && secNo != ""){
       var tableid = "DeanProject_permittoregister" + formid + "Table";
       var rowid = tableid + tableNum + rowNum;
@@ -68,7 +68,7 @@ function newRowPTR(formid, tableNum, rowNum, crn, prefix, courseNum, secNo){
     }
 }
 
-function newRowADC(formid, tableNum, rowNum, crn, prefix, courseNum, secNo, attend){
+function newRowADC(formid, tableNum, rowNum, crn, prefix, courseNum, secNo, attend) {
     if (crn != "" && prefix != "" && courseNum != "" && secNo != ""){
       var tableid = "DeanProject_add_dropclass" + formid + "Table";
       var rowid = tableid + tableNum + rowNum;
@@ -83,6 +83,18 @@ function newRowADC(formid, tableNum, rowNum, crn, prefix, courseNum, secNo, atte
         newCell(rowid, attend)
       }
     }
+}
+
+function newRowDA(formid, tableNum, rowNum, courseA, courseB) {
+  if (courseA != "" && courseB != ""){
+    var tableid = "DeanProject_degreeaudit" + formid + "Table";
+    var rowid = tableid + tableNum + rowNum;
+    var row = document.createElement("tr");
+    row.setAttribute("id", rowid);
+    document.getElementById(tableid + tableNum).appendChild(row);
+    newCell(rowid, courseA);
+    newCell(rowid, courseB);
+  }
 }
 
 function newLinePTRV(formid, title, content){

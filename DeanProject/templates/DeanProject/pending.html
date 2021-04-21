@@ -39,6 +39,13 @@
         }
       }
 
+      function createTableDA(formid, tableNum) {
+        tableid = "DeanProject_degreeaudit" + formid + "Table";
+        createTable(tableid, tableNum);
+        createHeader(tableid, tableNum, "Course Prefix/Number");
+        createHeader(tableid, tableNum, "Course Prefix/Number");
+      }
+
       function permitToRegisterView(formid){
           document.getElementById("DeanProject_permittoregister"+formid+"Title").innerHTML = "<h3> Permit to Register </h3>";
 
@@ -173,6 +180,22 @@
           newLineDAV(formid, "Minor selected: ", "{{form.minor_was_chosen}}");
           newLineDAV(formid, "Semester: ", "{{form.semester}}");
           newLineDAV(formid, "Year: ", "{{form.year}}");
+          createTableDA(formid, 0);
+          newRowDA(formid, 0, 1, "{{form.subCourse1A}}", "{{form.subCourse1B}}");
+          newRowDA(formid, 0, 2, "{{form.subCourse2A}}", "{{form.subCourse2B}}");
+          newRowDA(formid, 0, 3, "{{form.subCourse3A}}", "{{form.subCourse3B}}");
+          newRowDA(formid, 0, 4, "{{form.subCourse4A}}", "{{form.subCourse4B}}");
+          newRowDA(formid, 0, 5, "{{form.subCourse5A}}", "{{form.subCourse5B}}");
+          newRowDA(formid, 0, 6, "{{form.subCourse6A}}", "{{form.subCourse6B}}");
+          newRowDA(formid, 0, 7, "{{form.subCourse7A}}", "{{form.subCourse7B}}");
+          createTableDA(formid, 1);
+          newRowDA(formid, 1, 1, "{{form.reqCourse1A}}", "{{form.reqCourse1B}}");
+          newRowDA(formid, 1, 2, "{{form.reqCourse2A}}", "{{form.reqCourse2B}}");
+          newRowDA(formid, 1, 3, "{{form.reqCourse3A}}", "{{form.reqCourse3B}}");
+          newRowDA(formid, 1, 4, "{{form.reqCourse4A}}", "{{form.reqCourse4B}}");
+          newRowDA(formid, 1, 5, "{{form.reqCourse5A}}", "{{form.reqCourse5B}}");
+          newRowDA(formid, 1, 6, "{{form.reqCourse6A}}", "{{form.reqCourse6B}}");
+          newRowDA(formid, 1, 7, "{{form.reqCourse7A}}", "{{form.reqCourse7B}}");
       }
 
       function DegreeAuditAmendmentRequestView(formid){

@@ -110,7 +110,7 @@ def getForms(request):
         degreeAuditAmendmentRequestData = degreeAuditAmendmentRequest.objects.filter(student_id_number=user_id)
 
         results = list(chain(permitToRegisterData, addDropClassData, ugGraduationData, masterGraduationData, degreeAuditData, transcriptRequestData, degreeAuditAmendmentRequestData))
-        
+
         for form in results:
             if form.isPending:
                 pending.append(form)
@@ -612,7 +612,7 @@ def processDegreeAudit(request):
           isApproved,
           isDenied)
           VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,
-          ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
+          ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',
           (request.POST['student_id_number'],
           request.POST['date'],
           request.POST['catalog_year'],
