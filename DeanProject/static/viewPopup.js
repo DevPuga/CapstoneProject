@@ -34,6 +34,41 @@ function newWideTitle(divID, title){
     document.getElementById(divID).appendChild(div);
 }
 
+function createTable(divID, tableNum){
+    var table = document.createElement('table');
+    table.setAttribute("id", divID + tableNum);
+    document.getElementById(divID).appendChild(table);
+}
+
+function newCell(rowid, content) {
+    var cell = document.createElement("td");
+    var text = document.createTextNode(content);
+    cell.appendChild(text);
+    document.getElementById(rowid).appendChild(cell);
+}
+
+function createHeaderPTR(formid, tableNum, content){
+    var tableid = "DeanProject_permittoregister" + formid + "Table";
+    var cell = document.createElement("th");
+    var text = document.createTextNode(content);
+    cell.appendChild(text);
+    document.getElementById(tableid + tableNum).appendChild(cell);
+}
+
+function newRowPTR(formid, tableNum, rowNum, crn, prefix, courseNum, secNo){
+    if (crn != "" && prefix != "" && courseNum != "" && secNo != ""){
+      var tableid = "DeanProject_permittoregister" + formid + "Table";
+      var rowid = tableid + tableNum + rowNum;
+      var row = document.createElement("tr");
+      row.setAttribute("id", rowid);
+      document.getElementById(tableid + tableNum).appendChild(row);
+      newCell(rowid, crn);
+      newCell(rowid, prefix);
+      newCell(rowid, courseNum);
+      newCell(rowid, secNo);
+    }
+}
+
 function newLinePTRV(formid, title, content){
     newTitle("DeanProject_permittoregister"+formid+"Label", "<strong>" + title + "</strong>");
     newContent("DeanProject_permittoregister"+formid+"Content", content);

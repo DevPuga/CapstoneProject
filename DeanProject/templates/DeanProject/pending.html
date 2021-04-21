@@ -18,6 +18,14 @@
         }
       }
 
+      function createTablePTR(formid) {
+        createTable("DeanProject_permittoregister" + formid + "Table", 0);
+        createHeaderPTR(formid, 0, "CRN")
+        createHeaderPTR(formid, 0, "Course Prefix")
+        createHeaderPTR(formid, 0, "Course No.")
+        createHeaderPTR(formid, 0, "Section No.")
+      }
+
       function permitToRegisterView(formid){
           document.getElementById("DeanProject_permittoregister"+formid+"Title").innerHTML = "<h3> Permit to Register </h3>";
 
@@ -28,6 +36,16 @@
           newLinePTRV(formid, "Registration year: ", "{{form.registration_year}}");
           newLinePTRV(formid, "Total hours enrolled: ", "{{form.total_hours_enrolled}}");
           newLinePTRV(formid, "Comments: ", "{{form.comments}}");
+          createTablePTR(formid);
+          newRowPTR(formid, 0, 0, "{{form.crn0}}", "{{form.prefix0}}", "{{form.courseNum0}}", "{{form.secNo0}}");
+          newRowPTR(formid, 0, 1, "{{form.crn1}}", "{{form.prefix1}}", "{{form.courseNum1}}", "{{form.secNo1}}");
+          newRowPTR(formid, 0, 2, "{{form.crn2}}", "{{form.prefix2}}", "{{form.courseNum2}}", "{{form.secNo2}}");
+          newRowPTR(formid, 0, 3, "{{form.crn3}}", "{{form.prefix3}}", "{{form.courseNum3}}", "{{form.secNo3}}");
+          newRowPTR(formid, 0, 4, "{{form.crn4}}", "{{form.prefix4}}", "{{form.courseNum4}}", "{{form.secNo4}}");
+          newRowPTR(formid, 0, 5, "{{form.crn5}}", "{{form.prefix5}}", "{{form.courseNum5}}", "{{form.secNo5}}");
+          newRowPTR(formid, 0, 6, "{{form.crn6}}", "{{form.prefix6}}", "{{form.courseNum6}}", "{{form.secNo6}}");
+          newRowPTR(formid, 0, 7, "{{form.crn7}}", "{{form.prefix7}}", "{{form.courseNum7}}", "{{form.secNo7}}");
+          newRowPTR(formid, 0, 8, "{{form.crn8}}", "{{form.prefix8}}", "{{form.courseNum8}}", "{{form.secNo8}}");
       }
 
       function add_dropClassView(formid){
@@ -120,12 +138,28 @@
           document.getElementById("DeanProject_degreeaudit"+formid+"Title").innerHTML = "<h3> Degree Audit </h3>";
 
           newLineDAV(formid, "Student ID Number: ", "{{form.student_id_number}}");
+          newLineDAV(formid, "Submit Date: ", "{{form.date}}");
+          newLineDAV(formid, "Catalog year: ", "{{form.catalog_year}}");
+          newLineDAV(formid, "Name enrolled under: ", "{{form.name_enrolled_under}}");
+          newLineDAV(formid, "Major or minor name: ", "{{form.major_or_minor_name}}");
+          newLineDAV(formid, "Major selected: ", "{{form.major_was_chosen}}");
+          newLineDAV(formid, "Minor selected: ", "{{form.minor_was_chosen}}");
+          newLineDAV(formid, "Semester: ", "{{form.semester}}");
+          newLineDAV(formid, "Year: ", "{{form.year}}");
       }
 
       function DegreeAuditAmendmentRequestView(formid){
           document.getElementById("DeanProject_degreeauditamendmentrequest"+formid+"Title").innerHTML = "<h3> Degree Audit Ammendment Request </h3>";
 
           newLineDAARV(formid, "Student ID Number: ", "{{form.student_id_number}}");
+          newLineDAARV(formid, "Catalog year: ", "{{form.catalog_year}}");
+          newLineDAARV(formid, "Submit date: ", "{{form.date}}");
+          newLineDAARV(formid, "Name enrolled under: ", "{{form.name_enrolled_under}}");
+          newLineDAARV(formid, "Major selected: ", "{{form.major_was_chosen}}");
+          newLineDAARV(formid, "Change graduation term to: ", "{{form.change_grad_Term_to}}");
+          newLineDAARV(formid, "College distinction 1: ", "{{form.college_distinction}}");
+          newLineDAARV(formid, "College distinction 2: ", "{{form.college_distinction2}}");
+          newLineDAARV(formid, "Comments: ", "{{form.comments}}");
       }
 
       function TranscriptRequestView(formid){
@@ -171,6 +205,7 @@
               <div class="row">
                 <div id="{{form | db_table}}{{form.id}}Label"></div>
                 <div id="{{form | db_table}}{{form.id}}Content"></div>
+                <div id="{{form | db_table}}{{form.id}}Table"></div>
                 <script>getViewContent("{{form | db_table}}", "{{form.id}}")</script>
               </div>
               {% if userGroup == 'Faculty' %}
