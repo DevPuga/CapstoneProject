@@ -13,14 +13,13 @@
     {% comment %} View Content Code START {% endcomment %}
     <script>
       function adcDisplayIfChecked(formid, title, content) {
-        if (content == true) {
+        if (content == "True") {
           newLineADCV(formid, title, content);
         }
       }
 
       function permitToRegisterView(formid){
-          document.getElementById("DeanProject_permittoregister"+formid+"Title").innerHTML = "<strong> Permit to Register </strong>";
-          document.getElementById("DeanProject_permittoregister"+formid+"Content").innerHTML = "‏‏‎ ‎";
+          document.getElementById("DeanProject_permittoregister"+formid+"Title").innerHTML = "<h3> Permit to Register </h3>";
 
           newLinePTRV(formid, "Student ID Number: ",  "{{form.student_id_number}}");
           newLinePTRV(formid, "Date: ",  "{{form.date}}");
@@ -32,12 +31,10 @@
       }
 
       function add_dropClassView(formid){
-          document.getElementById("DeanProject_add_dropclass"+formid+"Title").innerHTML = "<strong> Add/Drop Course </strong>";
-          document.getElementById("DeanProject_add_dropclass"+formid+"Content").innerHTML = "‏‏‎ ‎";
+          document.getElementById("DeanProject_add_dropclass"+formid+"Title").innerHTML = "<h3> Add/Drop Course </h3>";
 
           newLineADCV(formid, "Student ID Number: ", "{{form.student_id_number}}");
           newLineADCV(formid, "Date: ", "{{form.date}}");
-
           newLineADCV(formid, "Comments: ", "{{form.comments}}");
           newLineADCV(formid, "Increases in tuition and fees: ", "{{form.increases_in_tuition_and_fees}}");
           newLineADCV(formid, "Receives Financial Aid: ", "{{form.recieves_financial_aid}}");
@@ -82,39 +79,72 @@
       }
 
       function UGGraduationView(formid){
-          document.getElementById("DeanProject_uggraduation"+formid+"Title").innerHTML = "<strong> Undergraduate Graduation Application </strong>";
-          document.getElementById("DeanProject_uggraduation"+formid+"Content").innerHTML = "\n";
+          document.getElementById("DeanProject_uggraduation"+formid+"Title").innerHTML = "<h3> Undergraduate Graduation Application </h3>";
 
           newLineUGGV(formid, "Student ID Number: ", "{{form.student_id_number}}");
+          newLineUGGV(formid, "Date: ", "{{form.date}}");
+          newLineUGGV(formid, "Name enrolled under: ", "{{form.name_enrolled_under}}");
+          newLineUGGV(formid, "Phone number: ", "{{form.phone_number}}");
+          newLineUGGV(formid, "Name on diploma: ", "{{form.diploma_name}}");
+          newLineUGGV(formid, "Name pronunciation: ", "{{form.name_pronunciation}}");
+          newLineUGGV(formid, "Pronunciation is recorded: ", "{{form.pronunciation_recorded}}");
+          newLineUGGV(formid, "Parents completed bachelor's degree: ", "{{form.parents_completed_bachelor_degree}}");
+          newLineUGGV(formid, "Expected graduation term: ", "{{form.expected_graduation_term}}");
+          newLineUGGV(formid, "Expected graduation year: ", "{{form.expected_graduation_year}}");
+          newLineUGGV(formid, "Preferred degree: ", "{{form.preferred_degree}}");
+
       }
 
       function MasterGraduationView(formid){
-          document.getElementById("DeanProject_mastergraduation"+formid+"Title").innerHTML = "<strong> Master's Graduation Application </strong>";
-          document.getElementById("DeanProject_mastergraduation"+formid+"Content").innerHTML = "\n";
+          document.getElementById("DeanProject_mastergraduation"+formid+"Title").innerHTML = "<h3> Master's Graduation Application </h3>";
 
           newLineMGV(formid, "Student ID Number: ", "{{form.student_id_number}}");
           newLineMGV(formid, "Date: ", "{{form.date}}");
-      }
-
-      function DegreeAuditAmendmentRequestView(formid){
-          document.getElementById("DeanProject_degreeauditamendmentrequest"+formid+"Title").innerHTML = "<strong> Degree Audit Ammendment Request </strong>";
-          document.getElementById("DeanProject_degreeauditamendmentrequest"+formid+"Content").innerHTML = "\n";
-
-          newLineDAARV(formid, "Student ID Number: ", "{{form.student_id_number}}");
+          newLineMGV(formid, "Name enrolled under: ", "{{form.name_enrolled_under}}");
+          newLineMGV(formid, "Mailing address: ", "{{form.mailing_address}}");
+          newLineMGV(formid, "City: ", "{{form.city}}");
+          newLineMGV(formid, "State: ", "{{form.state}}");
+          newLineMGV(formid, "Zip code: ", "{{form.zip_code}}");
+          newLineMGV(formid, "Phone number: ", "{{form.phone_number}}");
+          newLineMGV(formid, "Email address: ", "{{form.email}}");
+          newLineMGV(formid, "Student starting semester: ", "{{form.student_starting_semester}}");
+          newLineMGV(formid, "Student starting year: ", "{{form.student_starting_year}}");
+          newLineMGV(formid, "Name on diploma: ", "{{form.diploma_name}}");
+          newLineMGV(formid, "Name pronunciation: ", "{{form.name_pronunciation}}");
+          newLineMGV(formid, "Expected graduation term: ", "{{form.expected_graduation_term}}");
+          newLineMGV(formid, "Expected graduation year: ", "{{form.expected_graduation_year}}");
+          newLineMGV(formid, "Degree name: ", "{{form.degree_name}}");
       }
 
       function DegreeAuditView(formid){
-          document.getElementById("DeanProject_degreeaudit"+formid+"Title").innerHTML = "<strong> Degree Audit </strong>";
-          document.getElementById("DeanProject_degreeaudit"+formid+"Content").innerHTML = "\n";
+          document.getElementById("DeanProject_degreeaudit"+formid+"Title").innerHTML = "<h3> Degree Audit </h3>";
 
           newLineDAV(formid, "Student ID Number: ", "{{form.student_id_number}}");
       }
 
+      function DegreeAuditAmendmentRequestView(formid){
+          document.getElementById("DeanProject_degreeauditamendmentrequest"+formid+"Title").innerHTML = "<h3> Degree Audit Ammendment Request </h3>";
+
+          newLineDAARV(formid, "Student ID Number: ", "{{form.student_id_number}}");
+      }
+
       function TranscriptRequestView(formid){
-          document.getElementById("DeanProject_transcriptrequest"+formid+"Title").innerHTML = "<strong> Transcript Request Form </strong>";
-          document.getElementById("DeanProject_transcriptrequest"+formid+"Content").innerHTML = "\n";
+          document.getElementById("DeanProject_transcriptrequest"+formid+"Title").innerHTML = "<h3> Transcript Request Form </h3>";
 
           newLineTRV(formid, "Student ID Number: ", "{{form.student_id_number}}");
+          newLineTRV(formid, "Date: ", "{{form.date}}");
+          newLineTRV(formid, "Name enrolled under: ", "{{form.name_enrolled_under}}");
+          newLineTRV(formid, "Birth date: ", "{{form.birth_date}}");
+          newLineTRV(formid, "Mailing address: ", "{{form.mailing_address}}");
+          newLineTRV(formid, "City: ", "{{form.city}}");
+          newLineTRV(formid, "State: ", "{{form.state}}");
+          newLineTRV(formid, "Zip code: ", "{{form.zip_code}}");
+          newLineTRV(formid, "Phone number: ", "{{form.phone_number}}");
+          newLineTRV(formid, "Send transcript to ADHE (AR Lottery Scholarship): ", "{{form.adhe}}");
+          newLineTRV(formid, "Send transcript to SACM (Saudi Arabian Cultural Mission): ", "{{form.sacm}}");
+          newLineTRV(formid, "Send transcript to Embassy of Kuwait: ", "{{form.embassy_of_kuwait}}");
+          newLineTRV(formid, "Send transcript to ADE Licensure (AR Dept. of Ed.): ", "{{form.ade_licensure}}");
+          newLineTRV(formid, "Send transcript to ARSBN (AR State Board of Nursing): ", "{{form.arsbn}}");
       }
     </script>
 
@@ -136,8 +166,10 @@
             <div class="modal-content">
               <span onclick="closePopup(popup{{form | db_table}}{{form.id}})" id="closePopup" class="close">&times;</span>
 
+              <div id="{{form | db_table}}{{form.id}}Title" class="row"></div>
+
               <div class="row">
-                <div id="{{form | db_table}}{{form.id}}Title"></div>
+                <div id="{{form | db_table}}{{form.id}}Label"></div>
                 <div id="{{form | db_table}}{{form.id}}Content"></div>
                 <script>getViewContent("{{form | db_table}}", "{{form.id}}")</script>
               </div>
