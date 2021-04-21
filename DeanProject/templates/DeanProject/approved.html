@@ -118,7 +118,6 @@
 
           newLineADCV(formid, "Student ID Number: ", "{{form.student_id_number}}");
           newLineADCV(formid, "Date: ", "{{form.date}}");
-          newLineADCV(formid, "Comments: ", "{{form.comments}}");
           newLineADCV(formid, "Increases in tuition and fees: ", "{{form.increases_in_tuition_and_fees}}");
           newLineADCV(formid, "Receives Financial Aid: ", "{{form.recieves_financial_aid}}");
           adcDisplayIfChecked(formid, "Another course fits schedule: ", "{{form.another_course_fits_schedule}}");
@@ -159,6 +158,7 @@
           adcDisplayIfChecked(formid, "Personal emergency: ", "{{form.personal_emergency}}");
           adcDisplayIfChecked(formid, "Unmotivated for these courses or tired of school: ", "{{form.unmotivated_for_this_courses_or_tired_of_school}}");
           adcDisplayIfChecked(formid, "Working too many hours: ", "{{form.working_too_many_hours}}");
+          newLineADCV(formid, "Comments: ", "{{form.comments}}");
           createTableADC(formid, 0, false)
           newRowADC(formid, 0, 0, "{{form.addCRN0}}", "{{form.addPrefix0}}", "{{form.addCourseNum0}}", "{{form.addSecNo0}}");
           newRowADC(formid, 0, 1, "{{form.addCRN1}}", "{{form.addPrefix1}}", "{{form.addCourseNum1}}", "{{form.addSecNo1}}");
