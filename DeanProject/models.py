@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+from jsonfield import JSONField
 
 US_STATE_CHOICES = (
     ('ar','AR'), ('aa','AA'), ('ae','AE'), ('ak','AK'), ('al','AL'),
@@ -30,6 +30,7 @@ class Profile(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
   tech_id = models.CharField(max_length=9, default="")
   name = models.CharField(max_length=20, default="Person")
+  advisees = JSONField()
 
 
 @receiver(post_save, sender=User)
@@ -45,6 +46,7 @@ class permitToRegister(models.Model):
 
   class Meta:
     verbose_name = "Permit to Register"
+    db_table = "DeanProject_permittoregister"
 
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
@@ -97,6 +99,7 @@ class add_dropClass(models.Model):
 
   class Meta:
     verbose_name = "Add/Drop Class"
+    db_table = "DeanProject_add_dropclass"
 
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
@@ -211,6 +214,7 @@ class UGGraduation(models.Model):
 
   class Meta:
     verbose_name = "Undergraduate Graduation"
+    db_table = "DeanProject_uggraduation"
 
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
@@ -232,6 +236,7 @@ class masterGraduation(models.Model):
 
   class Meta:
     verbose_name = "Master's Graduation"
+    db_table = "DeanProject_mastergraduation"
 
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()
@@ -257,6 +262,7 @@ class degreeAudit(models.Model):
 
   class Meta:
     verbose_name = "Degree Audit"
+    db_table = "DeanProject_degreeaudit"
 
   student_id_number = models.CharField(max_length=10)
   date = models.DateField(default = '')
@@ -319,6 +325,7 @@ class degreeAuditAmendmentRequest(models.Model):
     
   class Meta:
     verbose_name = "Degree Audit Amendment Request"
+    db_table = "DeanProject_degreeauditamendmentrequest"
 
   student_id_number = models.CharField(max_length=10)
   catalog_year = models.DecimalField(decimal_places = 0, max_digits=4)
@@ -415,6 +422,7 @@ class degreeAuditAmendmentRequest(models.Model):
 class transcriptRequest(models.Model):
   class Meta:
     verbose_name = "Transcript Request"
+    db_table = "DeanProject_transcriptrequest"
 
   student_id_number = models.CharField(max_length=10)
   date = models.DateField()

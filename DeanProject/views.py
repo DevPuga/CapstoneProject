@@ -6,6 +6,7 @@ from itertools import chain
 import sqlite3
 
 
+
 #Used in navbar to check if user is faculty
 userGroup = ''
 
@@ -90,29 +91,56 @@ def get(request):
 # Should return all forms for authenticated user as dictionary or array
 def getForms(request):
     #forms = {'all' : range(13), 'pending' : range(3), 'approved' : range(9), 'denied' : range(1)}
-    user_id = request.user.profile.tech_id
 
-    permitToRegisterData = permitToRegister.objects.filter(student_id_number=user_id)
-    addDropClassData = add_dropClass.objects.filter(student_id_number=user_id)
-    ugGraduationData = UGGraduation.objects.filter(student_id_number=user_id)
-    masterGraduationData = masterGraduation.objects.filter(student_id_number=user_id)
-    degreeAuditData = degreeAudit.objects.filter(student_id_number=user_id)
-    transcriptRequestData = transcriptRequest.objects.filter(student_id_number=user_id)
-    degreeAuditAmendmentRequestData = degreeAuditAmendmentRequest.objects.filter(student_id_number=user_id)
-
-    results = list(chain(permitToRegisterData, addDropClassData, ugGraduationData, masterGraduationData, degreeAuditData, transcriptRequestData, degreeAuditAmendmentRequestData))
+    results = ""
 
     pending = []
     approved = []
     denied = []
 
-    for form in results:
-        if form.isPending:
-            pending.append(form)
-        elif form.isApproved:
-            approved.append(form)
-        elif form.isDenied:
-            denied.append(form)
+    if request.user.groups.filter(name="Student").exists():
+        user_id = request.user.profile.tech_id
+
+        permitToRegisterData = permitToRegister.objects.filter(student_id_number=user_id)
+        addDropClassData = add_dropClass.objects.filter(student_id_number=user_id)
+        ugGraduationData = UGGraduation.objects.filter(student_id_number=user_id)
+        masterGraduationData = masterGraduation.objects.filter(student_id_number=user_id)
+        degreeAuditData = degreeAudit.objects.filter(student_id_number=user_id)
+        transcriptRequestData = transcriptRequest.objects.filter(student_id_number=user_id)
+        degreeAuditAmendmentRequestData = degreeAuditAmendmentRequest.objects.filter(student_id_number=user_id)
+
+        results = list(chain(permitToRegisterData, addDropClassData, ugGraduationData, masterGraduationData, degreeAuditData, transcriptRequestData, degreeAuditAmendmentRequestData))
+        
+        for form in results:
+            if form.isPending:
+                pending.append(form)
+            elif form.isApproved:
+                approved.append(form)
+            elif form.isDenied:
+                denied.append(form)
+
+    elif request.user.groups.filter(name="Faculty").exists():
+        user_ids = request.user.profile.advisees["advisees"]
+        user_ids.append(request.user.profile.tech_id)
+
+        for id in user_ids:
+            permitToRegisterData = permitToRegister.objects.filter(student_id_number=id)
+            addDropClassData = add_dropClass.objects.filter(student_id_number=id)
+            ugGraduationData = UGGraduation.objects.filter(student_id_number=id)
+            masterGraduationData = masterGraduation.objects.filter(student_id_number=id)
+            degreeAuditData = degreeAudit.objects.filter(student_id_number=id)
+            transcriptRequestData = transcriptRequest.objects.filter(student_id_number=id)
+            degreeAuditAmendmentRequestData = degreeAuditAmendmentRequest.objects.filter(student_id_number=id)
+            results = list(chain(permitToRegisterData, addDropClassData, ugGraduationData, masterGraduationData, degreeAuditData, transcriptRequestData, degreeAuditAmendmentRequestData))
+
+            for form in results:
+                if form.isPending:
+                    pending.append(form)
+                elif form.isApproved:
+                    approved.append(form)
+                elif form.isDenied:
+                    denied.append(form)
+
 
     forms = {
         'all' : results,
