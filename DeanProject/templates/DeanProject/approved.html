@@ -1,18 +1,330 @@
 {% extends "DeanProject/base.html" %}
 {% load my_tags %}
 {% block content %}
+<head>
+<script type="text/javascript" src="/static/viewPopup.js"></script>
+</head>
+
 <title>Approved Forms - ATU Forms</title>
 <div class="container">
   <div class="row card-group">
     {% for form in forms.approved %}
+
+    {% comment %} View Content Code START {% endcomment %}
+    <script>
+      function adcDisplayIfChecked(formid, title, content) {
+        if (content == "True") {
+          newLineADCV(formid, title, content);
+        }
+      }
+
+      function createTablePTR(formid) {
+        tableid = "DeanProject_permittoregister" + formid + "Table"
+        createTable(tableid, 0, "Courses wished to be enrolled in:");
+        createHeader(tableid, 0, "CRN")
+        createHeader(tableid, 0, "Course Prefix")
+        createHeader(tableid, 0, "Course No.")
+        createHeader(tableid, 0, "Section No.")
+      }
+
+      function createTableADC(formid, tableNum, isDrop) {
+        tableid = "DeanProject_add_dropclass" + formid + "Table";
+        if (isDrop) {
+          createTable(tableid, tableNum, "Courses being dropped: ");
+          createHeader(tableid, tableNum, "CRN")
+          createHeader(tableid, tableNum, "Course Prefix")
+          createHeader(tableid, tableNum, "Course No.")
+          createHeader(tableid, tableNum, "Section No.")
+          createHeader(tableid, tableNum, "Did attend")
+        } else {
+          createTable(tableid, tableNum, "Courses being added: ");
+          createHeader(tableid, tableNum, "CRN")
+          createHeader(tableid, tableNum, "Course Prefix")
+          createHeader(tableid, tableNum, "Course No.")
+          createHeader(tableid, tableNum, "Section No.")
+        }
+      }
+
+      function createTableDA(formid, tableNum, tableType) {
+        tableid = "DeanProject_degreeaudit" + formid + "Table";
+        if (tableType == "requested") {
+          createTable(tableid, tableNum, "Requested Subtitutions: ");
+        } else {
+          createTable(tableid, tableNum, "Required Subtitutions: ");
+        }
+        createHeader(tableid, tableNum, "Course Prefix/Number");
+        createHeader(tableid, tableNum, "Course Prefix/Number");
+      }
+
+      function createTableDAAR(formid, tableNum, tableType) {
+        tableid = "DeanProject_degreeauditamendmentrequest" + formid + "Table";
+        switch(tableType) {
+          case "transfer":
+              createTable(tableid, tableNum, "Transfer courses: ");
+              createHeader(tableid, tableNum, "Transfer Institution")
+              createHeader(tableid, tableNum, "Course Subject")
+              createHeader(tableid, tableNum, "Course Number")
+              createHeader(tableid, tableNum, "Grade")
+              createHeader(tableid, tableNum, "Semester Taken")
+              createHeader(tableid, tableNum, "ATU Course Subject")
+              createHeader(tableid, tableNum, "ATU Course Number")
+              createHeader(tableid, tableNum, "Course Equivalent")
+              createHeader(tableid, tableNum, "Course Substitution")
+              break;
+          case "subA":
+              createTable(tableid, tableNum, "Substitute these ATU courses: ");
+              createHeader(tableid, tableNum, "Course Prefix")
+              createHeader(tableid, tableNum, "Course Number")
+              createHeader(tableid, tableNum, "Semester Taken")
+              break;
+          case "subB":
+              createTable(tableid, tableNum, "For these ATU courses: ");
+              createHeader(tableid, tableNum, "Course Prefix")
+              createHeader(tableid, tableNum, "Course Number")
+              break;
+          case "waive":
+              createTable(tableid, tableNum, "Please waive the following course requirement(s): ");
+              createHeader(tableid, tableNum, "Course Prefix")
+              createHeader(tableid, tableNum, "Course Number")
+              createHeader(tableid, tableNum, "Comments")
+              break;
+        }
+      }
+
+      function permitToRegisterView(formid){
+          document.getElementById("DeanProject_permittoregister"+formid+"Title").innerHTML = "<h3> Permit to Register </h3>";
+
+          newLinePTRV(formid, "Student ID Number: ",  "{{form.student_id_number}}");
+          newLinePTRV(formid, "Date: ",  "{{form.date}}");
+          newLinePTRV(formid, "Name enrolled under: ", "{{form.name_enrolled_under}}");
+          newLinePTRV(formid, "Registration semester: ", "{{form.registration_semester}}");
+          newLinePTRV(formid, "Registration year: ", "{{form.registration_year}}");
+          newLinePTRV(formid, "Total hours enrolled: ", "{{form.total_hours_enrolled}}");
+          newLinePTRV(formid, "Comments: ", "{{form.comments}}");
+          createTablePTR(formid);
+          newRowPTR(formid, 0, 0, "{{form.crn0}}", "{{form.prefix0}}", "{{form.courseNum0}}", "{{form.secNo0}}");
+          newRowPTR(formid, 0, 1, "{{form.crn1}}", "{{form.prefix1}}", "{{form.courseNum1}}", "{{form.secNo1}}");
+          newRowPTR(formid, 0, 2, "{{form.crn2}}", "{{form.prefix2}}", "{{form.courseNum2}}", "{{form.secNo2}}");
+          newRowPTR(formid, 0, 3, "{{form.crn3}}", "{{form.prefix3}}", "{{form.courseNum3}}", "{{form.secNo3}}");
+          newRowPTR(formid, 0, 4, "{{form.crn4}}", "{{form.prefix4}}", "{{form.courseNum4}}", "{{form.secNo4}}");
+          newRowPTR(formid, 0, 5, "{{form.crn5}}", "{{form.prefix5}}", "{{form.courseNum5}}", "{{form.secNo5}}");
+          newRowPTR(formid, 0, 6, "{{form.crn6}}", "{{form.prefix6}}", "{{form.courseNum6}}", "{{form.secNo6}}");
+          newRowPTR(formid, 0, 7, "{{form.crn7}}", "{{form.prefix7}}", "{{form.courseNum7}}", "{{form.secNo7}}");
+          newRowPTR(formid, 0, 8, "{{form.crn8}}", "{{form.prefix8}}", "{{form.courseNum8}}", "{{form.secNo8}}");
+      }
+
+      function add_dropClassView(formid){
+          document.getElementById("DeanProject_add_dropclass"+formid+"Title").innerHTML = "<h3> Add/Drop Course </h3>";
+
+          newLineADCV(formid, "Student ID Number: ", "{{form.student_id_number}}");
+          newLineADCV(formid, "Date: ", "{{form.date}}");
+          newLineADCV(formid, "Increases in tuition and fees: ", "{{form.increases_in_tuition_and_fees}}");
+          newLineADCV(formid, "Receives Financial Aid: ", "{{form.recieves_financial_aid}}");
+          adcDisplayIfChecked(formid, "Another course fits schedule: ", "{{form.another_course_fits_schedule}}");
+          adcDisplayIfChecked(formid, "Changing major: ", "{{form.changing_major}}");
+          adcDisplayIfChecked(formid, "Changing minor: ", "{{form.changing_minor}}");
+          adcDisplayIfChecked(formid, "Classes too large: ", "{{form.classes_too_large}}");
+          adcDisplayIfChecked(formid, "Could not understand the instructor course or materials: ", "{{form.could_not_understand_the_instructor_course_or_materials}}");
+          adcDisplayIfChecked(formid, "Course not required for major: ", "{{form.course_not_required_for_major}}");
+          adcDisplayIfChecked(formid, "Inadequate academic support services: ", "{{form.inadequate_academic_support_services}}");
+          adcDisplayIfChecked(formid, "Insufficient high school preparation: ", "{{form.insufficient_high_school_preparation}}");
+          adcDisplayIfChecked(formid, "Lack of academic challenge: ", "{{form.lack_of_academic_challenge}}");
+          adcDisplayIfChecked(formid, "Lack of progress in the courses: ", "{{form.lack_of_progress_in_the_courses}}");
+          adcDisplayIfChecked(formid, "Need to re-enroll in classes next semester: ", "{{form.need_to_re_enroll_in_classes_next_semester}}");
+          adcDisplayIfChecked(formid, "Need to re-enroll in classes with different instructor: ", "{{form.need_to_re_enroll_in_classes_with_different_instructor}}");
+          adcDisplayIfChecked(formid, "Quality of instruction did not meet expectations: ", "{{form.quality_of_instruction_did_not_meet_expections}}");
+          adcDisplayIfChecked(formid, "Reduce course load: ", "{{form.reduce_course_load}}");
+          adcDisplayIfChecked(formid, "Wanted classes face-to-face: ", "{{form.wanted_classes_face_to_face}}");
+          adcDisplayIfChecked(formid, "Wanted classes online: ", "{{form.wanted_classes_online}}");
+          adcDisplayIfChecked(formid, "Change in family financial circumstances: ", "{{form.change_in_family_financial_circumstances}}");
+          adcDisplayIfChecked(formid, "Didn't have enough money to continue: ", "{{form.didnt_have_enough_money_to_continue}}");
+          adcDisplayIfChecked(formid, "Financial aid was not sufficient: ", "{{form.financial_aid_was_not_sufficient}}");
+          adcDisplayIfChecked(formid, "Increases in tuition and fees: ", "{{form.increases_in_tuition_and_fees}}");
+          adcDisplayIfChecked(formid, "Incurred too much debt: ", "{{form.incurred_too_much_debt}}");
+          adcDisplayIfChecked(formid, "Needed course for financial aid eligibility: ", "{{form.needed_Course_for_financial_aid_eligibility}}");
+          adcDisplayIfChecked(formid, "Scholarship grant was not renewed: ", "{{form.scholarship_Grant_was_not_renewed}}");
+          adcDisplayIfChecked(formid, "Family illness responsibility: ", "{{form.family_illness_responsibility}}");
+          adcDisplayIfChecked(formid, "Homesick: ", "{{form.homesick}}");
+          adcDisplayIfChecked(formid, "Wanted to be closer to family and friends: ", "{{form.wanted_to_be_closer_to_family_and_friends}}");
+          adcDisplayIfChecked(formid, "Commute too long: ", "{{form.commute_too_long}}");
+          adcDisplayIfChecked(formid, "Moved out of the area: ", "{{form.moved_out_of_the_area}}");
+          adcDisplayIfChecked(formid, "Distracted social life: ", "{{form.distracted_Social_life}}");
+          adcDisplayIfChecked(formid, "Felt class climate unwelcoming: ", "{{form.felt_class_climate_unwelcoming}}");
+          adcDisplayIfChecked(formid, "Felt out of place in class: ", "{{form.felt_out_of_place_in_class}}");
+          adcDisplayIfChecked(formid, "Impact of natural disaster: ", "{{form.impact_of_natural_disaster}}");
+          adcDisplayIfChecked(formid, "Inadequate study skills or lack of academic success: ", "{{form.inadequate_study_skills_or_lack_of_academic_success}}");
+          adcDisplayIfChecked(formid, "Military obligations: ", "{{form.military_obligations}}");
+          adcDisplayIfChecked(formid, "Personal health: ", "{{form.personal_health}}");
+          adcDisplayIfChecked(formid, "Personal emergency: ", "{{form.personal_emergency}}");
+          adcDisplayIfChecked(formid, "Unmotivated for these courses or tired of school: ", "{{form.unmotivated_for_this_courses_or_tired_of_school}}");
+          adcDisplayIfChecked(formid, "Working too many hours: ", "{{form.working_too_many_hours}}");
+          newLineADCV(formid, "Comments: ", "{{form.comments}}");
+          createTableADC(formid, 0, false)
+          newRowADC(formid, 0, 0, "{{form.addCRN0}}", "{{form.addPrefix0}}", "{{form.addCourseNum0}}", "{{form.addSecNo0}}");
+          newRowADC(formid, 0, 1, "{{form.addCRN1}}", "{{form.addPrefix1}}", "{{form.addCourseNum1}}", "{{form.addSecNo1}}");
+          newRowADC(formid, 0, 2, "{{form.addCRN2}}", "{{form.addPrefix2}}", "{{form.addCourseNum2}}", "{{form.addSecNo2}}");
+          newRowADC(formid, 0, 3, "{{form.addCRN3}}", "{{form.addPrefix3}}", "{{form.addCourseNum3}}", "{{form.addSecNo3}}");
+          newRowADC(formid, 0, 4, "{{form.addCRN4}}", "{{form.addPrefix4}}", "{{form.addCourseNum4}}", "{{form.addSecNo4}}");
+          newRowADC(formid, 0, 5, "{{form.addCRN5}}", "{{form.addPrefix5}}", "{{form.addCourseNum5}}", "{{form.addSecNo5}}");
+          createTableADC(formid, 1, true)
+          newRowADC(formid, 1, 0, "{{form.dropCRN0}}", "{{form.dropPrefix0}}", "{{form.dropCourseNum0}}", "{{form.dropSecNo0}}", "{{form.dropDidAttend0}}");
+          newRowADC(formid, 1, 1, "{{form.dropCRN1}}", "{{form.dropPrefix1}}", "{{form.dropCourseNum1}}", "{{form.dropSecNo1}}", "{{form.dropDidAttend1}}");
+          newRowADC(formid, 1, 2, "{{form.dropCRN2}}", "{{form.dropPrefix2}}", "{{form.dropCourseNum2}}", "{{form.dropSecNo2}}", "{{form.dropDidAttend2}}");
+          newRowADC(formid, 1, 3, "{{form.dropCRN3}}", "{{form.dropPrefix3}}", "{{form.dropCourseNum3}}", "{{form.dropSecNo3}}", "{{form.dropDidAttend3}}");
+          newRowADC(formid, 1, 4, "{{form.dropCRN4}}", "{{form.dropPrefix4}}", "{{form.dropCourseNum4}}", "{{form.dropSecNo4}}", "{{form.dropDidAttend4}}");
+          newRowADC(formid, 1, 5, "{{form.dropCRN5}}", "{{form.dropPrefix5}}", "{{form.dropCourseNum5}}", "{{form.dropSecNo5}}", "{{form.dropDidAttend5}}");
+      }
+
+      function UGGraduationView(formid){
+          document.getElementById("DeanProject_uggraduation"+formid+"Title").innerHTML = "<h3> Undergraduate Graduation Application </h3>";
+
+          newLineUGGV(formid, "Student ID Number: ", "{{form.student_id_number}}");
+          newLineUGGV(formid, "Date: ", "{{form.date}}");
+          newLineUGGV(formid, "Name enrolled under: ", "{{form.name_enrolled_under}}");
+          newLineUGGV(formid, "Phone number: ", "{{form.phone_number}}");
+          newLineUGGV(formid, "Name on diploma: ", "{{form.diploma_name}}");
+          newLineUGGV(formid, "Name pronunciation: ", "{{form.name_pronunciation}}");
+          newLineUGGV(formid, "Pronunciation is recorded: ", "{{form.pronunciation_recorded}}");
+          newLineUGGV(formid, "Parents completed bachelor's degree: ", "{{form.parents_completed_bachelor_degree}}");
+          newLineUGGV(formid, "Expected graduation term: ", "{{form.expected_graduation_term}}");
+          newLineUGGV(formid, "Expected graduation year: ", "{{form.expected_graduation_year}}");
+          newLineUGGV(formid, "Preferred degree: ", "{{form.preferred_degree}}");
+
+      }
+
+      function MasterGraduationView(formid){
+          document.getElementById("DeanProject_mastergraduation"+formid+"Title").innerHTML = "<h3> Master's Graduation Application </h3>";
+
+          newLineMGV(formid, "Student ID Number: ", "{{form.student_id_number}}");
+          newLineMGV(formid, "Date: ", "{{form.date}}");
+          newLineMGV(formid, "Name enrolled under: ", "{{form.name_enrolled_under}}");
+          newLineMGV(formid, "Mailing address: ", "{{form.mailing_address}}");
+          newLineMGV(formid, "City: ", "{{form.city}}");
+          newLineMGV(formid, "State: ", "{{form.state}}");
+          newLineMGV(formid, "Zip code: ", "{{form.zip_code}}");
+          newLineMGV(formid, "Phone number: ", "{{form.phone_number}}");
+          newLineMGV(formid, "Email address: ", "{{form.email}}");
+          newLineMGV(formid, "Student starting semester: ", "{{form.student_starting_semester}}");
+          newLineMGV(formid, "Student starting year: ", "{{form.student_starting_year}}");
+          newLineMGV(formid, "Name on diploma: ", "{{form.diploma_name}}");
+          newLineMGV(formid, "Name pronunciation: ", "{{form.name_pronunciation}}");
+          newLineMGV(formid, "Expected graduation term: ", "{{form.expected_graduation_term}}");
+          newLineMGV(formid, "Expected graduation year: ", "{{form.expected_graduation_year}}");
+          newLineMGV(formid, "Degree name: ", "{{form.degree_name}}");
+      }
+
+      function DegreeAuditView(formid){
+          document.getElementById("DeanProject_degreeaudit"+formid+"Title").innerHTML = "<h3> Degree Audit </h3>";
+
+          newLineDAV(formid, "Student ID Number: ", "{{form.student_id_number}}");
+          newLineDAV(formid, "Submit Date: ", "{{form.date}}");
+          newLineDAV(formid, "Catalog year: ", "{{form.catalog_year}}");
+          newLineDAV(formid, "Name enrolled under: ", "{{form.name_enrolled_under}}");
+          newLineDAV(formid, "Major or minor name: ", "{{form.major_or_minor_name}}");
+          newLineDAV(formid, "Major selected: ", "{{form.major_was_chosen}}");
+          newLineDAV(formid, "Minor selected: ", "{{form.minor_was_chosen}}");
+          newLineDAV(formid, "Semester: ", "{{form.semester}}");
+          newLineDAV(formid, "Year: ", "{{form.year}}");
+          createTableDA(formid, 0, "requested");
+          newRowDA(formid, 0, 1, "{{form.subCourse1A}}", "{{form.subCourse1B}}");
+          newRowDA(formid, 0, 2, "{{form.subCourse2A}}", "{{form.subCourse2B}}");
+          newRowDA(formid, 0, 3, "{{form.subCourse3A}}", "{{form.subCourse3B}}");
+          newRowDA(formid, 0, 4, "{{form.subCourse4A}}", "{{form.subCourse4B}}");
+          newRowDA(formid, 0, 5, "{{form.subCourse5A}}", "{{form.subCourse5B}}");
+          newRowDA(formid, 0, 6, "{{form.subCourse6A}}", "{{form.subCourse6B}}");
+          newRowDA(formid, 0, 7, "{{form.subCourse7A}}", "{{form.subCourse7B}}");
+          createTableDA(formid, 1, "required");
+          newRowDA(formid, 1, 1, "{{form.reqCourse1A}}", "{{form.reqCourse1B}}");
+          newRowDA(formid, 1, 2, "{{form.reqCourse2A}}", "{{form.reqCourse2B}}");
+          newRowDA(formid, 1, 3, "{{form.reqCourse3A}}", "{{form.reqCourse3B}}");
+          newRowDA(formid, 1, 4, "{{form.reqCourse4A}}", "{{form.reqCourse4B}}");
+          newRowDA(formid, 1, 5, "{{form.reqCourse5A}}", "{{form.reqCourse5B}}");
+          newRowDA(formid, 1, 6, "{{form.reqCourse6A}}", "{{form.reqCourse6B}}");
+          newRowDA(formid, 1, 7, "{{form.reqCourse7A}}", "{{form.reqCourse7B}}");
+      }
+
+      function DegreeAuditAmendmentRequestView(formid){
+          document.getElementById("DeanProject_degreeauditamendmentrequest"+formid+"Title").innerHTML = "<h3> Degree Audit Amendment Request </h3>";
+
+          newLineDAARV(formid, "Student ID Number: ", "{{form.student_id_number}}");
+          newLineDAARV(formid, "Catalog year: ", "{{form.catalog_year}}");
+          newLineDAARV(formid, "Submit date: ", "{{form.date}}");
+          newLineDAARV(formid, "Name enrolled under: ", "{{form.name_enrolled_under}}");
+          newLineDAARV(formid, "Major selected: ", "{{form.major_was_chosen}}");
+          newLineDAARV(formid, "Change graduation term to: ", "{{form.change_grad_Term_to}}");
+          newLineDAARV(formid, "College distinction 1: ", "{{form.college_distinction}}");
+          newLineDAARV(formid, "College distinction 2: ", "{{form.college_distinction2}}");
+          newLineDAARV(formid, "Comments: ", "{{form.comments}}");
+          createTableDAAR(formid, 0, "transfer")
+          newRowDAARTransfer(formid, 0, 0, "{{form.transfer_Institution}}", "{{form.course_subject}}", "{{form.course_num}}", "{{form.grade}}", "{{form.semester_taken}}", "{{form.atu_course_subject}}", "{{form.atu_course_num}}", "{{form.course_equivalent}}", "{{form.course_Substitution}}")
+          newRowDAARTransfer(formid, 0, 1, "{{form.transfer_Institution2}}", "{{form.course_subject2}}", "{{form.course_num2}}", "{{form.grade2}}", "{{form.semester_taken2}}", "{{form.atu_course_subject2}}", "{{form.atu_course_num2}}", "{{form.course_equivalent2}}", "{{form.course_Substitution2}}")
+          newRowDAARTransfer(formid, 0, 2, "{{form.transfer_Institution3}}", "{{form.course_subject3}}", "{{form.course_num3}}", "{{form.grade3}}", "{{form.semester_taken3}}", "{{form.atu_course_subject3}}", "{{form.atu_course_num3}}", "{{form.course_equivalent3}}", "{{form.course_Substitution3}}")
+          newRowDAARTransfer(formid, 0, 3, "{{form.transfer_Institution4}}", "{{form.course_subject4}}", "{{form.course_num4}}", "{{form.grade4}}", "{{form.semester_taken4}}", "{{form.atu_course_subject4}}", "{{form.atu_course_num4}}", "{{form.course_equivalent4}}", "{{form.course_Substitution4}}")
+          newRowDAARTransfer(formid, 0, 4, "{{form.transfer_Institution5}}", "{{form.course_subject5}}", "{{form.course_num5}}", "{{form.grade5}}", "{{form.semester_taken5}}", "{{form.atu_course_subject5}}", "{{form.atu_course_num5}}", "{{form.course_equivalent5}}", "{{form.course_Substitution5}}")
+          createTableDAAR(formid, 1, "subA")
+          newRowDAARSubA(formid, 1, 0, "{{form.atu_course_prefix1}}", "{{form.atu_course_number1}}", "{{form.semester_taken1}}")
+          newRowDAARSubA(formid, 1, 1, "{{form.atu_course_prefix2}}", "{{form.atu_course_number2}}", "{{form.semester_taken2}}")
+          newRowDAARSubA(formid, 1, 2, "{{form.atu_course_prefix3}}", "{{form.atu_course_number3}}", "{{form.semester_taken3}}")
+          createTableDAAR(formid, 2, "subB")
+          newRowDAARSubB(formid, 2, 0, "{{form.atu_course_prefix1B}}", "{{form.atu_course_num1B}}")
+          newRowDAARSubB(formid, 2, 1, "{{form.atu_course_prefix2B}}", "{{form.atu_course_num2B}}")
+          newRowDAARSubB(formid, 2, 2, "{{form.atu_course_prefix3B}}", "{{form.atu_course_num3B}}")
+          createTableDAAR(formid, 3, "waive")
+          newRowDAARWaive(formid, 3, 0, "{{form.atu_course_prefix4}}", "{{form.atu_course_number4}}", "{{form.comments4}}")
+          newRowDAARWaive(formid, 3, 1, "{{form.atu_course_prefix5}}", "{{form.atu_course_number5}}", "{{form.comments5}}")
+          newRowDAARWaive(formid, 3, 2, "{{form.atu_course_prefix6}}", "{{form.atu_course_number6}}", "{{form.comments6}}")
+      }
+
+      function TranscriptRequestView(formid){
+          document.getElementById("DeanProject_transcriptrequest"+formid+"Title").innerHTML = "<h3> Transcript Request Form </h3>";
+
+          newLineTRV(formid, "Student ID Number: ", "{{form.student_id_number}}");
+          newLineTRV(formid, "Date: ", "{{form.date}}");
+          newLineTRV(formid, "Name enrolled under: ", "{{form.name_enrolled_under}}");
+          newLineTRV(formid, "Birth date: ", "{{form.birth_date}}");
+          newLineTRV(formid, "Mailing address: ", "{{form.mailing_address}}");
+          newLineTRV(formid, "City: ", "{{form.city}}");
+          newLineTRV(formid, "State: ", "{{form.state}}");
+          newLineTRV(formid, "Zip code: ", "{{form.zip_code}}");
+          newLineTRV(formid, "Phone number: ", "{{form.phone_number}}");
+          newLineTRV(formid, "Send transcript to ADHE (AR Lottery Scholarship): ", "{{form.adhe}}");
+          newLineTRV(formid, "Send transcript to SACM (Saudi Arabian Cultural Mission): ", "{{form.sacm}}");
+          newLineTRV(formid, "Send transcript to Embassy of Kuwait: ", "{{form.embassy_of_kuwait}}");
+          newLineTRV(formid, "Send transcript to ADE Licensure (AR Dept. of Ed.): ", "{{form.ade_licensure}}");
+          newLineTRV(formid, "Send transcript to ARSBN (AR State Board of Nursing): ", "{{form.arsbn}}");
+      }
+    </script>
+
+    {% comment %}  View Content Code END {% endcomment %}
+
     <div class="col-sm-4">
       <div class="card">
         <div class="card-body">
           <h5>{{form.name_enrolled_under}} <span class="badge bg-success">Approved</span></h5>
           <h6 class="card-subtitle mb-2 text-muted">{{form | verbose_name}}</h6>
           <h6 class="card-subtitle mb-2 text-muted">{{form.date}}</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="card-link">View</a>
+          {% if form.comments == null %}
+          <p class="card-text">No comments were included</p>
+          {% else %}
+          <p class="card-text">{{form.comments}}</p>
+          {% endif %}
+          <a href="#" class="card-link" onclick="displayPopup(popup{{form | db_table}}{{form.id}})" id="{{form | db_table}}{{form.id}}">View</a>
+          <div id="popup{{form | db_table}}{{form.id}}" class="modal" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <span onclick="closePopup(popup{{form | db_table}}{{form.id}})" id="closePopup" class="close">&times;</span>
+              <div id="{{form | db_table}}{{form.id}}Title" class="row"></div>
+              <div class="row">
+                <div id="{{form | db_table}}{{form.id}}Label"></div>
+                <div id="{{form | db_table}}{{form.id}}Content"></div>
+              </div>
+              <div class="row">
+                <div id="{{form | db_table}}{{form.id}}Table"></div>
+                <script>getViewContent("{{form | db_table}}", "{{form.id}}")</script>
+              </div>
+            </div>
+          </div>
+          </div>
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@
 
       function createTablePTR(formid) {
         tableid = "DeanProject_permittoregister" + formid + "Table"
-        createTable(tableid, 0);
+        createTable(tableid, 0, "Courses wished to be enrolled in:");
         createHeader(tableid, 0, "CRN")
         createHeader(tableid, 0, "Course Prefix")
         createHeader(tableid, 0, "Course No.")
@@ -29,28 +29,38 @@
 
       function createTableADC(formid, tableNum, isDrop) {
         tableid = "DeanProject_add_dropclass" + formid + "Table";
-        createTable(tableid, tableNum);
-        createHeader(tableid, tableNum, "CRN")
-        createHeader(tableid, tableNum, "Course Prefix")
-        createHeader(tableid, tableNum, "Course No.")
-        createHeader(tableid, tableNum, "Section No.")
         if (isDrop) {
+          createTable(tableid, tableNum, "Courses being dropped: ");
+          createHeader(tableid, tableNum, "CRN")
+          createHeader(tableid, tableNum, "Course Prefix")
+          createHeader(tableid, tableNum, "Course No.")
+          createHeader(tableid, tableNum, "Section No.")
           createHeader(tableid, tableNum, "Did attend")
+        } else {
+          createTable(tableid, tableNum, "Courses being added: ");
+          createHeader(tableid, tableNum, "CRN")
+          createHeader(tableid, tableNum, "Course Prefix")
+          createHeader(tableid, tableNum, "Course No.")
+          createHeader(tableid, tableNum, "Section No.")
         }
       }
 
-      function createTableDA(formid, tableNum) {
+      function createTableDA(formid, tableNum, tableType) {
         tableid = "DeanProject_degreeaudit" + formid + "Table";
-        createTable(tableid, tableNum);
+        if (tableType == "requested") {
+          createTable(tableid, tableNum, "Requested Subtitutions: ");
+        } else {
+          createTable(tableid, tableNum, "Required Subtitutions: ");
+        }
         createHeader(tableid, tableNum, "Course Prefix/Number");
         createHeader(tableid, tableNum, "Course Prefix/Number");
       }
 
       function createTableDAAR(formid, tableNum, tableType) {
         tableid = "DeanProject_degreeauditamendmentrequest" + formid + "Table";
-        createTable(tableid, tableNum);
         switch(tableType) {
           case "transfer":
+              createTable(tableid, tableNum, "Transfer courses: ");
               createHeader(tableid, tableNum, "Transfer Institution")
               createHeader(tableid, tableNum, "Course Subject")
               createHeader(tableid, tableNum, "Course Number")
@@ -62,15 +72,18 @@
               createHeader(tableid, tableNum, "Course Substitution")
               break;
           case "subA":
+              createTable(tableid, tableNum, "Substitute these ATU courses: ");
               createHeader(tableid, tableNum, "Course Prefix")
               createHeader(tableid, tableNum, "Course Number")
               createHeader(tableid, tableNum, "Semester Taken")
               break;
           case "subB":
+              createTable(tableid, tableNum, "For these ATU courses: ");
               createHeader(tableid, tableNum, "Course Prefix")
               createHeader(tableid, tableNum, "Course Number")
               break;
           case "waive":
+              createTable(tableid, tableNum, "Please waive the following course requirement(s): ");
               createHeader(tableid, tableNum, "Course Prefix")
               createHeader(tableid, tableNum, "Course Number")
               createHeader(tableid, tableNum, "Comments")
@@ -105,7 +118,6 @@
 
           newLineADCV(formid, "Student ID Number: ", "{{form.student_id_number}}");
           newLineADCV(formid, "Date: ", "{{form.date}}");
-          newLineADCV(formid, "Comments: ", "{{form.comments}}");
           newLineADCV(formid, "Increases in tuition and fees: ", "{{form.increases_in_tuition_and_fees}}");
           newLineADCV(formid, "Receives Financial Aid: ", "{{form.recieves_financial_aid}}");
           adcDisplayIfChecked(formid, "Another course fits schedule: ", "{{form.another_course_fits_schedule}}");
@@ -146,6 +158,7 @@
           adcDisplayIfChecked(formid, "Personal emergency: ", "{{form.personal_emergency}}");
           adcDisplayIfChecked(formid, "Unmotivated for these courses or tired of school: ", "{{form.unmotivated_for_this_courses_or_tired_of_school}}");
           adcDisplayIfChecked(formid, "Working too many hours: ", "{{form.working_too_many_hours}}");
+          newLineADCV(formid, "Comments: ", "{{form.comments}}");
           createTableADC(formid, 0, false)
           newRowADC(formid, 0, 0, "{{form.addCRN0}}", "{{form.addPrefix0}}", "{{form.addCourseNum0}}", "{{form.addSecNo0}}");
           newRowADC(formid, 0, 1, "{{form.addCRN1}}", "{{form.addPrefix1}}", "{{form.addCourseNum1}}", "{{form.addSecNo1}}");
@@ -212,7 +225,7 @@
           newLineDAV(formid, "Minor selected: ", "{{form.minor_was_chosen}}");
           newLineDAV(formid, "Semester: ", "{{form.semester}}");
           newLineDAV(formid, "Year: ", "{{form.year}}");
-          createTableDA(formid, 0);
+          createTableDA(formid, 0, "requested");
           newRowDA(formid, 0, 1, "{{form.subCourse1A}}", "{{form.subCourse1B}}");
           newRowDA(formid, 0, 2, "{{form.subCourse2A}}", "{{form.subCourse2B}}");
           newRowDA(formid, 0, 3, "{{form.subCourse3A}}", "{{form.subCourse3B}}");
@@ -220,7 +233,7 @@
           newRowDA(formid, 0, 5, "{{form.subCourse5A}}", "{{form.subCourse5B}}");
           newRowDA(formid, 0, 6, "{{form.subCourse6A}}", "{{form.subCourse6B}}");
           newRowDA(formid, 0, 7, "{{form.subCourse7A}}", "{{form.subCourse7B}}");
-          createTableDA(formid, 1);
+          createTableDA(formid, 1, "required");
           newRowDA(formid, 1, 1, "{{form.reqCourse1A}}", "{{form.reqCourse1B}}");
           newRowDA(formid, 1, 2, "{{form.reqCourse2A}}", "{{form.reqCourse2B}}");
           newRowDA(formid, 1, 3, "{{form.reqCourse3A}}", "{{form.reqCourse3B}}");
@@ -231,7 +244,7 @@
       }
 
       function DegreeAuditAmendmentRequestView(formid){
-          document.getElementById("DeanProject_degreeauditamendmentrequest"+formid+"Title").innerHTML = "<h3> Degree Audit Ammendment Request </h3>";
+          document.getElementById("DeanProject_degreeauditamendmentrequest"+formid+"Title").innerHTML = "<h3> Degree Audit Amendment Request </h3>";
 
           newLineDAARV(formid, "Student ID Number: ", "{{form.student_id_number}}");
           newLineDAARV(formid, "Catalog year: ", "{{form.catalog_year}}");
@@ -284,27 +297,28 @@
 
     {% comment %}  View Content Code END {% endcomment %}
 
-
-
     <div class="col-sm-4">
       <div class="card">
         <div class="card-body">
           <h5>{{form.name_enrolled_under}} <span class="badge bg-warning">Pending</span></h5>
           <h6 class="card-subtitle mb-2 text-muted">{{form | verbose_name}}</h6>
           <h6 class="card-subtitle mb-2 text-muted">{{form.date}}</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-
+          {% if form.comments == null %}
+          <p class="card-text">No comments were included</p>
+          {% else %}
+          <p class="card-text">{{form.comments}}</p>
+          {% endif %}
           <a href="#" class="card-link" onclick="displayPopup(popup{{form | db_table}}{{form.id}})" id="{{form | db_table}}{{form.id}}">View</a>
-
-          <div id="popup{{form | db_table}}{{form.id}}" class="modal">
+          <div id="popup{{form | db_table}}{{form.id}}" class="modal" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <span onclick="closePopup(popup{{form | db_table}}{{form.id}})" id="closePopup" class="close">&times;</span>
-
               <div id="{{form | db_table}}{{form.id}}Title" class="row"></div>
-
               <div class="row">
                 <div id="{{form | db_table}}{{form.id}}Label"></div>
                 <div id="{{form | db_table}}{{form.id}}Content"></div>
+              </div>
+              <div class="row">
                 <div id="{{form | db_table}}{{form.id}}Table"></div>
                 <script>getViewContent("{{form | db_table}}", "{{form.id}}")</script>
               </div>
@@ -320,6 +334,7 @@
               </div>
               {% endif %}
             </div>
+          </div>
           </div>
         </div>
       </div>

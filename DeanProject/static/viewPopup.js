@@ -16,28 +16,35 @@ function closePopup(popup){
 function newContent(divID, content){
     var div = document.createElement('div');
     document.getElementById(divID).className = "col";
+    document.getElementById(divID).style.width = "fit-content"
     div.innerHTML = content;
     document.getElementById(divID).appendChild(div);
 }
 
 function newTitle(divID, title){
     var div = document.createElement('div');
-    document.getElementById(divID).className = "col-4";
+    document.getElementById(divID).style.width = "fit-content"
     div.innerHTML = title;
     document.getElementById(divID).appendChild(div);
 }
 
 function newWideTitle(divID, title){
     var div = document.createElement('div');
-    document.getElementById(divID).className = "col-6";
+    document.getElementById(divID).style.width = "fit-content"
     div.innerHTML = title;
     document.getElementById(divID).appendChild(div);
 }
 
-function createTable(divID, tableNum){
+function createTable(divID, tableNum, tableTitle){
     var table = document.createElement('table');
-    table.setAttribute("id", divID + tableNum);
+    tableID = divID + tableNum;
+    table.setAttribute("id", tableID);
+    var title = document.createElement('h5');
+    var text = document.createTextNode(tableTitle);
+    title.appendChild(text)
+    document.getElementById(divID).appendChild(title);
     document.getElementById(divID).appendChild(table);
+    document.getElementById(tableID).className = "mb-3";
 }
 
 function newCell(rowid, content) {
@@ -185,7 +192,7 @@ function newLineDAV(formid, title, content){
 }
 
 function newLineTRV(formid, title, content){
-    newTitle("DeanProject_transcriptrequest"+formid+"Label", "<strong>" + title + "</strong>");
+    newWideTitle("DeanProject_transcriptrequest"+formid+"Label", "<strong>" + title + "</strong>");
     newContent("DeanProject_transcriptrequest"+formid+"Content", content);
 }
 
