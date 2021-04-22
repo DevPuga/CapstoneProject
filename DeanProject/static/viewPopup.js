@@ -16,20 +16,21 @@ function closePopup(popup){
 function newContent(divID, content){
     var div = document.createElement('div');
     document.getElementById(divID).className = "col";
+    document.getElementById(divID).style.width = "fit-content"
     div.innerHTML = content;
     document.getElementById(divID).appendChild(div);
 }
 
 function newTitle(divID, title){
     var div = document.createElement('div');
-    document.getElementById(divID).style.width = "200px"
+    document.getElementById(divID).style.width = "fit-content"
     div.innerHTML = title;
     document.getElementById(divID).appendChild(div);
 }
 
 function newWideTitle(divID, title){
     var div = document.createElement('div');
-    document.getElementById(divID).style.width = "500px"
+    document.getElementById(divID).style.width = "fit-content"
     div.innerHTML = title;
     document.getElementById(divID).appendChild(div);
 }

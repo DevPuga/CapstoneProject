@@ -309,13 +309,16 @@
           <p class="card-text">{{form.comments}}</p>
           {% endif %}
           <a href="#" class="card-link" onclick="displayPopup(popup{{form | db_table}}{{form.id}})" id="{{form | db_table}}{{form.id}}">View</a>
-          <div id="popup{{form | db_table}}{{form.id}}" class="modal">
+          <div id="popup{{form | db_table}}{{form.id}}" class="modal" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <span onclick="closePopup(popup{{form | db_table}}{{form.id}})" id="closePopup" class="close">&times;</span>
               <div id="{{form | db_table}}{{form.id}}Title" class="row"></div>
               <div class="row">
                 <div id="{{form | db_table}}{{form.id}}Label"></div>
                 <div id="{{form | db_table}}{{form.id}}Content"></div>
+              </div>
+              <div class="row">
                 <div id="{{form | db_table}}{{form.id}}Table"></div>
                 <script>getViewContent("{{form | db_table}}", "{{form.id}}")</script>
               </div>
@@ -326,6 +329,7 @@
               </div>
               {% endif %}
             </div>
+          </div>
           </div>
         </div>
       </div>
@@ -344,17 +348,21 @@
           <p class="card-text">{{form.comments}}</p>
           {% endif %}
           <a href="#" class="card-link" onclick="displayPopup(popup{{form | db_table}}{{form.id}})" id="{{form | db_table}}{{form.id}}">View</a>
-          <div id="popup{{form | db_table}}{{form.id}}" class="modal">
+          <div id="popup{{form | db_table}}{{form.id}}" class="modal" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <span onclick="closePopup(popup{{form | db_table}}{{form.id}})" id="closePopup" class="close">&times;</span>
               <div id="{{form | db_table}}{{form.id}}Title" class="row"></div>
               <div class="row">
                 <div id="{{form | db_table}}{{form.id}}Label"></div>
                 <div id="{{form | db_table}}{{form.id}}Content"></div>
+              </div>
+              <div class="row">
                 <div id="{{form | db_table}}{{form.id}}Table"></div>
                 <script>getViewContent("{{form | db_table}}", "{{form.id}}")</script>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
@@ -373,17 +381,21 @@
           <p class="card-text">{{form.comments}}</p>
           {% endif %}
           <a href="#" class="card-link" onclick="displayPopup(popup{{form | db_table}}{{form.id}})" id="{{form | db_table}}{{form.id}}">View</a>
-          <div id="popup{{form | db_table}}{{form.id}}" class="modal">
+          <div id="popup{{form | db_table}}{{form.id}}" class="modal" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <span onclick="closePopup(popup{{form | db_table}}{{form.id}})" id="closePopup" class="close">&times;</span>
               <div id="{{form | db_table}}{{form.id}}Title" class="row"></div>
               <div class="row">
                 <div id="{{form | db_table}}{{form.id}}Label"></div>
                 <div id="{{form | db_table}}{{form.id}}Content"></div>
+              </div>
+              <div class="row">
                 <div id="{{form | db_table}}{{form.id}}Table"></div>
                 <script>getViewContent("{{form | db_table}}", "{{form.id}}")</script>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
