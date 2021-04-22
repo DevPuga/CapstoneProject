@@ -4,6 +4,7 @@ from .models import *
 from django.db import connection
 from itertools import chain
 import sqlite3
+from django.http import HttpResponseRedirect
 
 
 
@@ -43,12 +44,27 @@ def get(request):
       "form_selector": emptyForm(), "currentForm": ""}
       
       if 'deny' in request.POST:
-        print(request.POST.get("form_id"))
-        print(request.POST.get("table_name"))
+        db = sqlite3.connect("db.sqlite3")
+        cursor = db.cursor()
+        tablename = request.POST.get("table_name")
+        form_id = request.POST.get("form_id")
+        cursor.execute(f"Update {tablename} set isPending = false where id = {form_id}")
+        cursor.execute(f"Update {tablename} set isDenied = true where id = {form_id}")
+        db.commit()
+        db.close()
+        return HttpResponseRedirect('/')
+
       elif 'approve' in request.POST:
-        print("Approve")
-    
-      
+        db = sqlite3.connect("db.sqlite3")
+        cursor = db.cursor()
+        tablename = request.POST.get("table_name")
+        form_id = request.POST.get("form_id")
+        cursor.execute(f"Update {tablename} set isPending = false where id = {form_id}")
+        cursor.execute(f"Update {tablename} set isApproved = true where id = {form_id}")
+        db.commit()
+        db.close()
+        return HttpResponseRedirect('/')
+
       # For newform.html page
       if requestedPage == "newform":
         if request.method == "POST":
