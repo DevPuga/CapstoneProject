@@ -4,6 +4,7 @@ from .models import *
 from django.db import connection
 from itertools import chain
 import sqlite3
+from django.http import HttpResponseRedirect
 
 
 
@@ -36,11 +37,33 @@ def get(request):
       # Get user's forms so we can populate them as cards
       forms = getForms(request)
       #numPending = max(forms["pending"]) + 1
-
+    
       # Set tab as active, render faculty tab if faculty, give forms to html
       context = {"%s_page"%requestedPage: "active", "userGroup": userGroup, "forms": forms,
       #"numPending": numPending,
       "form_selector": emptyForm(), "currentForm": ""}
+      
+      if 'deny' in request.POST:
+        db = sqlite3.connect("db.sqlite3")
+        cursor = db.cursor()
+        tablename = request.POST.get("table_name")
+        form_id = request.POST.get("form_id")
+        cursor.execute(f"Update {tablename} set isPending = false where id = {form_id}")
+        cursor.execute(f"Update {tablename} set isDenied = true where id = {form_id}")
+        db.commit()
+        db.close()
+        return HttpResponseRedirect('/')
+
+      elif 'approve' in request.POST:
+        db = sqlite3.connect("db.sqlite3")
+        cursor = db.cursor()
+        tablename = request.POST.get("table_name")
+        form_id = request.POST.get("form_id")
+        cursor.execute(f"Update {tablename} set isPending = false where id = {form_id}")
+        cursor.execute(f"Update {tablename} set isApproved = true where id = {form_id}")
+        db.commit()
+        db.close()
+        return HttpResponseRedirect('/')
 
       # For newform.html page
       if requestedPage == "newform":
